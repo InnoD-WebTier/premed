@@ -18,7 +18,9 @@ Meteor.methods({
 	},
 
 	getItems: function () {
-		return Items.find({}).fetch();
+		var itemList = Items.find({}).fetch();
+		console.log(itemList);
+		return itemList;
 	},
 
 	// getDisplayedItems: function () {
