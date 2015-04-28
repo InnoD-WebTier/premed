@@ -6,12 +6,14 @@ Template.suggestion.events({
 		var email = $('#email').val();
 		var subject = $('#subject').val();
 		var message = $('#message').val();
+		var image = $('#image').val();
+		var link = $('#link').val();
 
-		Meteor.call('insertSuggestion', name, email, subject, message, function(err, success) {
+		Meteor.call('insertSuggestion', name, email, subject, message, link, image, function(err, success) {
 			if (success) {
 				alert("You've added content! ;)");
 			} else {
-				alert("Failed to add content ): ");
+				alert("Failed to add content ):");
 			}
 		});
 	}

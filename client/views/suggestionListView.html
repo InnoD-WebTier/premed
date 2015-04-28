@@ -4,16 +4,40 @@
 		<ul class="flex-container">
 			{{#each items}}
 			<li class="flex-item">
-				<img class="img-container" src="http://placekitten.com/g/300/200">
-				<div class="section-header-white">
-					{{this.subject}}
-				</div>
-				<div class="section-paragraph-white">
-					<h6>
-						{{this.content}}
-					</h6>
-				</div>
+				<label for={{this._id}}>
+					<img class="img-container" src={{this.image}}>
+					<div class="section-header-white">
+						{{this.subject}}
+					</div>
+					<div class="section-paragraph-white">
+						<h6>
+							{{this.content}}
+						</h6>
+					</div>
+				</label>
 			</li>
+
+			<div class="modal">
+				<input class="modal-open" id={{this._id}} type="checkbox" hidden style="display: none">
+				<div class="modal-wrap" aria-hidden="true" role="dialog">
+					<label class="modal-overlay" for={{this._id}}></label>
+
+					<div class="modal-dialog">
+						<div class="modal-header">
+							<h2>{{this.subject}}</h2>
+							<label class="btn-close" for={{this._id}} aria-hidden="true">× </label>
+						</div>
+						<div class="modal-body">
+							{{this.body}}
+						</div>
+
+						<div class="modal-footer">
+							{{this.name}}
+						</div>
+					</div>
+				</div>
+			</div>
+
 			{{/each}}
 		</ul>
 	</div>

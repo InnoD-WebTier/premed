@@ -10,14 +10,23 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
-	insertSuggestion: function (name, email, subject, text) {
+	insertSuggestion: function (name, email, subject, body, link, image) {
+		if (!image) {
+			image = "http://placekitten.com/g/300/200";
+		}
+
 		Items.insert({
 			name: name,
 			email: email,
 			subject: subject,
-			body: text,
+			body: body,
 			display: false,
+			link: link,
+			image: image,
 		});
+
+
+
 		return true;
 	},
 
