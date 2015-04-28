@@ -14,12 +14,13 @@ Template.suggestionListView.onCreated(function(){
 	});
 });
 
-Template.suggestionListView.events ( {
-	'mouseenter .flex-item': function(event) {
-		console.log("HIHIH");
-	},
+// Template.suggestionListView.events ( {
+// 	'mouseenter .flex-item': function(event) {
+// 		console.log("HIHIH");
+// 		$('.flex-item:hover').css({cursor: pointer})
+// 	},
 
-	'mouseleave .flex-item': function(event) {
-		console.log("HIHIH");
-	}
-});
+// 	'mouseleave .flex-item': function(event) {
+// 		console.log("HIHIH");
+// 	}
+// });
