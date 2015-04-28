@@ -1,0 +1,42 @@
+.background-img {
+	position: fixed;
+	left: 0;
+	right: 0;
+	z-index: 1;
+
+	opacity: .85;
+	display: block;
+	background: linear-gradient(
+	      rgba(0, 0, 0, 0.35), 
+	      rgba(0, 0, 0, 0.35)
+	    ), url('img/UCBerkeleyCampus.jpg');
+	background-color: gray;
+	background-size: cover;
+	width: 100%;
+	height: 100%;
+
+	-webkit-filter: blur(5px);
+	-moz-filter: blur(5px);
+	-o-filter: blur(5px);
+	-ms-filter: blur(5px);
+	filter: blur(5px);
+}
+
+.landing-text {
+	text-align: center;
+	position: fixed;
+	margin-top: 20%;
+	z-index: 1;
+	width: 100%;
+	color: white;
+	opacity: .9;
+}
+
+.landing-head {
+	font-size: 85px;
+	font-weight: bold;
+}
+
+.landing-desc {
+	font-size: 22px;
+}
