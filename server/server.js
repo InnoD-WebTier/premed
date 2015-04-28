@@ -10,12 +10,12 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
-	insertSuggestion: function (name, email, subject, content) {
+	insertSuggestion: function (name, email, subject, text) {
 		Items.insert({
 			name: name,
 			email: email,
 			subject: subject,
-			content: content,
+			body: text,
 			display: false,
 		});
 		return true;

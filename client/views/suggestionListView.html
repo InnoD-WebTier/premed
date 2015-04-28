@@ -1,8 +1,20 @@
 <template name="suggestionListView">
 	<div class="container">
 		<h1>Suggestion List</h1>
-		{{#each items}}
-			<li>{{this}}</li>
-		{{/each}}
+		<ul class="flex-container">
+			{{#each items}}
+			<li class="flex-item">
+				<img class="img-container" src="http://placekitten.com/g/300/200">
+				<div class="section-header-white">
+					{{this.subject}}
+				</div>
+				<div class="section-paragraph-white">
+					<h6>
+						{{this.content}}
+					</h6>
+				</div>
+			</li>
+			{{/each}}
+		</ul>
 	</div>
 </template>
