@@ -86,6 +86,8 @@ a {
         width: 100%;
         position: relative;
     }
+
+    
     .navbar a#pull:after {
         content:"";
         background: url(nav-icon.png) no-repeat;
