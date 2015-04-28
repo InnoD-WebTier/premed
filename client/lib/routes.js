@@ -1,5 +1,5 @@
 Router.route('/', function() {
-	this.render('index');
+	this.render('landing');
 });
 
 Router.route('/suggestion', function() {
@@ -12,4 +12,8 @@ Router.route('/landing', function() {
 
 Router.route('/suggestionListView', function() {
 	this.render('suggestionListView');
+});
+
+Router.configure({
+	layoutTemplate: 'ApplicationLayout'
 });
