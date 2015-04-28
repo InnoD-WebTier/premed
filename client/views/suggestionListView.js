@@ -14,4 +14,12 @@ Template.suggestionListView.onCreated(function(){
 	});
 });
 
+Template.suggestionListView.events ( {
+	'mouseenter .flex-item': function(event) {
+		console.log("HIHIH");
+	},
 
+	'mouseleave .flex-item': function(event) {
+		console.log("HIHIH");
+	}
+});
