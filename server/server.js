@@ -3,6 +3,10 @@ Items = new Mongo.Collection("items");
 //Code that runs on startup.
 Meteor.startup(function () {
 	console.log("Successful startup");
+
+	Meteor.publish("items", function() {
+		return Items.find();
+	});
 });
 
 Meteor.methods({
@@ -35,5 +39,4 @@ Meteor.methods({
 	// 		item.display = true;
 	// 	}
 	// },
-
 });

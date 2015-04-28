@@ -1,4 +1,5 @@
 //Use subscribe here instead!
+Meteor.subscribe("items");
 
 Template.suggestionListView.helpers({
 	items: function() {
