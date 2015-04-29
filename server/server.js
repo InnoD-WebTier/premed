@@ -35,12 +35,18 @@ Meteor.methods({
 	},
 
 	updateItem: function(id, subject, message, image, link, display) {
-		Meteor.update({_id: id}, {
+		if (!image) {
+			image = "http://placekitten.com/g/300/200";
+		}
+
+		Items.update({_id: id}, {
 			subject: subject, 
 			body: message,
 			image:image,
 			link:link,
 			display: display,
 		});
+
+		return true;
 	}
 });
