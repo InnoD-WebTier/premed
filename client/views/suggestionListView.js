@@ -18,19 +18,21 @@ Template.suggestionListView.events ( {
 		event.preventDefault();
 		// console.log(event);
 
-		var id = event.target.name;
+		var id = event.target.id;
 		console.log(id);
-		var subject = $('#'+id+" .subject").val();
-		console.log(subject);
+		var subject = $('#' + id + " #subject").val();
+		var message = $('#' + id + " #message").val();
+		var image = $('#' + id + " #image").val();
+		var link = $('#' + id + " #link").val();
+		var display = $('#' + id + " #check").prop("checked");
 
-		// var subject = $('#subject').val();
-		// var message = $('#message').val();
-		// var image = $('#image').val();
-		// var link = $('#link').val();
-		// var display = $('#display').attr('checked');;
 		// console.log(subject);
+		// console.log(message);
+		// console.log(image);
+		// console.log(link);
+		// console.log(display);
 
-		Meteor.call('setItems', function(err, success) {
+		Meteor.call('updateItem', id, subject, message, image, link, display, function(err, success) {
 			if (success) {
 				alert("Content updated! ;)");
 			} else {
