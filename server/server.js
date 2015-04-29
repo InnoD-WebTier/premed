@@ -34,28 +34,13 @@ Meteor.methods({
 		return itemList;
 	},
 
-	setItems: function (subject, body, link, image) {
-		// Items.update({
-		// 	$set: {subject: subject}
-		// 	body: body,
-		// 	// display: display,
-		// 	link: link,
-		// 	image: image,
-		// });
-
-		return true;
-	},
-
-	// getDisplayedItems: function () {
-	// 	return Items.find({display: true}).fetch();
-	// },
-
-	// toggleItemDisplay: function () {
-	// 	if (Item.find(id).display == true) {
-	// 		item.display = false;
-	// 	};
-	// 	else {
-	// 		item.display = true;
-	// 	}
-	// },
+	updateItem: function(id, subject, message, image, link, display) {
+		Meteor.update({_id: id}, {
+			subject: subject, 
+			body: message,
+			image:image,
+			link:link,
+			display: display,
+		});
+	}
 });

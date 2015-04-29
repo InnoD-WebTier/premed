@@ -21,7 +21,6 @@ html {
   height: 100%;
   perspective: 900;
   overflow-y: scroll;
-  background-color: #dce7eb;
   font-family: "Titillium Web", sans-serif;
   color: rgba(48, 69, 92, 0.8);
 }
@@ -88,9 +87,6 @@ ul li {
   position: relative;
   padding: 0;
   margin: 0;
-  padding-bottom: 4px;
-  padding-top: 18px;
-  border-top: 1px dotted #dce7eb;
 }
 ul li:nth-of-type(1) {
   animation-delay: 0.5s;
