@@ -22,9 +22,9 @@
 				<div class="modal-wrap" aria-hidden="true" role="dialog">
 					<label class="modal-overlay" for={{this._id}}></label>
 
-					<form class="modal-dialog" name={{this._id}} style="max-height: 100vh">
+					<form class="modal-dialog" id={{this._id}} style="max-height: 100vh">
 						<div class="modal-header">
-							<h2><input type="text" class="subject" value={{this.subject}}></h2>
+							<h2><input type="text" id="subject" value={{this.subject}}></h2>
 							<label class="btn-close" for={{this._id}} aria-hidden="true">× </label>
 						</div>
 						<div class="modal-body">
@@ -41,15 +41,15 @@
 							<div class="row">
 								<div class="six columns">
 									Redirect URL
-									<input type="text" value={{this.link}}>
+									<input type="text" id="link" value={{this.link}}>
 								</div>
 								<div class="six columns">
 									Image URL
-									<input type="text" value={{this.image}}>
+									<input type="text" id="image" value={{this.image}}>
 								</div>
 							</div>
 							<div class="row">
-								Display: <input type="checkbox" checked={{this.display}}>
+								Display: <input type="checkbox" id="check" checked={{this.display}}>
 							</div>
 						</div>
 
