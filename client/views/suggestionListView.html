@@ -4,7 +4,7 @@
 		<ul class="flex-container">
 			{{#each items}}
 			<li class="flex-item">
-				<label for={{this._id}}>
+				<label for={{this._id}} style="cursor: pointer">
 					<img class="img-container" src={{this.image}}>
 					<div class="section-header-white">
 						{{this.subject}}
@@ -22,19 +22,42 @@
 				<div class="modal-wrap" aria-hidden="true" role="dialog">
 					<label class="modal-overlay" for={{this._id}}></label>
 
-					<div class="modal-dialog">
+					<form class="modal-dialog" name={{this._id}} style="max-height: 100vh">
 						<div class="modal-header">
-							<h2>{{this.subject}}</h2>
+							<h2><input type="text" class="subject" value={{this.subject}}></h2>
 							<label class="btn-close" for={{this._id}} aria-hidden="true">× </label>
 						</div>
 						<div class="modal-body">
-							{{this.body}}
+							<div class="row">
+								<b>Contact Info:</b> {{this.name}}
+							</div>
+							<div class="row">
+								<b>Email:</b> {{this.email}}
+							</div>
+							<div class="row">
+								Message
+								<textarea class="subject-text" value={{this.body}} placeholder="Message" id="message"></textarea>
+							</div>
+							<div class="row">
+								<div class="six columns">
+									Redirect URL
+									<input type="text" value={{this.link}}>
+								</div>
+								<div class="six columns">
+									Image URL
+									<input type="text" value={{this.image}}>
+								</div>
+							</div>
+							<div class="row">
+								Display: <input type="checkbox" checked={{this.display}}>
+							</div>
 						</div>
 
 						<div class="modal-footer">
-							{{this.name}}
+							<label class="btn-cancel" for={{this._id}} aria-hidden="true">Cancel </label>
+							<input class="btn-confirm" for={{this._id}} aria-hidden="true" type="submit">
 						</div>
-					</div>
+					</form>
 				</div>
 			</div>
 
