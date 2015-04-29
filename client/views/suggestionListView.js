@@ -13,14 +13,3 @@ Template.suggestionListView.onCreated(function(){
 		Session.set("items", itemList);
 	});
 });
-
-// Template.suggestionListView.events ( {
-// 	'mouseenter .flex-item': function(event) {
-// 		console.log("HIHIH");
-// 		$('.flex-item:hover').css({cursor: pointer})
-// 	},
-
-// 	'mouseleave .flex-item': function(event) {
-// 		console.log("HIHIH");
-// 	}
-// });
