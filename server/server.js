@@ -34,6 +34,18 @@ Meteor.methods({
 		return itemList;
 	},
 
+	setItems: function (subject, body, link, image) {
+		// Items.update({
+		// 	$set: {subject: subject}
+		// 	body: body,
+		// 	// display: display,
+		// 	link: link,
+		// 	image: image,
+		// });
+
+		return true;
+	},
+
 	// getDisplayedItems: function () {
 	// 	return Items.find({display: true}).fetch();
 	// },
