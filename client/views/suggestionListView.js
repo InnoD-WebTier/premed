@@ -13,6 +13,7 @@ Template.suggestionListView.onCreated(function(){
 		Session.set("items", itemList);
 	});
 });
+<<<<<<< HEAD
 
 Template.suggestionListView.events ( {
 	'submit .modal-dialog': function(event) {
@@ -40,3 +41,5 @@ Template.suggestionListView.events ( {
 		});
 	}
 });
+=======
+>>>>>>> 622152a4c76981c9c6c66087e01c0479e8fcb998

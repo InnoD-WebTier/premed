@@ -2,16 +2,28 @@ Router.route('/', function() {
 	this.render('landing');
 });
 
-Router.route('/suggestion', function() {
-	this.render('suggestion');
+Router.route('/advising', function() {
+	this.render('advising');
 });
 
-Router.route('/landing', function() {
-	this.render('landing');
+Router.route('/orgs', function() {
+	this.render('orgs');
 });
 
-Router.route('/suggestionListView', function() {
+Router.route('/mcat', function() {
+	this.render('mcat');
+});
+
+Router.route('/contribute', function() {
+	this.render('contribute');
+});
+
+Router.route('/opportunities', function() {
 	this.render('suggestionListView');
+});
+
+Router.route('/about', function() {
+	this.render('about');
 });
 
 Router.configure({

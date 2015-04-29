@@ -25,8 +25,6 @@ Meteor.methods({
 			image: image,
 		});
 
-
-
 		return true;
 	},
 
