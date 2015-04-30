@@ -8,10 +8,6 @@ Meteor.startup(function () {
 	Meteor.publish("items", function() {
 		return Items.find();
 	});
-
-	Meteor.publish("clubs", function() {
-		return Clubs.find();
-	});
 });
 
 Meteor.methods({
@@ -33,7 +29,7 @@ Meteor.methods({
 		return true;
 	},
 
-	userClubSuggestion: function (name, email, subject, body, link, image) {
+	insertClubSuggestion: function (name, email, subject, body, link, image) {
 		if (!image) {
 			image = "http://placekitten.com/g/300/200";
 		}
@@ -50,11 +46,8 @@ Meteor.methods({
 
 		return true;
 	},
+	
 
-	getClubs: function() {
-		console.log(
-		return Clubs.find();
-	}
 
 	getItems: function () {
 		var itemList = Items.find({}).fetch();

@@ -7,23 +7,37 @@
 // function that computes where a button is clicked,
 // if clicked, change the view
 // {{#if ButtonChecked true}}
-	{{UI.insert()}}
+//	{{UI.insert()}}
 
+Template.orgs.helpers({
+    categories: function(){
+        return ["facebook", "news", "tv", "tweets"]
+    }
+});
 
+Template.orgs.events({
+    "change #category-select": function (event, template) {
+        var org = $(event.currentTarget).val();
+        console.log("org : " + org);
+        // additional code to do what you want with the category
+    }
+});
 
-Template.organization.helpers({
-	'loginCheck #loginCheck': function(event) {
-	var user = Meteor.userId();
-	if (user) {
-		return true;
-	} else {
-		return false;
-	}
+// Template.orgs.helpers({
+
+// 	'loginCheck #loginCheck': function(event) {
+// 	var user = Meteor.userId();
+// 	if (user) {
+// 		return true;
+// 	} else {
+// 		return false;
+// 		}
+// 	},
 	
-	'getClubs #club-list': function(event) {
-		return Clubs.find()
-	}
-})
+// 	'getClubs #club-list': function(event) {
+// 		return Clubs.find();
+// 	}
+// })
 
 Template.suggestion.events({
 	'submit #suggestion-form': function(event) {
