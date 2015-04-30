@@ -17,6 +17,20 @@
 //     }
 // });
 
+// Template.orgs.onCreated(function(){
+// 	Meteor.call('getClubs', function(err, itemList){
+// 		console.log("Here is the list being passed in");
+// 		console.log(itemList);
+// 		Session.set("items", itemList);
+// 	});
+// });
+
+Template.orgs.onCreated(function(){
+	Meteor.call('getClubs', function(err, itemList){
+		Session.set("clubs", itemList);
+	});
+});
+
 
 Template.orgs.events({
     "change #category-select": function (event, template) {
@@ -27,6 +41,10 @@ Template.orgs.events({
 
    	"click #renderForm": function(event, template) {
    		template.$(".test").toggle();	
+   	},
+
+   	"click #test2": function(event, template) {
+   		template.$(".contents").toggle();	
    	},
 
    	'submit #suggestion-form': function(event) {
@@ -47,9 +65,7 @@ Template.orgs.events({
 				alert("Failed to add content ):");
 			}
 		});
-		return false;
 	}
-
 });
 
 Template.orgs.helpers({
@@ -63,11 +79,14 @@ Template.orgs.helpers({
 		}
 	},
 	
-	'getClubs #club-list': function(event) {
-		return Clubs.find();
+	clubs: function() {
+		return Session.get("clubs");
 	},
+	// clubs: function() {
+	// 	return Clubs.find().fetch();
+	// },
 
-	'rendered': function(event) {
+	'rendered': function() {
 		return true;
 	}
 });

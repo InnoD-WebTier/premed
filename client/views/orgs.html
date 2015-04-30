@@ -12,7 +12,6 @@
 	<input class="button-primary" value="Add resources" type="button" id="renderForm">
 </div>
 {{/if }}
-
 <div class="test">
 	<div class="container">
 		<div class="header">
@@ -30,15 +29,15 @@
 		      <input class="u-full-width" placeholder="Email" id="email" type="email">
 		    </div>
 		    <div class="four columns">
-		      <select class="u-full-width" id="exampleRecipientInput">
-		        <option value="Option 1">Health Related Clubs</option>
-		        <option value="Option 2">Pre-Health Fraternities/Sororities</option>
-		        <option value="Option 3">Non-Health Related Clubs</option>
-		        <option value="Option 4">Mentoring</option>
-		        <option value="Option 5">Tutoring/Teaching</option>
-		        <option value="Option 6">Science/Society</option>
-		        <option value="Option 7">Global Abroad Organizations</option>
-		        <option value="Option 8">DeCals</option>
+		      <select class="u-full-width" id="subject" type="subject">
+		        <option value="Health Related Clubs">Health Related Clubs</option>
+		        <option value="Pre-Health Fraternities/Sororities">Pre-Health Fraternities/Sororities</option>
+		        <option value="Non-Health Related Clubs">Non-Health Related Clubs</option>
+		        <option value="Mentoring">Mentoring</option>
+		        <option value="Tutoring/Teaching">Tutoring/Teaching</option>
+		        <option value="Science/Society">Science/Society</option>
+		        <option value="Global Abroad Organizations">Global Abroad Organizations</option>
+		        <option value="DeCals">DeCals</option>
 		      </select>
 		    </div>
 		  </div>
@@ -61,10 +60,12 @@
 			<div id="orglist1">
 				<ul>
 				  <li>
-				    <input type="checkbox" checked>
+				    <input id="test2" type="checkbox" checked>
 				    <i></i>
 				    <h2>Health Related Clubs</h2>
-				    <p>This page was written in HTML and CSS. The CSS was compiled from SASS. I used Normalize as my CSS reset and -prefix-free to save myself some headaches. I haven't quite gotten the hang of Slim for compiling into HTML, but someday I'll use it since its syntax compliments that of SASS. Regardless, this could all be done in plain HTML and CSS.</p>
+				    {{#each clubs}}
+				    	<p class="contents">{{name}}</p>
+				    {{/each}}
 				  </li>
 				  <li>
 				    <input type="checkbox" checked>

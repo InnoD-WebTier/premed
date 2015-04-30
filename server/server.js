@@ -4,9 +4,12 @@ Clubs = new Mongo.Collection("clubs");
 //Code that runs on startup.
 Meteor.startup(function () {
 	console.log("Successful startup");
-
+	console.log(Clubs.find().fetch());
 	Meteor.publish("items", function() {
 		return Items.find();
+	});
+	Meteor.publish("clubs", function() {
+		return Clubs.find();
 	});
 });
 
@@ -47,6 +50,12 @@ Meteor.methods({
 		return true;
 	},
 	
+	getClubs: function () {
+		var itemList = Clubs.find({}).fetch();
+		console.log(itemList);
+		return itemList;
+	},
+
 	getItems: function () {
 		var itemList = Items.find({}).fetch();
 		console.log(itemList);
