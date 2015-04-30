@@ -39,12 +39,42 @@ Template.orgs.events({
         // additional code to do what you want with the category
     },
 
+    // There has to be an easier way to do this
+
    	"click #renderForm": function(event, template) {
    		template.$(".test").toggle();	
    	},
 
-   	"click #test2": function(event, template) {
-   		template.$(".contents").toggle();	
+   	"click #first": function(event, template) {
+   		template.$(".contents1").toggle();	
+   	},
+
+   	"click #second": function(event, template) {
+   		template.$(".contents2").toggle();	
+   	},
+
+   	"click #third": function(event, template) {
+   		template.$(".contents3").toggle();	
+   	},
+
+   	"click #fourth": function(event, template) {
+   		template.$(".contents4").toggle();	
+   	},
+
+   	"click #fifth": function(event, template) {
+   		template.$(".contents5").toggle();	
+   	},
+
+   	"click #sixth": function(event, template) {
+   		template.$(".contents6").toggle();	
+   	},
+
+   	"click #seventh": function(event, template) {
+   		template.$(".contents7").toggle();	
+   	},
+
+   	"click #eighth": function(event, template) {
+   		template.$(".contents8").toggle();	
    	},
 
    	'submit #suggestion-form': function(event) {
@@ -69,7 +99,6 @@ Template.orgs.events({
 });
 
 Template.orgs.helpers({
-
 	'loginCheck #loginCheck': function(event) {
 	var user = Meteor.userId();
 	if (user) {
@@ -82,9 +111,14 @@ Template.orgs.helpers({
 	clubs: function() {
 		return Session.get("clubs");
 	},
-	// clubs: function() {
-	// 	return Clubs.find().fetch();
-	// },
+
+	clubCheck: function(string1, string2) {
+		if (string1 === string2) {
+			return true;
+		} else {
+			return false;
+		}
+	},
 
 	'rendered': function() {
 		return true;

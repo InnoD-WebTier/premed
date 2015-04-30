@@ -1,4 +1,11 @@
-.contents {
+.contents1,
+.contents2,
+.contents3,
+.contents4,
+.contents5,
+.contents6,
+.contents7,
+.contents8 {
     display: none;
 }
 
@@ -6,109 +13,149 @@
     display: none;
 }
 
-.container {
-  font-family: sans-serif
+#orglist1 {
+  /*min-height: 0;*/
+  /*display: inline-block;*/
+  position: relative;
+  /*left: 50%;*/
+  margin: 90px 0;
+  /*transform: translate(-50%, 0);*/
+  box-shadow: 0 10px 0 0 #ff6873 inset;
+  background-color: #fefffa;
+  /*max-width: 450px;*/
+  padding: 30px;
 }
-
-/* clearfix */
-.clearfix:before,
-.clearfix:after {
-    content: " ";
-    display: table;
-}
-.clearfix:after {
-    clear: both;
-}
-.clearfix {
-    *zoom: 2;
-}  
-
-/* Navigation */
-.navbar {
-    height: 40px;
-    width: 100%;
-    background: #262626;
-    font-size: 11pt;
-    position: fixed;
-    top: 0;
-    z-index: 2;
-}
-
-.navbar ul {
-    padding: 0;
-    margin: 0;
-    height: 40px;
-}
-
-.navbar li {
-    display: inline;
-    float: left;
-}
-
-.navbar a {
-    color: #fff;
-    display: inline-block;
-    text-align: center;
-    text-decoration: none;
-    padding:9px 0;
-}
-
-a {
-	width: 16vw;
-}
-
-.navbar a#pull {
-    display: none;
-}
-
-.navbar-selection {
-	width: 100%;
-	height: 300px;
-}
-
-/*responsive navbar*/
-@media screen and (max-width: 800px) {
-    .navbar {
-        height: auto;
-        border-bottom: 0;
+@media (min-width:800px) {
+    #originlist1 {
+        max-width: 450px;
+        min-width: 450px;
+        display:inline-block;
     }
-    .navbar ul {
-        display: none;
-        height: auto;
-    }    
-    .navbar li {
-        width: 100%;
-        float: left;
-        position: relative;
-        border-bottom: 1px solid #262626;
-      }
-      .navbar a {
-          text-align: left;
-          width: 100%;
-          text-indent: 25px;
-            background: #2e2e2e;          
-      }      
-      .navbar a:hover {
-          background:#444;
-      }
-                
-    .navbar a#pull {
-        display: block;
-        background-color: #262626;
-        width: 100%;
-        position: relative;
-    }
+}
+@media (max-width: 800px) {
+  #orglist1 {
+    display:block;
+    box-sizing: border-box;
+    transform: translate(0, 0);
+    min-width: 100%;
+    min-height: 100%;
+    /*margin: 0;*/
+    left: 0;
+  }
+}
 
-    
-    .navbar a#pull:after {
-        content:"";
-        background: url(nav-icon.png) no-repeat;
-        width: 30px;
-        height: 30px;
-        color: #FFF;
-        display: inline-block;
-        position: absolute;
-        right: 15px;
-        top: 10px;
-    }
-}    
+h1, h2 {
+  color: #ff6873;
+}
+
+h2 {
+  font-size: 20px;
+  line-height: 34px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  display: block;
+  background-color: #fefffa;
+  margin: 0;
+  cursor: pointer;
+}
+
+p {
+  color: rgba(48, 69, 92, 0.8);
+  font-size: 17px;
+  line-height: 26px;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+  max-height: 800px;
+  opacity: 1;
+  transform: translate(0, 0);
+  margin-top: 14px;
+  z-index: 2;
+}
+
+ul {
+  list-style: none;
+  /*perspective: 900;*/
+  padding: 0;
+  margin: 0;
+}
+ul li {
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+ul li:nth-of-type(1) {
+  animation-delay: 0.5s;
+}
+ul li:nth-of-type(2) {
+  animation-delay: 0.75s;
+}
+ul li:nth-of-type(3) {
+  animation-delay: 1s;
+}
+ul li:last-of-type {
+  padding-bottom: 0;
+}
+ul li i {
+  position: absolute;
+  transform: translate(-6px, 0);
+  margin-top: 16px;
+  right: 0;
+}
+ul li i:before, ul li i:after {
+  content: "";
+  position: absolute;
+  background-color: #ff6873;
+  width: 3px;
+  height: 9px;
+}
+ul li i:before {
+  transform: translate(-2px, 0) rotate(45deg);
+}
+ul li i:after {
+  transform: translate(2px, 0) rotate(-45deg);
+}
+ul li input[type=checkbox] {
+  position: absolute;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  opacity: 0;
+}
+ul li input[type=checkbox]:checked ~ p {
+  margin-top: 0;
+  max-height: 0;
+  opacity: 0;
+  transform: translate(0, 50%);
+}
+ul li input[type=checkbox]:checked ~ i:before {
+  transform: translate(2px, 0) rotate(45deg);
+}
+ul li input[type=checkbox]:checked ~ i:after {
+  transform: translate(-2px, 0) rotate(-45deg);
+}
+
+@keyframes flipdown {
+  0% {
+    opacity: 0;
+    transform-origin: top center;
+    transform: rotateX(-90deg);
+  }
+  5% {
+    opacity: 1;
+  }
+  80% {
+    transform: rotateX(8deg);
+  }
+  83% {
+    transform: rotateX(6deg);
+  }
+  92% {
+    transform: rotateX(-3deg);
+  }
+  100% {
+    transform-origin: top center;
+    transform: rotateX(0deg);
+  }
+}
