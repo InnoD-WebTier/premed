@@ -1,42 +1,60 @@
 
+
 <template name= "orgs">
-<select id="category-select">
+<!-- <select id="category-select">
     <option disabled="disabled" selected="selected">Please Select</option> 
     {{#each categories}}
         <option value="{{this}}">{{this}}</option>
     {{/each}}
-</select>
+</select> -->
 <div class="container">
-	<div class="header">
-		<strong>Do you have any additional resources for this page?</strong> <br>
-		<strong>Please contribute using the box below! </strong><br> 
-		Email is checked and website is updated daily!<br>
-		[*Acceptable submissions include advising resources/contact information on campus not already listed, not opinions about each advising resource]
-	</div>
-	<form id="suggestion-form">
-	  <div class="row">
-	    <div class="four columns">
-	      <input class="u-full-width" placeholder="Name" id="name" type="text">
-	    </div>
-	    <div class="four columns">
-	      <input class="u-full-width" placeholder="Email" id="email" type="email">
-	    </div>
-	    <div class="four columns">
-	      <input class="u-full-width" placeholder="Subject" id="subject" type="text">
-	    </div>
-	  </div>
-	  <textarea class="u-full-width" placeholder="Message" id="message"></textarea>
-	  <div class="row">
-	    <div class="six columns">
-	      <input class="u-full-width" placeholder="Link" id="link" type="text">
-	    </div>
-	    <div class="six columns">
-	      <input class="u-full-width" placeholder="Image URL" id="image" type="text">
-	    </div>
-	  </div>
-	  <input class="button-primary" value="Submit" type="submit">
-	</form>
+	<input class="button-primary" value="Add resources" type="button" id="renderForm">
 </div>
+
+{{#if rendered}}
+	<div class="test">
+	<div class="container">
+		<div class="header">
+			<strong>Submit your resource below!</strong> <br>
+			Please choose an appropriate category for the organization from the dropdown. Acceptable submissions include advising resources/contact information in the message field, not opinions about each advising resource.
+			<br>
+		</div>
+		<br>
+		<form id="suggestion-form">
+		  <div class="row">
+		    <div class="four columns">
+		      <input class="u-full-width" placeholder="Name" id="name" type="text">
+		    </div>
+		    <div class="four columns">
+		      <input class="u-full-width" placeholder="Email" id="email" type="email">
+		    </div>
+		    <div class="four columns">
+		      <select class="u-full-width" id="exampleRecipientInput">
+		        <option value="Option 1">Health Related Clubs</option>
+		        <option value="Option 2">Pre-Health Fraternities/Sororities</option>
+		        <option value="Option 3">Non-Health Related Clubs</option>
+		        <option value="Option 4">Mentoring</option>
+		        <option value="Option 5">Tutoring/Teaching</option>
+		        <option value="Option 6">Science/Society</option>
+		        <option value="Option 7">Global Abroad Organizations</option>
+		        <option value="Option 8">DeCals</option>
+		      </select>
+		    </div>
+		  </div>
+		  <textarea class="u-full-width" placeholder="Message" id="message"></textarea>
+		  <div class="row">
+		    <div class="six columns">
+		      <input class="u-full-width" placeholder="Link" id="link" type="text">
+		    </div>
+		    <div class="six columns">
+		      <input class="u-full-width" placeholder="Image URL" id="image" type="text">
+		    </div>
+		  </div>
+		  <input class="button-primary" value="Submit" type="submit">
+		</form>
+	</div>
+</div>
+{{/if }}
 <div class="container">
 	<div class="row">
 		<div class=" offset-by-one five columns">
@@ -102,3 +120,5 @@
 	</div>
 </div>
 </template>
+
+

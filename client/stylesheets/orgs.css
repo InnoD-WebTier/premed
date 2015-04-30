@@ -1,3 +1,11 @@
+p {
+    display: none;
+}
+
+.test {
+    display: none;
+}
+
 .container {
   font-family: sans-serif
 }
