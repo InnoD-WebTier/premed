@@ -7,12 +7,13 @@
         <option value="{{this}}">{{this}}</option>
     {{/each}}
 </select> -->
+{{#if rendered}}
 <div class="container">
 	<input class="button-primary" value="Add resources" type="button" id="renderForm">
 </div>
+{{/if }}
 
-{{#if rendered}}
-	<div class="test">
+<div class="test">
 	<div class="container">
 		<div class="header">
 			<strong>Submit your resource below!</strong> <br>
@@ -54,7 +55,6 @@
 		</form>
 	</div>
 </div>
-{{/if }}
 <div class="container">
 	<div class="row">
 		<div class=" offset-by-one five columns">

@@ -47,7 +47,6 @@ Template.orgs.events({
 				alert("Failed to add content ):");
 			}
 		});
-		$('#name').reset();
 		return false;
 	}
 
