@@ -10,8 +10,8 @@ Router.route('/orgs', function() {
 	this.render('orgs');
 });
 
-Router.route('/mcat', function() {
-	this.render('mcat');
+Router.route('/resources', function() {
+	this.render('resources');
 });
 
 Router.route('/contribute', function() {

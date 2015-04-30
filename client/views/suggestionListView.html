@@ -4,14 +4,14 @@
 		<ul class="flex-container">
 			{{#each items}}
 			<li class="flex-item">
-				<label for={{this._id}}>
+				<label for={{this._id}} style="cursor: pointer">
 					<img class="img-container" src={{this.image}}>
 					<div class="section-header-white">
 						{{this.subject}}
 					</div>
 					<div class="section-paragraph-white">
 						<h6>
-							{{this.content}}
+							{{this.body}}
 						</h6>
 					</div>
 				</label>
@@ -22,22 +22,46 @@
 				<div class="modal-wrap" aria-hidden="true" role="dialog">
 					<label class="modal-overlay" for={{this._id}}></label>
 
-					<div class="modal-dialog">
+					<form class="modal-dialog" id={{this._id}} style="max-height: 100vh">
 						<div class="modal-header">
-							<h2>{{this.subject}}</h2>
+							Subject <input type="text" id="subject" value={{this.subject}}> 
 							<label class="btn-close" for={{this._id}} aria-hidden="true">× </label>
 						</div>
 						<div class="modal-body">
-							{{this.body}}
-						</div>
+							<div class="row">
+								<div class="six columns">
+									Contact Info: {{this.name}}
+								</div>
+								<div class="six columns">
+									Email: {{this.email}}
+								</div>
+							</div>
+							<div class="row">
+								Message <textarea class="subject-text" value={{this.body}} placeholder="Message" id="message"></textarea>
+							</div>
+							<div class="row">
+								<div class="six columns">
+									Redirect URL
+									<input type="text" id="link" value={{this.link}}>
+								</div>
+								<div class="six columns">
+									Image URL <input type="text" id="image" value={{this.image}}>
+								</div>
+							</div>
 
-						<div class="modal-footer">
-							{{this.name}}
 						</div>
-					</div>
+						<div class="modal-footer">
+							<div class="row">
+								<div class="two columns">
+									Display: <input type="checkbox" id="check" checked={{this.display}}>
+								</div>
+								<label class="button" for={{this._id}} aria-hidden="true">Cancel </label>
+								<input class="button-primary" for={{this._id}} aria-hidden="true" type="submit">
+							</div>
+						</div>
+					</form>
 				</div>
 			</div>
-
 			{{/each}}
 		</ul>
 	</div>

@@ -55,16 +55,19 @@ Meteor.methods({
 		return itemList;
 	},
 
-	// getDisplayedItems: function () {
-	// 	return Items.find({display: true}).fetch();
-	// },
+	updateItem: function(id, subject, message, image, link, display) {
+		if (!image) {
+			image = "http://placekitten.com/g/300/200";
+		}
 
-	// toggleItemDisplay: function () {
-	// 	if (Item.find(id).display == true) {
-	// 		item.display = false;
-	// 	};
-	// 	else {
-	// 		item.display = true;
-	// 	}
-	// },
+		Items.update({_id: id}, {
+			subject: subject, 
+			body: message,
+			image:image,
+			link:link,
+			display: display,
+		});
+
+		return true;
+	}
 });

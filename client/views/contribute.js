@@ -1,4 +1,4 @@
-Template.suggestion.events({
+Template.contribute.events({
 	'submit #suggestion-form': function(event) {
 		event.preventDefault();
 
