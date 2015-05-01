@@ -26,6 +26,10 @@ Router.route('/about', function() {
 	this.render('about');
 });
 
+Router.route('/admin', function() {
+  this.render('admin');
+});
+
 Router.configure({
 	layoutTemplate: 'ApplicationLayout'
 });

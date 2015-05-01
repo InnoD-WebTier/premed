@@ -10,3 +10,5 @@ iron:router
 jquery
 skeleton:skeleton
 less
+accounts-facebook
+accounts-ui

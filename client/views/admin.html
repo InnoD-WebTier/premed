@@ -1,0 +1,26 @@
+<template name="admin">
+  {{> loginButtons}}
+  
+  <br>
+  {{#if is_admin}}
+    You are an admin! (Note: if there are no other admins, everyone is one.)
+  {{else}}
+    You are not an admin...
+  {{/if}}
+
+  <br>
+  Known users:
+  
+  
+  <ul>
+  {{#each users}}
+    {{#if this.admin}}
+      <li>{{this.profile.name}} (Admin)
+      <button class="unset-admin" value="{{this._id}}">Unset Admin</button></li>
+    {{else}}
+      <li>{{this.profile.name}} (Not admin)
+      <button class="set-admin" value="{{this._id}}">Set Admin</button></li>
+    {{/if}}
+  {{/each}}
+  </ul>
+</template>

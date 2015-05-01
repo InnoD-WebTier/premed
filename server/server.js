@@ -11,6 +11,9 @@ Meteor.startup(function () {
 	Meteor.publish("clubs", function() {
 		return Clubs.find();
 	});
+  Meteor.publish("users", function() {
+    return Meteor.users.find();
+  });
 });
 
 Meteor.methods({
@@ -77,5 +80,28 @@ Meteor.methods({
 		});
 
 		return true;
-	}
+	},
+
+  setAdmin: function (id, value) {
+    var auth_as = Meteor.users.findOne( { _id: Meteor.userId() } );
+    if (auth_as.admin) {
+      Meteor.users.update({_id: id}, {
+        $set: {admin: value},
+      });
+    } else if (Meteor.users.find( { admin: true } ).count() === 0) {
+      console.log("No admins exist, allowing access to setAdmin.");
+      Meteor.users.update({_id: id}, {
+        $set: {admin: value},
+      });
+    } else {
+      console.log("Not an admin!")
+      return false;
+    }
+    return true;
+  },
+
+  isAdmin: function () {
+    return Meteor.users.findOne( { _id: Meteor.userId() } ).admin ||
+       Meteor.users.find( { admin: true } ).count() === 0;
+  },
 });
