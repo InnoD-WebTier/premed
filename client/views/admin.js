@@ -14,8 +14,6 @@ Template.admin.helpers({
 Template.admin.events({
   "click .set-admin": function () {
     Meteor.call('setAdmin', this._id, true, function (err, success) {
-      console.log(err);
-      console.log(success);
       if(!success) {
         alert("Failed to set admin");
       }
