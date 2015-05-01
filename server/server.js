@@ -14,6 +14,7 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
+
 	insertSuggestion: function (name, email, subject, body, link, image) {
 		if (!image) {
 			image = "http://placekitten.com/g/300/200";
