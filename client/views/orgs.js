@@ -1,3 +1,5 @@
+Meteor.subscribe("users");
+
 Template.orgs.onCreated(function(){
 	Meteor.call('getClubs', function(err, itemList){
 		Session.set("clubs", itemList);
@@ -92,9 +94,7 @@ Template.orgs.helpers({
 		}
 	},
 
-	// change after Arlan commits user accounts 
-
 	'is_Admin': function() {
-		return true;
+		return Meteor.user() && Meteor.users.findOne( { _id: Meteor.userId() }).admin;
 	}
 });
