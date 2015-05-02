@@ -3,6 +3,7 @@
 		<h1>Suggestion List</h1>
 		<ul class="flex-container">
 			{{#each items}}
+      {{#if is_admin}}
 			<li class="flex-item">
 				<label for={{this._id}} style="cursor: pointer">
 					<img class="img-container" src={{this.image}}>
@@ -14,9 +15,13 @@
 							{{this.body}}
 						</h6>
 					</div>
+          <div class="section-paragraph-white">
+            {{#unless this.display}}
+            <h6>(Not displayed)</h6>
+            {{/unless}}
+          </div>
 				</label>
 			</li>
-
 			<div class="modal">
 				<input class="modal-open" id={{this._id}} type="checkbox" hidden style="display: none">
 				<div class="modal-wrap" aria-hidden="true" role="dialog">
@@ -62,6 +67,23 @@
 					</form>
 				</div>
 			</div>
+      {{else}}
+        {{#if this.display}}
+        <li class="flex-item">
+          <label for={{this._id}} style="cursor: pointer">
+            <img class="img-container" src={{this.image}}>
+            <div class="section-header-white">
+              {{this.subject}}
+            </div>
+            <div class="section-paragraph-white">
+              <h6>
+                {{this.body}}
+              </h6>
+            </div>
+          </label>
+        </li>
+        {{/if}}
+      {{/if}}
 			{{/each}}
 		</ul>
 	</div>

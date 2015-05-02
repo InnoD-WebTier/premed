@@ -1,9 +1,13 @@
 //Use subscribe here instead!
 Meteor.subscribe("items");
+Meteor.subscribe("users");
 
 Template.suggestionListView.helpers({
 	items: function() {
 		return Session.get("items");
+	},
+	'is_admin': function() {
+		return Meteor.user() && Meteor.users.findOne( { _id: Meteor.userId() }).admin;
 	}
 });
 

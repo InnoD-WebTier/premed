@@ -20,7 +20,7 @@ Meteor.methods({
 
 	insertSuggestion: function (name, email, subject, body, link, image) {
 		if (!image) {
-			image = "http://placekitten.com/g/300/200";
+			image = "http://placekitten.com/g/300/205";
 		}
 
 		Items.insert({
@@ -38,7 +38,7 @@ Meteor.methods({
 
 	insertClubSuggestion: function (name, email, subject, body, link, image) {
 		if (!image) {
-			image = "http://placekitten.com/g/300/200";
+			image = "http://placekitten.com/g/300/205";
 		}
 
 		Clubs.insert({
@@ -68,7 +68,7 @@ Meteor.methods({
 
 	updateItem: function(id, subject, message, image, link, display) {
 		if (!image) {
-			image = "http://placekitten.com/g/300/200";
+			image = "http://placekitten.com/g/300/205";
 		}
 
 		Items.update({_id: id}, {
