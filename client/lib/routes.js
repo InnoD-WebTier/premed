@@ -35,5 +35,6 @@ Router.route('/admin', function() {
 });
 
 Router.configure({
-	layoutTemplate: 'ApplicationLayout'
+	layoutTemplate: 'ApplicationLayout',
+	notFoundTemplate: '404'
 });
