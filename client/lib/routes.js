@@ -26,6 +26,10 @@ Router.route('/about', function() {
 	this.render('about');
 });
 
+Router.route('/mcat', function() {
+  this.render('mcat');
+});
+
 Router.route('/admin', function() {
   this.render('admin');
 });
