@@ -1,3 +1,9 @@
+// Application Layout SCSS
+
+.content {
+    padding-top: 60px;
+}
+
 .container {
   font-family: sans-serif
 }
@@ -13,7 +19,7 @@
 }
 .clearfix {
     *zoom: 2;
-}  
+}
 
 /* Navigation */
 .navbar {
@@ -67,7 +73,7 @@ a {
     .navbar ul {
         display: none;
         height: auto;
-    }    
+    }
     .navbar li {
         width: 100%;
         float: left;
@@ -78,12 +84,12 @@ a {
           text-align: left;
           width: 100%;
           text-indent: 25px;
-            background: #2e2e2e;          
-      }      
+            background: #2e2e2e;
+      }
       .navbar a:hover {
           background:#444;
       }
-                
+
     .navbar a#pull {
         display: block;
         background-color: #262626;
@@ -91,7 +97,7 @@ a {
         position: relative;
     }
 
-    
+
     .navbar a#pull:after {
         content:"";
         background: url(nav-icon.png) no-repeat;
@@ -103,4 +109,4 @@ a {
         right: 15px;
         top: 10px;
     }
-}    
+}
