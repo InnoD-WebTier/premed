@@ -1,0 +1,26 @@
+<head>
+<meta charset='utf-8' />
+<style type='text/css'>
+
+	body {
+		margin-top: 40px;
+		text-align: center;
+		font-size: 14px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+	}
+
+	#calendar {
+		width: 900px;
+		margin: 0 auto;
+	}
+
+</style>
+</head>
+
+
+<template name="calendar">
+	<button id='addToggle' name='addToggle'>Add Event</button>
+	<br/>
+	<input type='text' id='description' placeholder='Add a Description' style="visibility:hidden">
+	<div id="myCalendar"></div>
+</template>

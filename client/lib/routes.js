@@ -34,7 +34,10 @@ Router.route('/admin', function() {
   this.render('admin');
 });
 
+Router.route('/calendar', function() {
+	this.render('calendar');
+});
+
 Router.configure({
-	layoutTemplate: 'ApplicationLayout',
-	notFoundTemplate: '404'
+	layoutTemplate: 'ApplicationLayout'
 });

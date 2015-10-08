@@ -1,5 +1,6 @@
 Items = new Mongo.Collection("items");
 Clubs = new Mongo.Collection("clubs");
+Events = new Mongo.Collection("events");
 
 //Code that runs on startup.
 Meteor.startup(function () {
@@ -11,6 +12,9 @@ Meteor.startup(function () {
 	Meteor.publish("clubs", function() {
 		return Clubs.find();
 	});
+	Meteor.publish("events", function() {
+		return Events.find({});
+	})
   Meteor.publish("users", function() {
     return Meteor.users.find();
   });
@@ -53,6 +57,14 @@ Meteor.methods({
 
 		return true;
 	},
+
+	insertEvent: function (event) {
+		Events.insert({
+			title: event.title,
+			start: event.start,
+			end: event.end
+		});
+	},
 	
 	getClubs: function () {
 		var itemList = Clubs.find({}).fetch();
@@ -64,6 +76,12 @@ Meteor.methods({
 		var itemList = Items.find({}).fetch();
 		console.log(itemList);
 		return itemList;
+	},
+
+	getEvents: function () {
+		var eventList = Events.find({}).fetch();
+		console.log(eventList);
+		return eventList;
 	},
 
 	updateItem: function(id, subject, message, image, link, display) {
