@@ -1,14 +1,43 @@
-// Application Layout SCSS
+// Application Layout Styles
 
-.content {
-    padding-top: 60px;
-}
-
-.navigation-wrapper {
-    .navbar {
+.navbar {
+    margin-left: auto;
+    margin-right: auto;
+    height: $navbar-height;
+    width: 100%;
+    font-family: 'DinPro', sans-serif;
+    position: fixed;
+    background-color: white;
+    z-index: 100;
+    ul {
+        @include vertical-align();
+        text-align: center;
+        margin: 0 auto;
+        padding: 0px;
+        display: table;
+        list-style-type: none;
+        li {
+            float: left;
+            padding: 2px;
+            width: 150px;
+            margin-left: auto;
+            margin-right: auto;
+        }
         .nav-item {
             text-align: center;
             text-transform: uppercase;
+            a {
+                font-size: 18px;
+                letter-spacing: 1px;
+                color: $grey;
+                text-decoration: none;
+                transition: 200ms;
+                padding-bottom: 7px;
+                &:hover {
+                    color: $light-blue;
+                    border-bottom: solid 2px $light-blue;
+                }
+            }
         }
     }
 }

@@ -1,0 +1,29 @@
+// Landing Page Styles
+
+.background {
+    background: url("/img/logo/logo.png") no-repeat center center;
+    background-size: contain;
+    height: 100%;
+    width: 100%;
+    .landing-text {
+        @include vertical-align();
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        font-family: 'DinPro', sans-serif;
+        .landing-title {
+            color: $blue;
+            font-size: 52px;
+            font-weight: bold;
+            #at {
+                margin: 0;
+                padding: 0;
+                font-family: 'Open-Sans', sans-serif;
+            }
+        }
+        .landing-subtitle {
+            color: $blue;
+            font-size: 28px;
+        }
+    }
+}

@@ -1,5 +1,19 @@
 // Base Styles
 
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+.content {
+    height: 100%;
+    padding-top: $navbar-height;
+}
+
+// Fonts
 @font-face {
     font-family: DINPro;
     src: url("/fonts/DINPro-Regular.otf");
@@ -31,6 +45,13 @@
 @font-face {
     font-family: DINProMedium;
     src: url("/fonts/DINPro-Medium.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Open-Sans;
+    src: url("/fonts/OpenSans-Regular.ttf");
     font-weight: normal;
     font-style: normal;
 }

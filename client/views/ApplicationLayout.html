@@ -1,17 +1,15 @@
 <template name="ApplicationLayout">
-	<div class="navigation-wrapper">
-	    <ul class="navbar">
-	    	<!-- not implemented: academics -->
+	<div class="navbar">
+	    <ul>
 	    	<li class="nav-item"><a href="/">home</a></li>
 	    	<li class="nav-item"><a href="/about">about</a></li>
 	        <li class="nav-item"><a href="/academics">academics</a></li>
 	        <li class="nav-item"><a href="/advising">advising</a></li>
+	        <li class="nav-item"><a href="/orgs">clubs</a></li>
 	        <li class="nav-item"><a href="/opportunities">opportunities</a></li>
-	        <li class="nav-item"><a href="/orgs">organizations</a></li>
 	    	<li class="nav-item"><a href="/mcat">mcat</a></li>
 	        <li class="nav-item"><a href="/contribute">contribute</a></li>
 	    </ul>
-	    <a href="#" id="pull">menu</a>
 	</div>
 	<div class="content">
 		{{> yield}}
