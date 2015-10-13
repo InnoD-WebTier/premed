@@ -13,3 +13,5 @@ less
 accounts-facebook
 accounts-ui
 fourseven:scss
+cfs:standard-packages
+cfs:filesystem
