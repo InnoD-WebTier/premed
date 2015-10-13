@@ -6,24 +6,21 @@
     height: $navbar-height;
     width: 100%;
     font-family: 'DinPro', sans-serif;
-    position: fixed;
-    background-color: white;
+    background-color: $white;
     z-index: 100;
-    ul {
+    .nav {
         @include vertical-align();
         text-align: center;
         margin: 0 auto;
         padding: 0px;
         display: table;
         list-style-type: none;
-        li {
+        .nav-item {
             float: left;
             padding: 2px;
             width: 150px;
             margin-left: auto;
             margin-right: auto;
-        }
-        .nav-item {
             text-align: center;
             text-transform: uppercase;
             a {
@@ -37,6 +34,22 @@
                     color: $light-blue;
                     border-bottom: solid 2px $light-blue;
                 }
+            }
+            .dropdown {
+                display: none;
+                height: auto;
+                position: absolute;
+                font-size: 18px;
+                color: $light-blue;
+                background: $white;
+                .drop-item {
+                    border-bottom: solid 2px $light-grey;
+                }
+            }
+            &:hover .dropdown {
+                display: block;
+                list-style-type: none;
+                text-align: left;
             }
         }
     }

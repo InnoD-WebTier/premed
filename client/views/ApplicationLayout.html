@@ -1,14 +1,21 @@
 <template name="ApplicationLayout">
 	<div class="navbar">
-	    <ul>
+	    <ul class="nav">
 	    	<li class="nav-item"><a href="/">home</a></li>
 	    	<li class="nav-item"><a href="/about">about</a></li>
 	        <li class="nav-item"><a href="/academics">academics</a></li>
-	        <li class="nav-item"><a href="/advising">advising</a></li>
+	        <li class="nav-item">
+	        	<a href="/advising">advising</a>
+	        	<ul class="dropdown">
+	        		<li class="drop-item">majors</li>
+	        		<li class="drop-item">professors</li>
+	        		<li class="drop-item">courses</li>
+	        		<li class="drop-item">peer</li>
+	        	</ul>
+	        </li>
 	        <li class="nav-item"><a href="/orgs">clubs</a></li>
 	        <li class="nav-item"><a href="/opportunities">opportunities</a></li>
 	    	<li class="nav-item"><a href="/mcat">mcat</a></li>
-	        <li class="nav-item"><a href="/contribute">contribute</a></li>
 	    </ul>
 	</div>
 	<div class="content">

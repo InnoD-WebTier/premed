@@ -10,7 +10,16 @@ body {
 
 .content {
     height: 100%;
-    padding-top: $navbar-height;
+}
+
+.title {
+    font-size: 52px;
+    font-family: 'DinPro', sans-serif;
+}
+
+.subtitle {
+    font-size: 28px;
+    font-family: 'DinPro', sans-serif;
 }
 
 // Fonts

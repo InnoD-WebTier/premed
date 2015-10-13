@@ -10,10 +10,8 @@
         width: 50%;
         margin: 0 auto;
         text-align: center;
-        font-family: 'DinPro', sans-serif;
         .landing-title {
             color: $blue;
-            font-size: 52px;
             font-weight: bold;
             #at {
                 margin: 0;
@@ -23,7 +21,19 @@
         }
         .landing-subtitle {
             color: $blue;
-            font-size: 28px;
         }
+    }
+}
+
+.calendar-wrapper {
+    background: $blue;
+    width: 100%;
+    margin-top: 20px;
+    padding: 40px 0 40px 0;
+    .calendar-title {
+        width: 50%;
+        margin: 0 auto;
+        color: $white;
+        text-align: center;
     }
 }
