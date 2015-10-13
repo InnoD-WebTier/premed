@@ -4,6 +4,8 @@ Template.orgs.onCreated(function(){
 	Meteor.call('getClubs', function(err, itemList){
 		Session.set("clubs", itemList);
 	});
+
+  // template.$('.club-link-exp-body').hide();
 });
 
 Template.orgs.events({
@@ -16,39 +18,39 @@ Template.orgs.events({
     // There has to be an easier way to do this
 
    	"click #renderForm": function(event, template) {
-   		template.$(".test").toggle();	
+   		template.$(".test").toggle();
    	},
 
    	"click #first": function(event, template) {
-   		template.$(".contents1").toggle();	
+   		template.$(".contents1").toggle();
    	},
 
    	"click #second": function(event, template) {
-   		template.$(".contents2").toggle();	
+   		template.$(".contents2").toggle();
    	},
 
    	"click #third": function(event, template) {
-   		template.$(".contents3").toggle();	
+   		template.$(".contents3").toggle();
    	},
 
    	"click #fourth": function(event, template) {
-   		template.$(".contents4").toggle();	
+   		template.$(".contents4").toggle();
    	},
 
    	"click #fifth": function(event, template) {
-   		template.$(".contents5").toggle();	
+   		template.$(".contents5").toggle();
    	},
 
    	"click #sixth": function(event, template) {
-   		template.$(".contents6").toggle();	
+   		template.$(".contents6").toggle();
    	},
 
    	"click #seventh": function(event, template) {
-   		template.$(".contents7").toggle();	
+   		template.$(".contents7").toggle();
    	},
 
    	"click #eighth": function(event, template) {
-   		template.$(".contents8").toggle();	
+   		template.$(".contents8").toggle();
    	},
 
    	'submit #suggestion-form': function(event) {
@@ -60,7 +62,7 @@ Template.orgs.events({
 		var message = $('#message').val();
 		var image = $('#image').val();
 		var link = $('#link').val();
-		
+
 
 		Meteor.call('insertClubSuggestion', name, email, subject, message, link, image, function(err, success) {
 			if (success) {
@@ -69,7 +71,11 @@ Template.orgs.events({
 				alert("Failed to add content ):");
 			}
 		});
-	}
+	},
+
+  'click .club-link-list-item-title': function(event, template) {
+    template.$('.club-link-list-item-body').toggle();
+  }
 });
 
 Template.orgs.helpers({
