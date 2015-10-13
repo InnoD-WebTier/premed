@@ -21,6 +21,13 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
+	deleteEvent: function (key) {
+		if (Events.find({id:key})) {
+			console.log(Events.remove({_id:key}));
+		} else {
+			throw 'Invalid key';s
+		}
+	},
 
 	insertSuggestion: function (name, email, subject, body, link, image) {
 		if (!image) {
@@ -59,11 +66,17 @@ Meteor.methods({
 	},
 
 	insertEvent: function (event) {
-		Events.insert({
-			title: event.title,
-			start: event.start,
-			end: event.end
-		});
+		if (event.start == '') {
+			throw 'Invalid Start Date';
+		} else if (event.end == '') {
+			throw 'Invalid End Date';
+		} else {
+			Events.insert({
+				title: event.title,
+				start: event.start,
+				end: event.end
+			});
+		}
 	},
 	
 	getClubs: function () {
@@ -98,6 +111,14 @@ Meteor.methods({
 		});
 
 		return true;
+	},
+
+	updateEvent: function(event) {
+		Events.update({_id:event._id}, {
+			title: event.title,
+			start: event.start,
+			end: event.end
+		});
 	},
 
   setAdmin: function (id, value) {

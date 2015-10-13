@@ -39,5 +39,6 @@ Router.route('/calendar', function() {
 });
 
 Router.configure({
-	layoutTemplate: 'ApplicationLayout'
+	layoutTemplate: 'ApplicationLayout',
+	notFoundTemplate: '404'
 });
