@@ -14,6 +14,10 @@ Router.route('/advising', function() {
 	}
 });
 
+Router.route('/academics', function() {
+	this.render('academics');
+})
+
 Router.route('/orgs', function() {
 	this.render('orgs');
 }, {
