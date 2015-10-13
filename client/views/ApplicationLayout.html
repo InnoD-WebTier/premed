@@ -1,17 +1,17 @@
 <template name="ApplicationLayout">
-	<!-- NAVBAR HERE -->
-	<div class="navbar clearfix">
-	    <ul class="clearfix">
-	        <li><a href="/advising">ADVISING</a></li>
-	        <li><a href="/opportunities">OPPORTUNITIES</a></li>
-	        <li><a href="/orgs">ORGANIZATIONS</a></li>
-	    	<li><a href="/mcat">RESOURCES</a></li>
-	        <li><a href="/contribute">CONTRIBUTE</a></li>
-	        <li><a href="/about">ABOUT</a></li>
+	<div class="navbar">
+	    <ul>
+	    	<li class="nav-item"><a href="/">home</a></li>
+	    	<li class="nav-item"><a href="/about">about</a></li>
+	        <li class="nav-item"><a href="/academics">academics</a></li>
+	        <li class="nav-item"><a href="/advising">advising</a></li>
+	        <li class="nav-item"><a href="/orgs">clubs</a></li>
+	        <li class="nav-item"><a href="/opportunities">opportunities</a></li>
+	    	<li class="nav-item"><a href="/mcat">mcat</a></li>
+	        <li class="nav-item"><a href="/contribute">contribute</a></li>
 	    </ul>
-	    <a href="#" id="pull">MENU</a>  
 	</div>
-	<div style="padding-top:60px">
+	<div class="content">
 		{{> yield}}
 	</div>
 </template>

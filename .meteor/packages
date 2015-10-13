@@ -25,3 +25,5 @@ ejson
 spacebars
 check
 fourseven:scss
+cfs:standard-packages
+cfs:filesystem
