@@ -6,6 +6,22 @@ Router.route('/', function() {
 	}
 });
 
+Router.route('/about', function() {
+	this.render('about');
+}, {
+	onAfterAction: function() {
+		return setTitle('About');
+	}
+});
+
+Router.route('/academics',
+	{
+		name: 'academics'
+	},
+	function() {
+		this.render('academics');
+});
+
 Router.route('/advising', function() {
 	this.render('advising');
 }, {
@@ -13,10 +29,6 @@ Router.route('/advising', function() {
 		return setTitle('Advising');
 	}
 });
-
-Router.route('/academics', function() {
-	this.render('academics');
-})
 
 Router.route('/orgs', function() {
 	this.render('orgs');
@@ -47,14 +59,6 @@ Router.route('/opportunities', function() {
 }, {
 	onAfterAction: function() {
 		return setTitle('Opportunities');
-	}
-});
-
-Router.route('/about', function() {
-	this.render('about');
-}, {
-	onAfterAction: function() {
-		return setTitle('About');
 	}
 });
 

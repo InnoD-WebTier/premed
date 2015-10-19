@@ -14,7 +14,7 @@
 	        	<a class="main-link" href="/academics">academics</a>
 	        	<input type="checkbox" id="drop-1">
 	        	<ul>
-	        		<li><a href="/academics#majors">majors</a></li>
+	        		<li><a href="{{ pathFor 'academics' hash='majors' }}">majors</a></li>
 	        		<li><a href="/academics#professors">professors</a></li>
 	        		<li><a href="/academics#courses">courses</a></li>
 	        	</ul>
@@ -44,6 +44,6 @@
 		{{> yield}}
 	</div>
 	<footer>
-		hello
+		FOOTER
 	</footer>
 </template>
