@@ -1,26 +1,18 @@
 // Base Styles
-
-html {
-    height: 100%;
-}
-
-body {
-    height: 100%;
-}
-
 .content {
     position: relative;
     padding-top: $navbar-height;
+    font-family: 'DinPro', sans-serif;
 }
 
+// Use with h2 tag
 .title {
     font-size: 52px;
-    font-family: 'DinPro', sans-serif;
 }
 
+// Use with h3 tag
 .subtitle {
     font-size: 28px;
-    font-family: 'DinPro', sans-serif;
 }
 
 // Fonts
