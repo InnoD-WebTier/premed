@@ -1,56 +1,93 @@
 // Application Layout Styles
 
-.navbar {
+nav {
+    position: fixed;
+    width: 100%;
+    .toggle, [id^=drop] {
+        display: none;
+    }
     margin-left: auto;
     margin-right: auto;
-    height: $navbar-height;
-    width: 100%;
+    height: auto;
     font-family: 'DinPro', sans-serif;
+    text-align: center;
     background-color: $white;
     z-index: 100;
-    .nav {
-        @include vertical-align();
-        text-align: center;
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    a {
+        display: block;
+        padding: 7px 0;
+        font-size: 18px;
+        letter-spacing: 1px;
+        color: $grey;
+        text-decoration: none;
+        transition: color 200ms;
+    }
+    ul.menu {
+        position: relative;
         margin: 0 auto;
         padding: 0px;
-        display: table;
         list-style-type: none;
-        .nav-item {
-            float: left;
-            padding: 2px;
-            width: 150px;
-            margin-left: auto;
-            margin-right: auto;
+        display: inline-block;
+        height: $navbar-height;
+        li.main {
+            @include vertical-align();
+            margin: 0px 25px;
+            display: inline-block;
             text-align: center;
+            float: left;
             text-transform: uppercase;
-            a {
-                font-size: 18px;
-                letter-spacing: 1px;
-                color: $grey;
-                text-decoration: none;
-                transition: 200ms;
-                padding-bottom: 7px;
-                &:hover {
+            a.main-link {
+                margin-left: 8px;
+                border-top: solid 2px transparent;
+                border-bottom: solid 2px transparent;
+            }
+            ul {
+                background: $white;
+                margin: 0;
+                padding: 15px 8px 0 8px;
+                display: none;
+                list-style-type: none;
+                position: absolute;
+                li {
+                    margin: 0;
+                    float: none;
+                    display: list-item;
+                    position: relative;
+                    border-bottom: solid 2px transparent;
+                    text-align: left;
+                    &:hover {
+                        color: $light-blue;
+                    }
+                }
+            }
+            &.active {
+                a.main-link {
                     color: $light-blue;
                     border-bottom: solid 2px $light-blue;
                 }
             }
-            .dropdown {
-                display: none;
-                height: auto;
-                position: absolute;
-                font-size: 18px;
-                color: $light-blue;
-                background: $white;
-                .drop-item {
-                    border-bottom: solid 2px $light-grey;
+            &:hover {
+                a.main-link {
+                    color: $light-blue;
+                    border-bottom: solid 2px $light-blue;
+
                 }
-            }
-            &:hover .dropdown {
-                display: block;
-                list-style-type: none;
-                text-align: left;
+                ul {
+                    display: inherit;
+                }
             }
         }
     }
 }
+
+footer {
+    height: 100px;
+    width: 100px;
+}
+
+

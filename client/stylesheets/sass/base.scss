@@ -9,7 +9,8 @@ body {
 }
 
 .content {
-    height: 100%;
+    position: relative;
+    padding-top: $navbar-height;
 }
 
 .title {

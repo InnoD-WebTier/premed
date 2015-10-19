@@ -1,24 +1,49 @@
 <template name="ApplicationLayout">
-	<div class="navbar">
-	    <ul class="nav">
-	    	<li class="nav-item"><a href="/">home</a></li>
-	    	<li class="nav-item"><a href="/about">about</a></li>
-	        <li class="nav-item"><a href="/academics">academics</a></li>
-	        <li class="nav-item">
-	        	<a href="/advising">advising</a>
-	        	<ul class="dropdown">
-	        		<li class="drop-item">majors</li>
-	        		<li class="drop-item">professors</li>
-	        		<li class="drop-item">courses</li>
-	        		<li class="drop-item">peer</li>
+	<nav>
+		<label for="drop" class="toggle">Menu</label>
+		<input type="checkbox" id="drop">
+	    <ul class="menu">
+	    	<li class="main {{ isActivePath '/' }}">
+	    		<a class="main-link" href="/">home</a>
+	    	</li>
+	    	<li class="main {{ isActivePath '/about' }}">
+	    		<a class="main-link" href="/about">about</a>
+	    	</li>
+	        <li class="main {{ isActivePath '/academics' }}">
+	        	<label for="drop-1" class="toggle">academics</label>
+	        	<a class="main-link" href="/academics">academics</a>
+	        	<input type="checkbox" id="drop-1">
+	        	<ul>
+	        		<li><a href="/academics#majors">majors</a></li>
+	        		<li><a href="/academics#professors">professors</a></li>
+	        		<li><a href="/academics#courses">courses</a></li>
 	        	</ul>
 	        </li>
-	        <li class="nav-item"><a href="/orgs">clubs</a></li>
-	        <li class="nav-item"><a href="/opportunities">opportunities</a></li>
-	    	<li class="nav-item"><a href="/mcat">mcat</a></li>
+	        <li class="main {{ isActivePath '/advising' }}">
+	        	<label for="drop-2" class="toggle">advising</label>
+	        	<a class="main-link" href="/advising">advising</a>
+	        	<input type="checkbox" id="drop-2">
+	        	<ul>
+	        		<li><a href="/advising#career">cal career</a></li>
+	        		<li><a href="/advising#department">department</a></li>
+	        		<li><a href="/advising#peer">peer</a></li>
+	        	</ul>
+	        </li>
+	        <li class="main {{ isActivePath '/orgs' }}">
+	        	<a class="main-link" href="/orgs">clubs</a>
+	        </li>
+	        <li class="main {{ isActivePath '/opportunities' }}">
+	        	<a class="main-link" href="/opportunities">opportunities</a>
+	        </li>
+	    	<li class="main {{ isActivePath '/mcat' }}">
+	        	<a class="main-link" href="/mcat">mcat</a>
+	    	</li>
 	    </ul>
-	</div>
+	</nav>
 	<div class="content">
 		{{> yield}}
 	</div>
+	<footer>
+		hello
+	</footer>
 </template>
