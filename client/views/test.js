@@ -12,6 +12,7 @@ currID = '';
 editMode = 0;
 deleteMode = 0;
 eventList = [];
+noEndDate = 'No end specified';
 
 function refetch() {
 	eventList = Events.find({}).fetch();
@@ -65,17 +66,22 @@ Template.calendar.rendered = function(){
 				element.attr('href', 'javascript:void(0);');
 				element.click(function () {
 					if (event.end == null) {
-						var end = event.start.format();
+						var endDay = noEndDate;
+						var endTime = '';
 					} else {
-						var end = event.end.format();
+						var endDay = event.end.format("MMMM Do, YYYY");
+						var endTime = event.end.format("h:mm a");
 					}
 					currID = event._id;
 					document.getElementById('info').innerHTML = event.title;
-					document.getElementById('startDate').innerHTML = event.start.format();
-					document.getElementById('endDate').innerHTML = end;
+					document.getElementById('startDate').innerHTML = event.start.format("MMMM Do, YYYY");
+					document.getElementById('startTime').innerHTML = event.start.format("h:mm a");
+					document.getElementById('endDate').innerHTML = endDay;
+					document.getElementById('endTime').innerHTML = endTime;
 					document.getElementById('eventInfo').checked = true;
 				});
-			}
+			},
+			timezone: "local"
 		});
 		console.log(Events.find({}).fetch());
 	});
@@ -106,6 +112,8 @@ Template.calendar.events({
 					console.log(err);
 				} else {
 					console.log('event added');
+					event._id = success;
+					console.log(event);
 					$("#myCalendar").fullCalendar("renderEvent", event);
 				}
 			});
@@ -124,10 +132,18 @@ Template.calendar.events({
 			console.log(document.getElementById('info').innerHTML);
 			var desc = document.getElementById('info').innerHTML;
 			console.log(desc);
-			var start = document.getElementById('startDate').innerHTML;
-			var end = document.getElementById('endDate').innerHTML;
-			document.getElementById('startDate').innerHTML = "<input type='text' id='editStart' value='" + start + "'/>";
-			document.getElementById('endDate').innerHTML = "<input type='text' id='editEnd' value='" + end + "'/>";
+			var startDate = document.getElementById('startDate').innerHTML;
+			var startTime = document.getElementById('startTime').innerHTML;
+			var endDate = document.getElementById('endDate').innerHTML;
+			var endTime = document.getElementById('endTime').innerHTML;
+			if (endDate === noEndDate) {
+				endDate = '';
+				endTime = '';
+			}
+			document.getElementById('startDate').innerHTML = "<input type='text' id='editStartDate' value='" + startDate + "'/>";
+			document.getElementById('startTime').innerHTML = "<input type='text' id='editStartTime' value='" + startTime + "'/>";
+			document.getElementById('endDate').innerHTML = "<input type='text' id='editEndDate' value='" + endDate + "'/>";
+			document.getElementById('endTime').innerHTML = "<input type='text' id='editEndTime' value='" + endTime + "'/>";
 			document.getElementById('info').innerHTML = "Title: <input type='text' id='editDesc' value=\"" + desc + "\"/>";
 			confirmButtons();
 		}
@@ -146,14 +162,20 @@ Template.calendar.events({
 	"click #confirm": function(e) {
 		if (editMode === 1) {
 			var desc = document.getElementById('editDesc').value;
-			var start = document.getElementById('editStart').value;
-			var end = document.getElementById('editEnd').value;
+			var startDate = document.getElementById('editStartDate').value;
+			var startTime = document.getElementById('editStartTime').value;
+			var endDate = document.getElementById('editEndDate').value;
+			var endTime = document.getElementById('editEndTime').value;
+			console.log(startDate + ' ' + startTime);
+			console.log($.fullCalendar.moment(startDate + ' ' + startTime, "MMMM Do, YYYY h:mm a"));
+			console.log($.fullCalendar.moment(startDate + ' ' + startTime, "MMMM Do, YYYY h:mm a").toISOString());
 			var event = {
 				_id: currID,
-				start: start,
-				end: end,
+				start: $.fullCalendar.moment(startDate + ' ' + startTime, "MMMM Do, YYYY h:mm a").toISOString(),
+				end: $.fullCalendar.moment(endDate + ' ' + endTime, "MMMM Do, YYYY h:mm a").toISOString(),
 				title: desc
 			};
+			console.log(event);
 			Meteor.call('updateEvent', event, function (err, success) {
 				if (err) {
 					console.log('failed to edit event');

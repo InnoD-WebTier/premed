@@ -71,11 +71,12 @@ Meteor.methods({
 		} else if (event.end == '') {
 			throw 'Invalid End Date';
 		} else {
-			Events.insert({
+			var id = Events.insert({
 				title: event.title,
 				start: event.start,
 				end: event.end
 			});
+			return id;
 		}
 	},
 	
@@ -114,6 +115,7 @@ Meteor.methods({
 	},
 
 	updateEvent: function(event) {
+		console.log(event);
 		Events.update({_id:event._id}, {
 			title: event.title,
 			start: event.start,
