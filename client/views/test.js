@@ -200,6 +200,7 @@ Template.calendar.events({
 				}
 				revert();
 			})
+			deleteMode = 0;
 		}
 	}, 
 
