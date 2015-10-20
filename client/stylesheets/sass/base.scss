@@ -8,11 +8,29 @@
 // Use with h2 tag
 .title {
     font-size: 52px;
+    font-family: 'DINProBold';
+    color: $light-blue;
 }
 
 // Use with h3 tag
 .subtitle {
     font-size: 28px;
+    font-family: 'DINProMedium', sans-serif;
+    color: $light-blue;
+}
+
+.title-underline {
+    border-color: $blue;
+    background-color: $blue;
+    color: $light-blue;
+    height: 2px;
+    width: 200px;
+    margin: 10px auto;
+}
+
+.page-container {
+    padding: 0 15%;
+    margin: 0 auto;
 }
 
 // Fonts
