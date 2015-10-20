@@ -5,12 +5,12 @@
 
 // Vendors
 @import "client/stylesheets/sass/vendors/normalize.scss";
+@import "client/stylesheets/sass/grid.scss";
 @import "client/stylesheets/sass/vendors/toast.scss";
 
 // App
 @import "client/stylesheets/sass/mixins.scss";
 @import "client/stylesheets/sass/variables.scss";
-@import "client/stylesheets/sass/grid.scss";
 @import "client/stylesheets/sass/base.scss";
 @import "client/stylesheets/sass/ApplicationLayout.scss";
 
@@ -18,5 +18,6 @@
 
 // Pages
 @import "client/stylesheets/sass/pages/landingpage.scss";
-@import "client/stylesheets/sass/pages/orgs.scss";
 @import "client/stylesheets/sass/pages/academics.scss";
+@import "client/stylesheets/sass/pages/orgs.scss";
+@import "client/stylesheets/sass/pages/about.scss";
