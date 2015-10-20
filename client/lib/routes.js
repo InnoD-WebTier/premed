@@ -6,6 +6,22 @@ Router.route('/', function() {
 	}
 });
 
+Router.route('/about', function() {
+	this.render('about');
+}, {
+	onAfterAction: function() {
+		return setTitle('About');
+	}
+});
+
+Router.route('/academics', function() {
+	this.render('academics');
+}, {
+	onAfterAction: function() {
+		return setTitle('Academics');
+	}
+});
+
 Router.route('/advising', function() {
 	this.render('advising');
 }, {
@@ -14,15 +30,11 @@ Router.route('/advising', function() {
 	}
 });
 
-Router.route('/academics', function() {
-	this.render('academics');
-})
-
 Router.route('/orgs', function() {
 	this.render('orgs');
 }, {
 	onAfterAction: function() {
-		return setTitle('Organizations');
+		return setTitle('Clubs');
 	}
 });
 
@@ -50,14 +62,6 @@ Router.route('/opportunities', function() {
 	}
 });
 
-Router.route('/about', function() {
-	this.render('about');
-}, {
-	onAfterAction: function() {
-		return setTitle('About');
-	}
-});
-
 Router.route('/mcat', function() {
   this.render('mcat');
 }, {
@@ -77,6 +81,21 @@ Router.route('/admin', function() {
 Router.configure({
 	layoutTemplate: 'ApplicationLayout',
 	notFoundTemplate: '404'
+});
+
+// Allows clicking on sublink from a different page
+Router.onAfterAction(function() {
+    var self = this;
+    $(window).scrollTop(0);
+    if (this.params.hash) {
+        Tracker.afterFlush(function() {
+            if (typeof $("#" + self.params.hash).offset() !== "undefined") {
+            	var elem = $("#" + self.params.hash);
+            	var elemHeight = elem.height();
+                $(document).scrollTop(elem.offset().top - elemHeight);
+            }
+        });
+    }
 });
 
 this.setTitle = function(title) {
