@@ -1,0 +1,80 @@
+// SKETCHY CHANGES.
+$font-main: DINPro;
+$font-bold: DINProMedium;
+$font-bolder: DINProBold;
+$font-boldest: DINProBlack;
+$font-light: DINProLight;
+$font-secondary: Open-Sans;
+
+
+// END SKETCHY CHANGES.
+
+.visible {
+  display: block;
+}
+
+.title-row {
+  text-align: center;
+  margin: 20px 0;
+
+  .title {
+    font-family: $font-bolder;
+    color: $light-blue;
+    text-transform: uppercase;
+  }
+
+  .orgs-divider {
+    border-color: $blue;
+    background-color: $blue;
+    color: $light-blue;
+    height: 2px;
+    width: 200px;
+    margin: 10px auto;
+  }
+}
+
+
+.contact-us {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.club-type-list-row {
+  margin: 10px 0;
+
+  ul.club-type-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+
+    li.club-type-list-item {
+      margin: 10px;
+      padding: 1em;
+      color: $grey;
+      background-color: $light-grey;
+      display: inline-block;
+    }
+
+  }
+}
+
+.club-link-list-title {
+  h4 {
+    font-family: $font-bold;
+    color: $light-blue;
+  }
+}
+
+.club-link-list {
+  margin-bottom: 20px;
+
+
+  .club-link-list-item-title {
+    color: $gold;
+    cursor: pointer;
+  }
+
+  .club-link-list-item-body {
+    // display: none;
+  }
+}

@@ -74,7 +74,8 @@ Template.orgs.events({
 	},
 
   'click .club-link-list-item-title': function(event, template) {
-    template.$('.club-link-list-item-body').toggle();
+    template.$('.club-link-list-item-body').toggleClass('visible');
+    template.$('.club-link-list-item-body').toggleClass('hidden');
   }
 });
 
