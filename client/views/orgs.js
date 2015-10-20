@@ -73,9 +73,10 @@ Template.orgs.events({
 		});
 	},
 
-  'click .club-link-list-item-title': function(event, template) {
-    template.$('.club-link-list-item-body').toggleClass('visible');
-    template.$('.club-link-list-item-body').toggleClass('hidden');
+  'click .club-list-item-title': function(event, template) {
+    var list_item = template.$(event.target).parent();
+    var desc_body = list_item.children('.club-list-item-body');
+    desc_body.is(':visible') ? desc_body.slideUp() : desc_body.slideDown();
   }
 });
 
