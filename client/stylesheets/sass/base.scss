@@ -1,0 +1,77 @@
+// Base Styles
+.content {
+    position: relative;
+    padding-top: $navbar-height;
+    font-family: 'DinPro', sans-serif;
+}
+
+// Use with h2 tag
+.title {
+    font-size: 52px;
+    font-family: 'DINProBold';
+    color: $light-blue;
+}
+
+// Use with h3 tag
+.subtitle {
+    font-size: 28px;
+    font-family: 'DINProMedium', sans-serif;
+    color: $light-blue;
+}
+
+.title-underline {
+    border-color: $blue;
+    background-color: $blue;
+    color: $light-blue;
+    height: 2px;
+    width: 200px;
+    margin: 10px auto;
+}
+
+.page-container {
+    padding: 0 15%;
+    margin: 0 auto;
+}
+
+// Fonts
+@font-face {
+    font-family: DINPro;
+    src: url("/fonts/DINPro-Regular.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: DINProBold;
+    src: url("/fonts/DINPro-Bold.otf");
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: DINProLight;
+    src: url("/fonts/DINPro-Light.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: DINProBlack;
+    src: url("/fonts/DINPro-Black.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: DINProMedium;
+    src: url("/fonts/DINPro-Medium.otf");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: Open-Sans;
+    src: url("/fonts/OpenSans-Regular.ttf");
+    font-weight: normal;
+    font-style: normal;
+}

@@ -1,17 +1,7 @@
 <template name="ApplicationLayout">
-	<!-- NAVBAR HERE -->
-	<div class="navbar clearfix">
-	    <ul class="clearfix">
-	        <li><a href="/advising">ADVISING</a></li>
-	        <li><a href="/opportunities">OPPORTUNITIES</a></li>
-	        <li><a href="/orgs">ORGANIZATIONS</a></li>
-	    	<li><a href="/mcat">RESOURCES</a></li>
-	        <li><a href="/contribute">CONTRIBUTE</a></li>
-	        <li><a href="/about">ABOUT</a></li>
-	    </ul>
-	    <a href="#" id="pull">MENU</a>  
-	</div>
-	<div style="padding-top:60px">
+  {{> navbar}}
+	<div class="content">
 		{{> yield}}
 	</div>
+  {{> footer}}
 </template>

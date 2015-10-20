@@ -1,155 +1,94 @@
-
-
 <template name= "orgs">
 <!-- <select id="category-select">
-    <option disabled="disabled" selected="selected">Please Select</option> 
+    <option disabled="disabled" selected="selected">Please Select</option>
     {{#each categories}}
         <option value="{{this}}">{{this}}</option>
     {{/each}}
 </select> -->
-{{#if is_Admin}}
+<!-- {{#if is_Admin}}
 <div class="container">
 	<input class="button-primary" value="Add resources" type="button" id="renderForm">
 </div>
 {{/if}}
-<div class="test">
-	<div class="container">
-		<div class="header">
-			<strong>Submit your resource below!</strong> <br>
-			Please choose an appropriate category for the organization from the dropdown. Acceptable submissions include advising resources/contact information in the message field, not opinions about each advising resource.
-			<br>
-		</div>
-		<br>
-		<form id="suggestion-form">
-		  <div class="row">
-		    <div class="four columns">
-		      <input class="u-full-width" placeholder="Name" id="name" type="text">
-		    </div>
-		    <div class="four columns">
-		      <input class="u-full-width" placeholder="Email" id="email" type="email">
-		    </div>
-		    <div class="four columns">
-		      <select class="u-full-width" id="subject" type="subject">
-		        <option value="Health Related Clubs">Health Related Clubs</option>
-		        <option value="Pre-Health Fraternities/Sororities">Pre-Health Fraternities/Sororities</option>
-		        <option value="Non-Health Related Clubs">Non-Health Related Clubs</option>
-		        <option value="Mentoring">Mentoring</option>
-		        <option value="Tutoring/Teaching">Tutoring/Teaching</option>
-		        <option value="Science/Society">Science/Society</option>
-		        <option value="Global Abroad Organizations">Global Abroad Organizations</option>
-		        <option value="DeCals">DeCals</option>
-		      </select>
-		    </div>
-		  </div>
-		  <textarea class="u-full-width" placeholder="Message" id="message"></textarea>
-		  <div class="row">
-		    <div class="six columns">
-		      <input class="u-full-width" placeholder="Link" id="link" type="text">
-		    </div>
-		    <div class="six columns">
-		      <input class="u-full-width" placeholder="Image URL" id="image" type="text">
-		    </div>
-		  </div>
-		  <input class="button-primary" value="Submit" type="submit">
-		</form>
-	</div>
-</div>
-<div class="container">
-	<div class="row">
-		<div class="six columns">
-			<div id="orglist1">
-				<ul>
-				  <li>
-				    <input id="first" type="checkbox" checked>
-				    <i></i>
-				    <h2>Health Related Clubs</h2>
-				    {{#each clubs}}
-				    	{{#if clubCheck subject "Health Related Clubs"}}
-				    		<p class="contents1">{{name}}</p>
-				    	{{/if}}
-				    {{/each}}
-				  </li>
-				  <li>
-				    <input id="second" type="checkbox" checked>
-				    <i></i>
-				    <h2>Pre - Health Fraternities/Sororities </h2>
-				    {{#each clubs}}
-				    	{{#if clubCheck subject "Pre-Health Fraternities/Sororities"}}
-				    		<p class="contents2">{{name}}</p>
-				    	{{/if}}
-				    {{/each}}
-				  </li>
-				  <li>
-				    <input id="third" type="checkbox" checked>
-				    <i></i>
-				    <h2>Non-Health-Related Clubs</h2>
-				    {{#each clubs}}
-				    	{{#if clubCheck subject "Non-Health-Related Clubs"}}
-				    		<p class="contents3">{{name}}</p>
-				    	{{/if}}
-				    {{/each}}
-				  </li>
-				  <li>
-				    <input id="fourth" type="checkbox" checked>
-				    <i></i>
-				    <h2>Mentoring</h2>
-				   	{{#each clubs}}
-				    	{{#if clubCheck subject "Mentoring"}}
-				    		<p class="contents4">{{name}}</p>
-				    	{{/if}}
-				    {{/each}}
-				  </li>
-				</ul>
+ -->
+<!-- <div class="row"> -->
+	<!-- The body is 4/5 width right now. -->
+	<div class="page-container">
+		<div class="title-row row">
+			<h2 class="title clubs-title">Clubs and Organizations</h2>
+			<hr class="title-underline" />
+			<div class="contact-us">
+				Contact us to list your organization here!
 			</div>
 		</div>
-		<div class="six columns">
-			<div id="orglist1">
-				<ul>
-				  <li>
-				    <input id="fifth" type="checkbox" checked>
-				    <i></i>
-				    <h2>Tutoring/Teaching</h2>
-				    {{#each clubs}}
-				    	{{#if clubCheck subject "Tutoring/Teaching"}}
-				    		<p class="contents5">{{name}}</p>
-				    	{{/if}}
-				    {{/each}}
-				  </li>
-				  <li>
-				    <input id="sixth" type="checkbox" checked>
-				    <i></i>
-				    <h2>Science/Society</h2>
-				    {{#each clubs}}
-				    	{{#if clubCheck subject "Science/Society"}}
-				    		<p class="contents6">{{name}}</p>
-				    	{{/if}}
-				    {{/each}}
-				  </li>
-				  <li>
-				    <input id="seventh" type="checkbox" checked>
-				    <i></i>
-				    <h2>Global Abroad Organizations </h2>
-				    {{#each clubs}}
-				    	{{#if clubCheck subject "Global Abroad Organizations"}}
-				    		<p class="contents7">{{name}}</p>
-				    	{{/if}}
-				    {{/each}}
-				  </li>
-				  <li>
-				    <input id="eighth" type="checkbox" checked>
-				    <i></i>
-				    <h2>DeCals </h2>
-					{{#each clubs}}
-				    	{{#if clubCheck subject "DeCals"}}
-				    		<p class="contents8">{{name}}</p>
-				    	{{/if}}
-				    {{/each}}
-				  </li>
-				</ul>
+
+		<div class="club-type-list-row">
+			<ul class="club-type-list col col--centered">
+				<li class="club-type-list-item">DeCals</li>
+				<li class="club-type-list-item">DeCals</li>
+				<li class="club-type-list-item">DeCals</li>
+				<li class="club-type-list-item">DeCals</li>
+				<li class="club-type-list-item">DeCals</li>
+				<li class="club-type-list-item">DeCals</li>
+				<li class="club-type-list-item">DeCals</li>
+				<li class="club-type-list-item">DeCals</li>
+			</ul>
+		</div>
+
+	<div class="club-link-list-row row">
+		<div class="col col--1-of-4">
+			<h3 class="subtitle club-link-list-title">DeCals</h3 >
+		</div>
+		<div class="club-link-list col col--3-of-4">
+			<div class="club-link-list-item">
+				<div class="club-link-list-item-title">
+					AAPI Community Health Issues DeCal
+				</div>
+				<div class="club-link-list-item-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa. Illum, optio possimus accusantium quae libero cum est quas iure cupiditate obcaecati deleniti veniam porro! Cumque explicabo hic qui veritatis rem sunt iusto repudiandae! Facere dolore laborum consequatur ex quos animi earum aliquid impedit quasi commodi ab, enim labore voluptates, vero minus reiciendis quibusdam optio architecto! Iste unde nemo quibusdam, provident recusandae placeat ipsam perspiciatis quaerat, veniam non. Nihil sed nemo autem pariatur fugit?</p>
+					<button class="club-link-list-item-btn">View Course Website</button>
+				</div>
 			</div>
+			<div class="club-link-list-item">
+				<div class="club-link-list-item-title">
+					AAPI Community Health Issues DeCal
+				</div>
+				<div class="club-link-list-item-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa. Illum, optio possimus accusantium quae libero cum est quas iure cupiditate obcaecati deleniti veniam porro! Cumque explicabo hic qui veritatis rem sunt iusto repudiandae! Facere dolore laborum consequatur ex quos animi earum aliquid impedit quasi commodi ab, enim labore voluptates, vero minus reiciendis quibusdam optio architecto! Iste unde nemo quibusdam, provident recusandae placeat ipsam perspiciatis quaerat, veniam non. Nihil sed nemo autem pariatur fugit?</p>
+					<button class="club-link-list-item-btn">View Course Website</button>
+				</div>
 		</div>
 	</div>
 </div>
+
+	<div class="club-link-list-row row">
+		<div class="col col--1-of-4">
+			<h3 class="subtitle club-link-list-title">DeCals</h3 >
+		</div>
+		<div class="club-link-list col col--3-of-4">
+			<div class="club-link-list-item">
+				<div class="club-link-list-item-title">
+					AAPI Community Health Issues DeCal
+				</div>
+				<div class="club-link-list-item-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa. Illum, optio possimus accusantium quae libero cum est quas iure cupiditate obcaecati deleniti veniam porro! Cumque explicabo hic qui veritatis rem sunt iusto repudiandae! Facere dolore laborum consequatur ex quos animi earum aliquid impedit quasi commodi ab, enim labore voluptates, vero minus reiciendis quibusdam optio architecto! Iste unde nemo quibusdam, provident recusandae placeat ipsam perspiciatis quaerat, veniam non. Nihil sed nemo autem pariatur fugit?</p>
+					<button class="club-link-list-item-btn">View Course Website</button>
+				</div>
+			</div>
+			<div class="club-link-list-item">
+				<div class="club-link-list-item-title">
+					AAPI Community Health Issues DeCal
+				</div>
+				<div class="club-link-list-item-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa. Illum, optio possimus accusantium quae libero cum est quas iure cupiditate obcaecati deleniti veniam porro! Cumque explicabo hic qui veritatis rem sunt iusto repudiandae! Facere dolore laborum consequatur ex quos animi earum aliquid impedit quasi commodi ab, enim labore voluptates, vero minus reiciendis quibusdam optio architecto! Iste unde nemo quibusdam, provident recusandae placeat ipsam perspiciatis quaerat, veniam non. Nihil sed nemo autem pariatur fugit?</p>
+					<button class="club-link-list-item-btn">View Course Website</button>
+				</div>
+		</div>
+	</div>
+</div>
+
+	</div>
+
 </template>
 
 

@@ -1,0 +1,39 @@
+// Landing Page Styles
+
+.background {
+    background: url("/img/logo/logo.png") no-repeat center center;
+    background-size: contain;
+    height: 100vh;
+    width: 100%;
+    .landing-text {
+        @include vertical-align();
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+        .landing-title {
+            color: $blue;
+            font-weight: bold;
+            #at {
+                margin: 0;
+                padding: 0;
+                font-family: 'Open-Sans', sans-serif;
+            }
+        }
+        .landing-subtitle {
+            color: $blue;
+        }
+    }
+}
+
+.calendar-wrapper {
+    background: $blue;
+    width: 100%;
+    margin-top: 20px;
+    padding: 40px 0 40px 0;
+    .calendar-title {
+        width: 50%;
+        margin: 0 auto;
+        color: $white;
+        text-align: center;
+    }
+}

@@ -28,7 +28,7 @@ Meteor.methods({
 			throw 'Invalid key';s
 		}
 	},
-
+	
 	insertSuggestion: function (name, email, subject, body, link, image) {
 		if (!image) {
 			image = "http://placekitten.com/g/300/205";
