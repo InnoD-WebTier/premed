@@ -1,14 +1,3 @@
-// SKETCHY CHANGES.
-$font-main: DINPro;
-$font-bold: DINProMedium;
-$font-bolder: DINProBold;
-$font-boldest: DINProBlack;
-$font-light: DINProLight;
-$font-secondary: Open-Sans;
-
-
-// END SKETCHY CHANGES.
-
 .visible {
   display: block;
 }
@@ -17,19 +6,8 @@ $font-secondary: Open-Sans;
   text-align: center;
   margin: 20px 0;
 
-  .title {
-    font-family: $font-bolder;
-    color: $light-blue;
+  .clubs-title {
     text-transform: uppercase;
-  }
-
-  .orgs-divider {
-    border-color: $blue;
-    background-color: $blue;
-    color: $light-blue;
-    height: 2px;
-    width: 200px;
-    margin: 10px auto;
   }
 }
 
@@ -59,10 +37,8 @@ $font-secondary: Open-Sans;
 }
 
 .club-link-list-title {
-  h4 {
-    font-family: $font-bold;
-    color: $light-blue;
-  }
+  font-family: DINProMedium;
+  color: $light-blue;
 }
 
 .club-link-list {
