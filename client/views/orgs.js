@@ -73,9 +73,9 @@ Template.orgs.events({
 		});
 	},
 
-  'click .club-list-item-title': function(event, template) {
+  'click .section-list-item-title': function(event, template) {
     var list_item = template.$(event.target).parent();
-    var desc_body = list_item.children('.club-list-item-body');
+    var desc_body = list_item.children('.section-list-item-body');
     desc_body.is(':visible') ? desc_body.slideUp() : desc_body.slideDown();
   }
 });
