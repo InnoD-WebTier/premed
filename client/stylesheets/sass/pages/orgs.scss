@@ -6,11 +6,21 @@
   text-align: center;
   margin: 20px 0;
 
-  .clubs-title {
+  .title {
+    font-family: 'DINProBold', sans-serif;
+    color: $light-blue;
     text-transform: uppercase;
   }
-}
 
+  .orgs-divider {
+    border-color: $blue;
+    background-color: $blue;
+    color: $light-blue;
+    height: 2px;
+    width: 200px;
+    margin: 10px auto;
+  }
+}
 
 .contact-us {
   text-align: center;
@@ -37,8 +47,10 @@
 }
 
 .club-link-list-title {
-  font-family: DINProMedium;
-  color: $light-blue;
+  h4 {
+    font-family: 'DINProMedium', sans-serif;
+    color: $light-blue;
+  }
 }
 
 .club-link-list {
