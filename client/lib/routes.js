@@ -1,6 +1,5 @@
 Router.route('/', function() {
 	this.render('landing');
-	this.render('calendar', {to: 'calendar'});
 }, {
 	onAfterAction: function() {
 		return setTitle('Home');
