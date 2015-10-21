@@ -74,6 +74,7 @@ Meteor.methods({
 			var id = Events.insert({
 				title: event.title,
 				start: event.start,
+				info: event.info,
 				end: event.end
 			});
 			return id;
@@ -119,6 +120,7 @@ Meteor.methods({
 		Events.update({_id:event._id}, {
 			title: event.title,
 			start: event.start,
+			info: event.info,
 			end: event.end
 		});
 	},

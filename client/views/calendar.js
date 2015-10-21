@@ -8,6 +8,7 @@ Events = new Mongo.Collection('events');
 addEventToggle = 0;
 startDate = '';
 endDate = '';
+eventDescription = '';
 currEvent = null;
 editMode = 0;
 deleteMode = 0;
@@ -74,9 +75,11 @@ Template.calendar.rendered = function(){
                         var endTime = event.end.format("h:mm a");
                     }
                     currEvent = event;
+                    var eventInfo = event.info;
                     document.getElementById('info').innerHTML = event.title;
                     document.getElementById('startDate').innerHTML = event.start.format("MMMM Do, YYYY");
                     document.getElementById('startTime').innerHTML = event.start.format("h:mm a");
+                    document.getElementById('eventDescription').innerHTML = eventInfo;
                     document.getElementById('endDate').innerHTML = endDay;
                     document.getElementById('endTime').innerHTML = endTime;
                     document.getElementById('eventInfo').checked = true;
@@ -104,6 +107,7 @@ Template.calendar.events({
                 var event = {
                     title: desc,
                     start: startDate,
+                    info: '',
                     end: endDate
                 };
                 Meteor.call('insertEvent', event, function (err, success) {
@@ -158,6 +162,7 @@ Template.calendar.events({
                                                                  "</select>  Year: <select id='sYear'>" + sYears + "</select>";
                 document.getElementById('startTime').innerHTML = "Hour: <select id='sHour'>" + sHours + "</select>  Minute: <select id='sMin'>" + sMinutes + 
                                                                  "</select> <select id='sAM'>" + sAMOption + "</select>";
+                document.getElementById('eventDescription').innerHTML = "<textarea id='editEventDscription' rows='4' cols='58' style='resize:vertical;' value='" + info + "'></textarea>";
                 document.getElementById('endDate').innerHTML = "Month: <select id='eMonth'>" + eMonths + "</select>  Day: <select id='eDay'>" + eDays + 
                                                                  "</select>  Year: <select id='eYear'>" + eYears + "</select>";
                 document.getElementById('endTime').innerHTML = "Hour: <select id='eHour'>" + eHours + "</select>  Minute: <select id='eMin'>" + eMinutes + 
@@ -196,10 +201,12 @@ Template.calendar.events({
                 var end = document.getElementById('eMonth').value + " " + document.getElementById('eDay').value + " " + 
                           document.getElementById('eYear').value + " " + document.getElementById('eHour').value + " " + 
                           document.getElementById('eMin').value + " " + document.getElementById('eAM').value;
+                var eventDescription = document.getElementById('editEventDscription').value;
                 var event = {
                     _id: currEvent._id,
                     start: $.fullCalendar.moment(start, "M D YYYY h m A").toISOString(),
                     end: $.fullCalendar.moment(end, "M D YYYY h m A").toISOString(),
+                    info: eventDescription,
                     title: desc
                 };
                 Meteor.call('updateEvent', event, function (err, success) {
