@@ -1,16 +1,17 @@
 <template name="calendar">
     <div class="calendar-wrapper">
         <h3 class="calendar-title subtitle">Calendar</h3>
+          {{#if is_admin}}
+          <div class="calendar-buttons">
+            <button id='addToggle' name='addToggle'>Add Event</button>
+            <br />
+            <input type='text' id='description' placeholder='Add a Description' style="display:none">
+          </div>
+          {{/if}}
+        <div id="myCalendar"></div>
     </div>
     <br/>
-    <div id="myCalendar"></div>
     <br/>
-    {{#if is_admin}}
-      <button id='addToggle' name='addToggle'>Add Event</button>
-      <br/>
-      <br/>
-      <input type='text' id='description' placeholder='Add a Description' style="visibility:hidden">
-    {{/if}}
 
     <div class="modal" data-keyboard="false" data-backdrop="static">
       <input class="modal-open" id="eventInfo" type="checkbox" style="display:none">

@@ -57,7 +57,7 @@ Template.calendar.rendered = function(){
                     endDate = date.format();
                     addEventToggle = 3;
                     document.getElementById('addToggle').innerHTML = "Add Event";
-                    document.getElementById('description').style.visibility = "visible";
+                    $('#description').show();
                 }
             },
             defaultDate: new Date(),
@@ -123,7 +123,7 @@ Template.calendar.events({
                 });
                 addEventToggle = 0;
                 document.getElementById('addToggle').innerHTML = 'Add Event';
-                document.getElementById('description').style.visibility = "hidden";
+                $('#description').hide();
                 startDate = '';
                 endDate = '';
             }
