@@ -1,11 +1,3 @@
-var insertMsg = function(err, success) {
-  if (success) {
-    alert("You've added content ;)!");
-  } else {
-    alert("Failed to add content :(");
-  }
-};
-
 Template.contribute.events({
 
   'change #imageUploader': function(event, template) {
@@ -29,10 +21,10 @@ Template.contribute.events({
     if (template.uploadedImage) {
       Images.insert(template.uploadedImage, function(err, fileObj) {
         if (!err) {
-          // TODO: awkward naming convention by collectionFS, need to change
-          image = "/img/uploads/" + fileObj.collectionName + "-" +  fileObj._id + "-" + image;
+          image = genImageName(image, fileObj);
           Meteor.call('insertSuggestion', name, email, subject,
                       message,link, image, insertMsg); 
+          template.uploadedImage = undefined;
         }
       });
     } else {

@@ -25,6 +25,7 @@ ejson
 spacebars
 check
 fourseven:scss
+rzymek:fullcalendar
 cfs:standard-packages
 cfs:filesystem
 zimme:active-route
