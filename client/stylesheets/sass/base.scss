@@ -1,16 +1,42 @@
 // Base Styles
-
-html {
-    height: 100%;
-}
-
-body {
-    height: 100%;
-}
-
 .content {
-    height: 100%;
+    position: relative;
     padding-top: $navbar-height;
+    font-family: 'DinPro', sans-serif;
+}
+
+// Use with h2 tag
+.title {
+    font-family: 'DINProBold';
+    color: $light-blue;
+
+    // Don't want to entirely override responsive text sizing in skeleton.css
+    @media (min-width: 550px) {
+        font-size: 52px;
+    }
+}
+
+// Use with h3 tag
+.subtitle {
+    font-family: 'DINProMedium', sans-serif;
+    color: $light-blue;
+
+    // Don't want to entirely override responsive text sizing in skeleton.css
+    @media (min-width: 550px) {
+        font-size: 28px;
+    }
+}
+
+.title-underline {
+    border-color: $blue;
+    background-color: $blue;
+    color: $light-blue;
+    width: 200px;
+    margin: 0 auto 40px;
+}
+
+.page-container {
+    padding: 0 17%;
 }
 
 // Fonts
@@ -22,7 +48,7 @@ body {
 }
 
 @font-face {
-    font-family: DINPro;
+    font-family: DINProBold;
     src: url("/fonts/DINPro-Bold.otf");
     font-weight: bold;
     font-style: normal;

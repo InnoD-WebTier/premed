@@ -1,17 +1,7 @@
 <template name="ApplicationLayout">
-	<div class="navbar">
-	    <ul>
-	    	<li class="nav-item"><a href="/">home</a></li>
-	    	<li class="nav-item"><a href="/about">about</a></li>
-	        <li class="nav-item"><a href="/academics">academics</a></li>
-	        <li class="nav-item"><a href="/advising">advising</a></li>
-	        <li class="nav-item"><a href="/orgs">clubs</a></li>
-	        <li class="nav-item"><a href="/opportunities">opportunities</a></li>
-	    	<li class="nav-item"><a href="/mcat">mcat</a></li>
-	        <li class="nav-item"><a href="/contribute">contribute</a></li>
-	    </ul>
-	</div>
+  {{> navbar}}
 	<div class="content">
 		{{> yield}}
 	</div>
+  {{> footer}}
 </template>

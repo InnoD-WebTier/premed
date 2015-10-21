@@ -4,6 +4,8 @@ Template.orgs.onCreated(function(){
 	Meteor.call('getClubs', function(err, itemList){
 		Session.set("clubs", itemList);
 	});
+
+  // template.$('.club-link-exp-body').hide();
 });
 
 Template.orgs.events({
@@ -16,39 +18,39 @@ Template.orgs.events({
     // There has to be an easier way to do this
 
    	"click #renderForm": function(event, template) {
-   		template.$(".test").toggle();	
+   		template.$(".test").toggle();
    	},
 
    	"click #first": function(event, template) {
-   		template.$(".contents1").toggle();	
+   		template.$(".contents1").toggle();
    	},
 
    	"click #second": function(event, template) {
-   		template.$(".contents2").toggle();	
+   		template.$(".contents2").toggle();
    	},
 
    	"click #third": function(event, template) {
-   		template.$(".contents3").toggle();	
+   		template.$(".contents3").toggle();
    	},
 
    	"click #fourth": function(event, template) {
-   		template.$(".contents4").toggle();	
+   		template.$(".contents4").toggle();
    	},
 
    	"click #fifth": function(event, template) {
-   		template.$(".contents5").toggle();	
+   		template.$(".contents5").toggle();
    	},
 
    	"click #sixth": function(event, template) {
-   		template.$(".contents6").toggle();	
+   		template.$(".contents6").toggle();
    	},
 
    	"click #seventh": function(event, template) {
-   		template.$(".contents7").toggle();	
+   		template.$(".contents7").toggle();
    	},
 
    	"click #eighth": function(event, template) {
-   		template.$(".contents8").toggle();	
+   		template.$(".contents8").toggle();
    	},
     
     "change #imageUploader": function(event, template) {
@@ -83,6 +85,12 @@ Template.orgs.events({
         Meteor.call('insertClubSuggestion', name, email, subject, 
                   message, link, image, insertMsg);
     }
+	},
+
+  'click .section-list-item-title': function(event, template) {
+    var list_item = template.$(event.target).parent();
+    var desc_body = list_item.children('.section-list-item-body');
+    desc_body.is(':visible') ? desc_body.slideUp() : desc_body.slideDown();
   }
 });
 
