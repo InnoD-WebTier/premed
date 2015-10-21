@@ -50,26 +50,40 @@ Template.orgs.events({
    	"click #eighth": function(event, template) {
    		template.$(".contents8").toggle();	
    	},
+    
+    "change #imageUploader": function(event, template) {
+      var file = event.target.files[0];
+      if (file) {
+        template.uploadedImage = file;
+        template.$("#image").val(file.name).prop("disabled", true);
+      }
+    },
 
-   	'submit #suggestion-form': function(event) {
-		event.preventDefault();
+   	"submit #suggestion-form": function(event, template) {
+      event.preventDefault();
 
-		var name = $('#name').val();
-		var email = $('#email').val();
-		var subject = $('#subject').val();
-		var message = $('#message').val();
-		var image = $('#image').val();
-		var link = $('#link').val();
-		
+      var name = $('#name').val();
+      var email = $('#email').val();
+      var subject = $('#subject').val();
+      var message = $('#message').val();
+      var image = $('#image').val();
+      var link = $('#link').val();
+      
 
-		Meteor.call('insertClubSuggestion', name, email, subject, message, link, image, function(err, success) {
-			if (success) {
-				alert("You've added content! ;)");
-			} else {
-				alert("Failed to add content ):");
-			}
-		});
-	}
+      if (template.uploadedImage) {
+        Images.insert(template.uploadedImage, function(err, fileObj) {
+          if (!err) {
+            image = genImageName(image, fileObj);
+            Meteor.call('insertClubSuggestion', name, email, subject,
+                        message,link, image, insertMsg); 
+            template.uploadedImage = undefined;
+          }
+        });
+      } else {
+        Meteor.call('insertClubSuggestion', name, email, subject, 
+                  message, link, image, insertMsg);
+    }
+  }
 });
 
 Template.orgs.helpers({
