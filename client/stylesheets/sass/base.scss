@@ -7,25 +7,32 @@
 
 // Use with h2 tag
 .title {
-    font-size: 52px;
     font-family: 'DINProBold';
     color: $light-blue;
+
+    // Don't want to entirely override responsive text sizing in skeleton.css
+    @media (min-width: 550px) {
+        font-size: 52px;
+    }
 }
 
 // Use with h3 tag
 .subtitle {
-    font-size: 28px;
     font-family: 'DINProMedium', sans-serif;
     color: $light-blue;
+
+    // Don't want to entirely override responsive text sizing in skeleton.css
+    @media (min-width: 550px) {
+        font-size: 28px;
+    }
 }
 
 .title-underline {
     border-color: $blue;
     background-color: $blue;
     color: $light-blue;
-    height: 0.5px;
     width: 200px;
-    margin: 10px auto;
+    margin: 0 auto 40px;
 }
 
 .page-container {
