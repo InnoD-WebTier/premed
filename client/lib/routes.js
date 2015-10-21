@@ -1,5 +1,6 @@
 Router.route('/', function() {
 	this.render('landing');
+	this.render('calendar', {to: 'calendar'});
 }, {
 	onAfterAction: function() {
 		return setTitle('Home');
@@ -76,6 +77,10 @@ Router.route('/admin', function() {
 	onAfterAction: function() {
 		return setTitle('Admin');
 	}
+});
+
+Router.route('/calendar', function() {
+	this.render('calendar');
 });
 
 Router.configure({
