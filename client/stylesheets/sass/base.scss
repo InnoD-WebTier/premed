@@ -1,4 +1,9 @@
 // Base Styles
+html {
+    font-size: 13px;
+    font-family: 'DinPro', sans-serif;
+}
+
 *, *:before, *:after {
     @include box-sizing(border-box);
 }
@@ -6,8 +11,6 @@
 .content {
     position: relative;
     padding-top: $navbar-height;
-    font-family: 'DinPro', sans-serif;
-    font-size: 18px;
 }
 
 .page-container {
@@ -18,14 +21,14 @@
 .title {
     font-family: 'DINProBold';
     color: $light-blue;
-    font-size: 52px;
+    font-size: 4rem;
 }
 
 // Use with h3 tag
 .subtitle {
     font-family: 'DINProMedium', sans-serif;
     color: $light-blue;
-    font-size: 28px;
+    font-size: 2rem;
 }
 
 .title-underline {
@@ -88,20 +91,20 @@
 }
 
 // Media Queries
-@media (max-width: 720px) {
-    .content {
-        font-size: 16px;
-    }
+@media (max-width: 920px) {
     .page-container {
         padding: 0 10%;
     }
 }
 
-@media (max-width: 520px) {
-    .title {
-        font-size: 48px;
+@media (max-width: 720px) {
+    html {
+        font-size: 11px;
     }
-    .subtitle {
-        font-size: 24px;
+}
+
+@media (max-width: 520px) {
+    html {
+        font-size: 10px;
     }
 }
