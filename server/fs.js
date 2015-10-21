@@ -1,12 +1,12 @@
 /* Initialize CollectionFS Stores */
 
+// Filesystem Adapter
 var imageStore = new FS.Store.FileSystem("images-fs", {
-  // TODO: awkward pathing, needs to be changed
-  path: "../../../../../public/img/uploads",
+  path: process.env.PWD + "/public/img/uploads",
   maxTries: 1
 });
 
-// TODO: Better Settings, filters
+// Initialize the Store
 Images = new FS.Collection("images", {
   stores: [imageStore],
   filter: {
@@ -17,7 +17,7 @@ Images = new FS.Collection("images", {
   }
 });
 
-// TODO: Implement better permissions
+// Permissions for CollectionFS store
 Images.allow({
   'insert' : function() {
     return true;

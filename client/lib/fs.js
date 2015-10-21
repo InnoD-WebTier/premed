@@ -1,3 +1,4 @@
+
 var imageStore = new FS.Store.FileSystem("images-fs");
 
 Images = new FS.Collection("images", {
@@ -12,4 +13,15 @@ Images = new FS.Collection("images", {
     }
   }
 });
+
+/*
+CollectionFS appends random key to filename
+when storing, get this image name string
+*/
+genImageName = function(image, fileObj) {
+  var newName = "/img/uploads/" + fileObj.collectionName 
+                + "-" + fileObj._id + "-" + image;
+  return newName;
+};
+
 
