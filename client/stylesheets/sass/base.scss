@@ -1,4 +1,8 @@
 // Base Styles
+*, *:before, *:after {
+    @include box-sizing(border-box);
+}
+
 .content {
     position: relative;
     padding-top: $navbar-height;
@@ -38,6 +42,13 @@
 
 .page-container {
     padding: 0 17%;
+}
+
+.row--centered {
+    text-align: center;
+    .col {
+        text-align: left;
+    }
 }
 
 // Fonts
