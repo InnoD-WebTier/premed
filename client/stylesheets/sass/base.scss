@@ -10,26 +10,22 @@
     font-size: 18px;
 }
 
+.page-container {
+    padding: 0 17%;
+}
+
 // Use with h2 tag
 .title {
     font-family: 'DINProBold';
     color: $light-blue;
-
-    // Don't want to entirely override responsive text sizing in skeleton.css
-    @media (min-width: 550px) {
-        font-size: 52px;
-    }
+    font-size: 52px;
 }
 
 // Use with h3 tag
 .subtitle {
     font-family: 'DINProMedium', sans-serif;
     color: $light-blue;
-
-    // Don't want to entirely override responsive text sizing in skeleton.css
-    @media (min-width: 550px) {
-        font-size: 28px;
-    }
+    font-size: 28px;
 }
 
 .title-underline {
@@ -40,10 +36,7 @@
     margin: 0 auto 40px;
 }
 
-.page-container {
-    padding: 0 17%;
-}
-
+// Allows centering of toast cols that are not in their own row
 .row--centered {
     text-align: center;
     .col {
@@ -92,4 +85,23 @@
     src: url("/fonts/OpenSans-Regular.ttf");
     font-weight: normal;
     font-style: normal;
+}
+
+// Media Queries
+@media (max-width: 720px) {
+    .content {
+        font-size: 16px;
+    }
+    .page-container {
+        padding: 0 10%;
+    }
+}
+
+@media (max-width: 520px) {
+    .title {
+        font-size: 48px;
+    }
+    .subtitle {
+        font-size: 24px;
+    }
 }
