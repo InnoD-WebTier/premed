@@ -1,0 +1,35 @@
+.about-page {
+    .about-info {
+        text-align: left;
+    }
+    .person-wrapper {
+        text-align: center;
+        .photo {
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+            margin: 0 auto;
+            padding: 5% 10%;
+            img {
+                height: auto;
+                width: 100%;
+            }
+        }
+        .name {
+            font-size: 28px;
+        }
+        .position {
+            font-size: 24px;
+        }
+        a.envelope-link {
+            width: 100%;
+            .envelope {
+                width: 50px;
+                height: 50px;
+                background: url('/img/about/envelope.png') no-repeat center center;
+                background-size: cover;
+                margin: 0 auto;
+            }
+        }
+    }
+}
