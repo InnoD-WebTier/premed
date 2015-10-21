@@ -34,6 +34,10 @@ function revert() {
     document.getElementById('deleteMessage').style.display = "none";
 }
 
+function isAdmin() {
+    return Meteor.user() && Meteor.users.findOne( { _id: Meteor.userId() }).admin;
+}
+
 Template.calendar.rendered = function(){
     Meteor.subscribe("events", function() {
         eventList = Events.find({}).fetch();
@@ -86,145 +90,163 @@ Template.calendar.rendered = function(){
 Template.calendar.events({
     "click #addToggle": function(e) {
         e.preventDefault();
-        if (addEventToggle === 0) {
-            addEventToggle = 1;
-            document.getElementById('addToggle').innerHTML = 'Select a start date (Click here to Cancel)';
-        } else if (addEventToggle === 1 || addEventToggle === 2) {
-            addEventToggle = 0;
-            startDate = '';
-            endDate = '';
-            document.getElementById('addToggle').innerHTML = 'Add Event';
-        } else if (addEventToggle === 3) {
-            var desc = document.getElementById('description').value;
-            var event = {
-                title: desc,
-                start: startDate,
-                end: endDate
-            };
-            Meteor.call('insertEvent', event, function (err, success) {
-                if (err) {
-                    console.log('event failed');
-                    console.log(err);
-                } else {
-                    console.log('event added');
-                    event._id = success;
-                    console.log(event);
-                    $("#myCalendar").fullCalendar("renderEvent", event);
-                }
-            });
-            addEventToggle = 0;
-            document.getElementById('addToggle').innerHTML = 'Add Event';
-            document.getElementById('description').style.visibility = "hidden";
-            startDate = '';
-            endDate = '';
+        if (isAdmin()) {
+            if (addEventToggle === 0) {
+                addEventToggle = 1;
+                document.getElementById('addToggle').innerHTML = 'Select a start date (Click here to Cancel)';
+            } else if (addEventToggle === 1 || addEventToggle === 2) {
+                addEventToggle = 0;
+                startDate = '';
+                endDate = '';
+                document.getElementById('addToggle').innerHTML = 'Add Event';
+            } else if (addEventToggle === 3) {
+                var desc = document.getElementById('description').value;
+                var event = {
+                    title: desc,
+                    start: startDate,
+                    end: endDate
+                };
+                Meteor.call('insertEvent', event, function (err, success) {
+                    if (err) {
+                        console.log('event failed');
+                        console.log(err);
+                    } else {
+                        console.log('event added');
+                        event._id = success;
+                        console.log(event);
+                        $("#myCalendar").fullCalendar("renderEvent", event);
+                    }
+                });
+                addEventToggle = 0;
+                document.getElementById('addToggle').innerHTML = 'Add Event';
+                document.getElementById('description').style.visibility = "hidden";
+                startDate = '';
+                endDate = '';
+            }
         }
     },
 
     "click #edit": function(e) {
         e.preventDefault();
-        if (editMode === 0) {
-            editMode = 1;
-            var desc = currEvent.title;
-            var sDay = currEvent.start.format('DD');
-            var sMonth = currEvent.start.format('MM');
-            var sYear = currEvent.start.format('YYYY');
-            var sHour = currEvent.start.format('hh');
-            var sMinute = currEvent.start.format('mm');
-            var sAM = currEvent.start.format('A');
-            var sids = ['sMonth'+sMonth, 'sDay'+sDay, 'sYear'+sYear, 'sHour'+sHour, 'sMinute'+sMinute, 's'+sAM];
-            var eDay = sDay;
-            var eMonth = sMonth;
-            var eYear = sYear;
-            var eHour = sHour;
-            var eMinute = sMinute;
-            var eAM = sAM;
-            if (currEvent.end != null) {
-                eDay = currEvent.end.format('DD');
-                eMonth = currEvent.end.format('MM');
-                eYear = currEvent.end.format('YYYY');
-                eHour = currEvent.end.format('hh');
-                eMinute = currEvent.end.format('mm');
-                eAM = currEvent.end.format('A');
+        if (isAdmin()) {
+            if (editMode === 0) {
+                editMode = 1;
+                var desc = currEvent.title;
+                var sDay = currEvent.start.format('DD');
+                var sMonth = currEvent.start.format('MM');
+                var sYear = currEvent.start.format('YYYY');
+                var sHour = currEvent.start.format('hh');
+                var sMinute = currEvent.start.format('mm');
+                var sAM = currEvent.start.format('A');
+                var sids = ['sMonth'+sMonth, 'sDay'+sDay, 'sYear'+sYear, 'sHour'+sHour, 'sMinute'+sMinute, 's'+sAM];
+                var eDay = sDay;
+                var eMonth = sMonth;
+                var eYear = sYear;
+                var eHour = sHour;
+                var eMinute = sMinute;
+                var eAM = sAM;
+                if (currEvent.end != null) {
+                    eDay = currEvent.end.format('DD');
+                    eMonth = currEvent.end.format('MM');
+                    eYear = currEvent.end.format('YYYY');
+                    eHour = currEvent.end.format('hh');
+                    eMinute = currEvent.end.format('mm');
+                    eAM = currEvent.end.format('A');
+                }
+                var eids = ['eMonth'+eMonth, 'eDay'+eDay, 'eYear'+eYear, 'eHour'+eHour, 'eMinute'+eMinute, 'e'+eAM];
+                document.getElementById('startDate').innerHTML = "Month: <select id='sMonth'>" + sMonths + "</select>  Day: <select id='sDay'>" + sDays + 
+                                                                 "</select>  Year: <select id='sYear'>" + sYears + "</select>";
+                document.getElementById('startTime').innerHTML = "Hour: <select id='sHour'>" + sHours + "</select>  Minute: <select id='sMin'>" + sMinutes + 
+                                                                 "</select> <select id='sAM'>" + sAMOption + "</select>";
+                document.getElementById('endDate').innerHTML = "Month: <select id='eMonth'>" + eMonths + "</select>  Day: <select id='eDay'>" + eDays + 
+                                                                 "</select>  Year: <select id='eYear'>" + eYears + "</select>";
+                document.getElementById('endTime').innerHTML = "Hour: <select id='eHour'>" + eHours + "</select>  Minute: <select id='eMin'>" + eMinutes + 
+                                                                 "</select> <select id='eAM'>" + eAMOption + "</select>";
+                document.getElementById('info').innerHTML = "Title: <input type='text' id='editDesc' value=\"" + desc + "\"/>";
+                for (var i = 0; i < sids.length; i++) {
+                    document.getElementById(sids[i]).selected = "selected";
+                }
+                for (var i = 0; i < eids.length; i++) {
+                    document.getElementById(eids[i]).selected = "selected";
+                }
+                confirmButtons();
             }
-            var eids = ['eMonth'+eMonth, 'eDay'+eDay, 'eYear'+eYear, 'eHour'+eHour, 'eMinute'+eMinute, 'e'+eAM];
-            document.getElementById('startDate').innerHTML = "Month: <select id='sMonth'>" + sMonths + "</select>  Day: <select id='sDay'>" + sDays + 
-                                                             "</select>  Year: <select id='sYear'>" + sYears + "</select>";
-            document.getElementById('startTime').innerHTML = "Hour: <select id='sHour'>" + sHours + "</select>  Minute: <select id='sMin'>" + sMinutes + 
-                                                             "</select> <select id='sAM'>" + sAMOption + "</select>";
-            document.getElementById('endDate').innerHTML = "Month: <select id='eMonth'>" + eMonths + "</select>  Day: <select id='eDay'>" + eDays + 
-                                                             "</select>  Year: <select id='eYear'>" + eYears + "</select>";
-            document.getElementById('endTime').innerHTML = "Hour: <select id='eHour'>" + eHours + "</select>  Minute: <select id='eMin'>" + eMinutes + 
-                                                             "</select> <select id='eAM'>" + eAMOption + "</select>";
-            document.getElementById('info').innerHTML = "Title: <input type='text' id='editDesc' value=\"" + desc + "\"/>";
-            for (var i = 0; i < sids.length; i++) {
-                document.getElementById(sids[i]).selected = "selected";
-            }
-            for (var i = 0; i < eids.length; i++) {
-                document.getElementById(eids[i]).selected = "selected";
-            }
-            confirmButtons();
         }
     },
 
     "click #delete": function(e) {
         e.preventDefault();
-        if (deleteMode === 0) {
-            deleteMode = 1;
-            document.getElementById('deleteMessage').innerHTML = "Are you sure you want to delete this event?\n";
-            document.getElementById('deleteMessage').style.display = "inline";
-            confirmButtons();
+        if (isAdmin()) {
+            if (deleteMode === 0) {
+                deleteMode = 1;
+                document.getElementById('deleteMessage').innerHTML = "Are you sure you want to delete this event?\n";
+                document.getElementById('deleteMessage').style.display = "inline";
+                confirmButtons();
+            }
         }
     },
 
     "click #confirm": function(e) {
-        if (editMode === 1) {
-            var desc = document.getElementById('editDesc').value;
-            var start = document.getElementById('sMonth').value + " " + document.getElementById('sDay').value + " " + 
-                        document.getElementById('sYear').value + " " + document.getElementById('sHour').value + " " + 
-                        document.getElementById('sMin').value + " " + document.getElementById('sAM').value;
-            var end = document.getElementById('eMonth').value + " " + document.getElementById('eDay').value + " " + 
-                      document.getElementById('eYear').value + " " + document.getElementById('eHour').value + " " + 
-                      document.getElementById('eMin').value + " " + document.getElementById('eAM').value;
-            var event = {
-                _id: currEvent._id,
-                start: $.fullCalendar.moment(start, "M D YYYY h m A").toISOString(),
-                end: $.fullCalendar.moment(end, "M D YYYY h m A").toISOString(),
-                title: desc
-            };
-            Meteor.call('updateEvent', event, function (err, success) {
-                if (err) {
-                    console.log('failed to edit event');
-                    console.log(err);
-                } else {
-                    console.log('event editted');
-                    refetch();
-                }
-                editMode = 0;
-                revert();
-                document.getElementById('eventInfo').checked = false;
-            });
-        } else if (deleteMode === 1) {
-            Meteor.call('deleteEvent', currEvent._id, function (err, success) {
-                if (err) {
-                    console.log('Failed to delete event');
-                    console.log(err);
-                } else {
-                    console.log('Event deleted');
-                    refetch();
+        if (isAdmin()) {
+            if (editMode === 1) {
+                var desc = document.getElementById('editDesc').value;
+                var start = document.getElementById('sMonth').value + " " + document.getElementById('sDay').value + " " + 
+                            document.getElementById('sYear').value + " " + document.getElementById('sHour').value + " " + 
+                            document.getElementById('sMin').value + " " + document.getElementById('sAM').value;
+                var end = document.getElementById('eMonth').value + " " + document.getElementById('eDay').value + " " + 
+                          document.getElementById('eYear').value + " " + document.getElementById('eHour').value + " " + 
+                          document.getElementById('eMin').value + " " + document.getElementById('eAM').value;
+                var event = {
+                    _id: currEvent._id,
+                    start: $.fullCalendar.moment(start, "M D YYYY h m A").toISOString(),
+                    end: $.fullCalendar.moment(end, "M D YYYY h m A").toISOString(),
+                    title: desc
+                };
+                Meteor.call('updateEvent', event, function (err, success) {
+                    if (err) {
+                        console.log('failed to edit event');
+                        console.log(err);
+                    } else {
+                        console.log('event editted');
+                        refetch();
+                    }
+                    editMode = 0;
+                    revert();
                     document.getElementById('eventInfo').checked = false;
-                }
-                revert();
-            })
-            deleteMode = 0;
+                });
+            } else if (deleteMode === 1) {
+                Meteor.call('deleteEvent', currEvent._id, function (err, success) {
+                    if (err) {
+                        console.log('Failed to delete event');
+                        console.log(err);
+                    } else {
+                        console.log('Event deleted');
+                        refetch();
+                        document.getElementById('eventInfo').checked = false;
+                    }
+                    revert();
+                })
+                deleteMode = 0;
+            }
         }
     }, 
 
-    "click #cancel, click #closebox": function(e) {
-        revert();
-        deleteMode = 0;
-        editMode = 0;
-        currEvent = null;
+    "click #cancel, click #closebox, click #close": function(e) {
+        if (isAdmin()) {
+            revert();
+            deleteMode = 0;
+            editMode = 0;
+            currEvent = null;
+        }
         document.getElementById('eventInfo').checked = false;
+    }
+});
+
+Template.calendar.helpers({
+    is_admin: function() {
+        return Meteor.user() && (
+               Meteor.users.findOne( { _id: Meteor.userId() }).admin || 
+               Meteor.users.find( { admin: true } ).count() === 0);
     }
 });
 

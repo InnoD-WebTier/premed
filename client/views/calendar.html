@@ -2,11 +2,15 @@
     <div class="calendar-wrapper">
         <h3 class="calendar-title subtitle">Calendar</h3>
     </div>
+    <br/>
     <div id="myCalendar"></div>
     <br/>
-    <button id='addToggle' name='addToggle'>Add Event</button>
-    <br/>
-    <input type='text' id='description' placeholder='Add a Description' style="visibility:hidden">
+    {{#if is_admin}}
+      <button id='addToggle' name='addToggle'>Add Event</button>
+      <br/>
+      <br/>
+      <input type='text' id='description' placeholder='Add a Description' style="visibility:hidden">
+    {{/if}}
 
     <div class="modal" data-keyboard="false" data-backdrop="static">
       <input class="modal-open" id="eventInfo" type="checkbox" style="display:none">
@@ -25,10 +29,14 @@
             End Time: <span id="endTime"></span><br/>
           </div>
           <div class="modal-footer">
-            <button id="delete" for="eventInfo">Delete</button>
-            <button id="edit" for="eventInfo">Edit</button>
-            <button id="confirm" for="eventInfo" style="display:none;">Confirm</button>
-            <button id="cancel" for="eventInfo" style="display:none;">Cancel</button>
+            {{#if is_admin}}
+              <button id="delete" for="eventInfo">Delete</button>
+              <button id="edit" for="eventInfo">Edit</button>
+              <button id="confirm" for="eventInfo" style="display:none;">Confirm</button>
+              <button id="cancel" for="eventInfo" style="display:none;">Cancel</button>
+            {{else}}
+              <button id="close" for="eventInfo">Close</button>
+            {{/if}}
           </div>
         </div>
       </div>
