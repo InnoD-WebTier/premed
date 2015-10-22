@@ -93,13 +93,6 @@ Template.calendar.rendered = function(){
             eventRender: function (event, element) {
                 element.attr('href', 'javascript:void(0);');
                 element.click(function () {
-                    if (event.end == null) {
-                        var endDay = noEndDate;
-                        var endTime = '';
-                    } else {
-                        var endDay = event.end.format("MMMM Do, YYYY");
-                        var endTime = event.end.format("h:mm a");
-                    }
                     if (event.end === null) {
                       event.end = event.start;
                     }
@@ -165,20 +158,16 @@ Template.calendar.events({
     "click #edit": function(e) {
         e.preventDefault();
         if (isAdmin()) {
-            if (editMode === editModes.NOT_EDITING) {
-                editMode = editModes.EDITING;
-                editModeDep.changed();
-            }
+            editMode = editModes.EDITING;
+            editModeDep.changed();
         }
     },
 
     "click #delete": function(e) {
         e.preventDefault();
         if (isAdmin()) {
-            if (deleteMode === deleteModes.NOT_DELETING) {
-                deleteMode = deleteModes.DELETING;
-                deleteModeDep.changed();
-            }
+            deleteMode = deleteModes.DELETING;
+            deleteModeDep.changed();
         }
     },
 
