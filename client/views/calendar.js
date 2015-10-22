@@ -294,24 +294,11 @@ Template.calendar.helpers({
     },
     deleting: function() {
       deleteModeDep.depend();
-      switch(deleteMode) {
-        case deleteModes.DELETING:
-          return true;
-        default:
-          return false;
-      }
+      return deleteMode === deleteModes.DELETING;
     },
     editing: function() {
       editModeDep.depend();
-      switch(editMode) {
-        case editModes.EDITING:
-          return true;
-        case editModes.NOT_EDITING:
-          return false;
-        default:
-          console.error('Bad editMode state');
-          return false;
-      }
+      return editMode === editModes.EDITING;
     },
     startDate: function() {
       currEventDep.depend();
