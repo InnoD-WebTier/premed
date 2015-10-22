@@ -105,15 +105,17 @@ Template.calendar.events({
     "click #addToggle": function(e) {
         e.preventDefault();
         if (isAdmin()) {
-            if (addEventMode === addEventModes.BASE) {
+            switch(addEventMode) {
+              case addEventModes.BASE:
                 addEventMode = addEventModes.ADD_START;
                 addEventModeDep.changed();
-            } else if (addEventMode === addEventModes.ADD_START || addEventMode === addEventModes.ADD_END) {
+              case addEventModes.ADD_START:
+              case addEventModes.ADD_END:
                 addEventMode = addEventModes.BASE;
                 addEventModeDep.changed();
                 startDate = '';
                 endDate = '';
-            } else if (addEventMode === addEventModes.ADD_TITLE) {
+              case addEventModes.ADD_TITLE:
                 var desc = document.getElementById('description').value;
                 var event = {
                     title: desc,
@@ -137,6 +139,8 @@ Template.calendar.events({
                 $('#description').hide();
                 startDate = '';
                 endDate = '';
+              default:
+                break;
             }
         }
     },
