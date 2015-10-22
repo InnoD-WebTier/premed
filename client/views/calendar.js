@@ -66,15 +66,24 @@ Template.calendar.rendered = function(){
                 right: 'month,agendaWeek,agendaDay'
             },
             dayClick: function(date, jsEvent, view) {
-                if (addEventMode === addEventModes.ADD_START) {
+                if(!isAdmin()) {
+                  return;
+                }
+                switch(addEventMode) {
+                  case addEventModes.BASE:
+                  case addEventModes.ADD_START:
                     startDate = date.format();
                     addEventMode = addEventModes.ADD_END;
                     addEventModeDep.changed();
-                } else if (addEventMode === addEventModes.ADD_END) {
+                    break;
+                  case addEventModes.ADD_END:
                     endDate = date.format();
                     addEventMode = addEventModes.ADD_TITLE;
                     addEventModeDep.changed();
                     $('#description').show();
+                    break;
+                  default:
+                    return;
                 }
             },
             defaultDate: new Date(),
