@@ -311,8 +311,9 @@ Template.calendar.helpers({
 });
 
 function generateDates(activeMoment) {
+    var currentYear = (new Date()).getFullYear();
     var dates = [
-        { type: 'Year', items: range(2015, 2020) },
+        { type: 'Year', items: range(currentYear, currentYear+5) },
         { type: 'Month', items: range(1, 12) },
         { type: 'Day', items: range(1, 31) }
     ]
@@ -351,29 +352,3 @@ function generateTimes(activeMoment) {
     })
     return times
 }
-
-function generateNumbers(start, end, type) {
-    select = "";
-    var num;
-    for (var i = start; i <= end; i++) {
-        num = (i < 10 ? '0' : '') + i.toString();
-        select = select + "<option id=\'" + type + num + "\' value=\'" + num + "\'>" + num + "</option>";
-    }
-    return select;
-}
-
-
-var d = new Date();
-sYears = generateNumbers(d.getFullYear(), d.getFullYear() + 5, 'sYear');
-sMonths = generateNumbers(1, 12, 'sMonth');
-sDays = generateNumbers(1, 31, 'sDay');
-sHours = generateNumbers(1, 12, 'sHour');
-sMinutes = generateNumbers(0, 59, 'sMinute');
-sAMOption = "<option id='sAM' value='AM'>AM</option><option id='sPM' value='PM'>PM</option>";
-
-eYears = generateNumbers(d.getFullYear(), d.getFullYear() + 5, 'eYear');
-eMonths = generateNumbers(1, 12, 'eMonth');
-eDays = generateNumbers(1, 31, 'eDay');
-eHours = generateNumbers(1, 12, 'eHour');
-eMinutes = generateNumbers(0, 59, 'eMinute');
-eAMOption = "<option id='eAM' value='AM'>AM</option><option id='ePM' value='PM'>PM</option>";
