@@ -3,7 +3,7 @@
         <h3 class="calendar-title subtitle">Calendar</h3>
           {{#if is_admin}}
           <div class="calendar-buttons">
-            <button id='addToggle' name='addToggle'>Add Event</button>
+            <button id='addToggle' name='addToggle'>{{add_text}}</button>
             <br />
             <input type='text' id='description' placeholder='Add a Description' style="display:none">
           </div>
@@ -14,33 +14,96 @@
     <br/>
 
     <div class="modal" data-keyboard="false" data-backdrop="static">
-      <input class="modal-open" id="eventInfo" type="checkbox" style="display:none">
+      <input class="modal-open" id="eventInfo" type="checkbox" checked={{showModal}}>
       <div class="modal-wrap" aria-hidden="true" role="dialog">
         <label class="modal-overlay" for="eventInfo"></label>
+        {{#if currEvent}}
         <div class="modal-dialog">
           <div class="modal-header">
-            <h2 id="deleteMessage" style="display:none;"></h2>
-            <h2 id="info"></h2>
+            {{#if editing}}
+              <h2 id="info">Title: <input type='text' id='editDesc' value={{currEvent.title}} /></h2>
+            {{else}}
+              <h2 id="info">{{currEvent.title}}</h2>
+            {{/if}}
             <button id='closebox' class="btn-close" for="eventInfo" aria-hidden="true">×</button>
           </div>
           <div class="modal-body">
-            Start Date: <span id="startDate"></span><br/>
-            Start Time: <span id="startTime"></span><br/>
-            Event Description: <span id="eventDescription"></span><br/>
-            End: <span id="endDate"></span><br/>
-            End Time: <span id="endTime"></span><br/>
+            {{#unless editing}}
+            <div class="event-readonly">
+              <div class="event-sdate">Start Date: {{currEvent.startDate}}</div>
+              <div class="event-stime">Start Time: {{currEvent.startTime}}</div>
+              <div class="event-edate">End Date: {{currEvent.endDate}}</div>
+              <div class="event-etime">End Time: {{currEvent.endTime}}</div>
+              <div class="event-desc">Event Description: {{currEvent.description}}</div>
+            </div>
+            {{else}}
+            <div class="event-editable">
+              Start Date: <span id="startDate">
+              {{#each startDate}}
+                {{this.type}}:
+                <select id='s{{this.type}}'>
+                  {{#each this.items}}
+                    <option id='s{{../type}}{{this.num}}' value={{this.num}} selected={{this.selected}}>{{this.num}}
+                    </option>
+                  {{/each}}
+                </select>
+              {{/each}}
+              </span><br/>
+              Start Time: <span id="startTime">
+              {{#each startTime}}
+                {{this.type}}:
+                <select id='s{{this.type}}'>
+                  {{#each this.items}}
+                    <option id='s{{../type}}{{this.num}}' value={{this.num}} selected={{this.selected}}>{{this.num}}
+                    </option>
+                  {{/each}}
+                </select>
+              {{/each}}
+              </span><br/>
+              End Date: <span id="endDate">
+              {{#each endDate}}
+                {{this.type}}:
+                <select id='e{{this.type}}'>
+                  {{#each this.items}}
+                    <option id='e{{../type}}{{this.num}}' value={{this.num}} selected={{this.selected}}>{{this.num}}
+                    </option>
+                  {{/each}}
+                </select>
+              {{/each}}
+              </span><br/>
+              End Time: <span id="endTime">
+              {{#each endTime}}
+                {{this.type}}:
+                <select id='e{{this.type}}'>
+                  {{#each this.items}}
+                    <option id='e{{../type}}{{this.num}}' value={{this.num}} selected={{this.selected}}>{{this.num}}
+                    </option>
+                  {{/each}}
+                </select>
+              {{/each}}
+              </span><br/>
+              Event Description: <span id="eventDescription"><textarea id='editEventDescription' rows='4' cols='58' style='resize:vertical;' value={{currEvent.description}}></textarea></span><br/>
+            </div>
+            {{/unless}}
           </div>
           <div class="modal-footer">
             {{#if is_admin}}
+              {{#if deleting}}
+              <h2 id="deleteMessage">Are you sure you want to delete this event?</h2>
+              {{/if}}
+              {{#unless confirmationButtons}}
               <button id="delete" for="eventInfo">Delete</button>
               <button id="edit" for="eventInfo">Edit</button>
-              <button id="confirm" for="eventInfo" style="display:none;">Confirm</button>
-              <button id="cancel" for="eventInfo" style="display:none;">Cancel</button>
+              {{else}}
+              <button id="confirm" for="eventInfo">Confirm</button>
+              <button id="cancel" for="eventInfo">Cancel</button>
+              {{/unless}}
             {{else}}
               <button id="close" for="eventInfo">Close</button>
             {{/if}}
           </div>
         </div>
+        {{/if}}
       </div>
     </div>
 </template>
