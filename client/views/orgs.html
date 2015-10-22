@@ -22,57 +22,36 @@
 			</div>
 		</div>
 
-	<div class="section-list-row row">
-		<div class="col col--1-of-4">
-			<h3 class="subtitle section-title">DeCals</h3 >
+		<div class="section-nav-row">
+			<ul class="section-nav col col--centered">
+        {{#each clubs}}
+          <li class="section-nav-item">{{this.category}}</li>
+        {{/each}}
+			</ul>
 		</div>
-		<div class="section-list col col--3-of-4">
-			<div class="section-list-item">
-				<div class="section-list-item-title">
-					AAPI Community Health Issues DeCal
-				</div>
-				<div class="section-list-item-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa. Illum, optio possimus accusantium quae libero cum est quas iure cupiditate obcaecati deleniti veniam porro! Cumque explicabo hic qui veritatis rem sunt iusto repudiandae! Facere dolore laborum consequatur ex quos animi earum aliquid impedit quasi commodi ab, enim labore voluptates, vero minus reiciendis quibusdam optio architecto! Iste unde nemo quibusdam, provident recusandae placeat ipsam perspiciatis quaerat, veniam non. Nihil sed nemo autem pariatur fugit?</p>
-					<button>View Course Website</button>
-				</div>
-			</div>
-			<div class="section-list-item">
-				<div class="section-list-item-title">
-					Critical Understanding of Global Health DeCal
-				</div>
-				<div class="section-list-item-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa. Illum, optio possimus accusantium quae libero cum est quas iure cupiditate obcaecati deleniti veniam porro! Cumque explicabo hic qui veritatis rem sunt iusto repudiandae! Facere dolore laborum consequatur ex quos animi earum aliquid impedit quasi commodi ab, enim labore voluptates, vero minus reiciendis quibusdam optio architecto! Iste unde nemo quibusdam, provident recusandae placeat ipsam perspiciatis quaerat, veniam non. Nihil sed nemo autem pariatur fugit?</p>
-					<button>View Course Website</button>
-				</div>
-		</div>
-	</div>
-</div>
+
+  {{#each clubs}}
 
 	<div class="section-list-row row">
 		<div class="col col--1-of-4">
-			<h3 class="subtitle section-title">Global Abroad Organizations</h3 >
+			<h3 class="subtitle section-title">{{this.category}}</h3 >
 		</div>
 		<div class="section-list col col--3-of-4">
+      {{#each this.clubs}}
 			<div class="section-list-item">
 				<div class="section-list-item-title">
-					Berkeley Alliance for Global Health
+          {{this.name}}
 				</div>
 				<div class="section-list-item-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa. Illum, optio possimus accusantium quae libero cum est quas iure cupiditate obcaecati deleniti veniam porro! Cumque explicabo hic qui veritatis rem sunt iusto repudiandae! Facere dolore laborum consequatur ex quos animi earum aliquid impedit quasi commodi ab, enim labore voluptates, vero minus reiciendis quibusdam optio architecto! Iste unde nemo quibusdam, provident recusandae placeat ipsam perspiciatis quaerat, veniam non. Nihil sed nemo autem pariatur fugit?</p>
-					<button>View Course Website</button>
+					<p>{{this.description}}</p>
+					<button>View Website</button>
 				</div>
 			</div>
-			<div class="section-list-item">
-				<div class="section-list-item-title">
-				Engineering World Health
-				</div>
-				<div class="section-list-item-body">
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa. Illum, optio possimus accusantium quae libero cum est quas iure cupiditate obcaecati deleniti veniam porro! Cumque explicabo hic qui veritatis rem sunt iusto repudiandae! Facere dolore laborum consequatur ex quos animi earum aliquid impedit quasi commodi ab, enim labore voluptates, vero minus reiciendis quibusdam optio architecto! Iste unde nemo quibusdam, provident recusandae placeat ipsam perspiciatis quaerat, veniam non. Nihil sed nemo autem pariatur fugit?</p>
-					<button>View Course Website</button>
-				</div>
-		</div>
-	</div>
-</div>
+      {{/each}}
+    </div>
+  </div>
+  {{/each}}
+
 
 	</div>
 
