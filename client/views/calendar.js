@@ -98,7 +98,6 @@ Template.calendar.rendered = function(){
                     }
                     currEvent = event;
                     currEventDep.changed();
-                    document.getElementById('eventInfo').checked = true;
                 });
             },
             timezone: "local"
@@ -200,7 +199,8 @@ Template.calendar.events({
 
                         editMode = editModes.NOT_EDITING;
                         editModeDep.changed();
-                        document.getElementById('eventInfo').checked = false;
+                        currEvent = null;
+                        currEventDep.changed();
                     }
                 });
             } else if (deleteMode === deleteModes.DELETING) {
@@ -212,10 +212,11 @@ Template.calendar.events({
                     } else {
                         console.log('Event deleted');
                         refetch();
-                        document.getElementById('eventInfo').checked = false;
 
                         deleteMode = deleteModes.NOT_DELETING;
                         deleteModeDep.changed();
+                        currEvent = null;
+                        currEventDep.changed();
                     }
                 })
             }
@@ -228,10 +229,9 @@ Template.calendar.events({
             deleteModeDep.changed();
             editMode = editModes.NOT_EDITING;
             editModeDep.changed();
-            currEvent = null;
-            currEventDep.changed();
         }
-        document.getElementById('eventInfo').checked = false;
+        currEvent = null;
+        currEventDep.changed();
     }
 });
 
@@ -285,6 +285,10 @@ Template.calendar.helpers({
     editing: function() {
       editModeDep.depend();
       return editMode === editModes.EDITING;
+    },
+    showModal: function() {
+      currEventDep.depend();
+      return currEvent !== null;
     },
     startDate: function() {
       currEventDep.depend();
