@@ -6,11 +6,13 @@ Need:
 */
 Events = new Mongo.Collection('events');
 addEventToggle = 0;
+var addEventToggleDep = new Tracker.Dependency;
 startDate = '';
 endDate = '';
 eventDescription = '';
 currEvent = null;
 editMode = 0;
+var editModeDep = new Tracker.Dependency;
 deleteMode = 0;
 eventList = [];
 noEndDate = 'No end specified';
@@ -52,11 +54,11 @@ Template.calendar.rendered = function(){
                 if (addEventToggle === 1) {
                     startDate = date.format();
                     addEventToggle = 2;
-                    document.getElementById('addToggle').innerHTML = 'Pick an end date (Click here to cancel)';
+                    addEventToggleDep.changed();
                 } else if (addEventToggle === 2) {
                     endDate = date.format();
                     addEventToggle = 3;
-                    document.getElementById('addToggle').innerHTML = "Add Event";
+                    addEventToggleDep.changed();
                     $('#description').show();
                 }
             },
@@ -96,12 +98,12 @@ Template.calendar.events({
         if (isAdmin()) {
             if (addEventToggle === 0) {
                 addEventToggle = 1;
-                document.getElementById('addToggle').innerHTML = 'Select a start date (Click here to Cancel)';
+                addEventToggleDep.changed();
             } else if (addEventToggle === 1 || addEventToggle === 2) {
                 addEventToggle = 0;
+                addEventToggleDep.changed();
                 startDate = '';
                 endDate = '';
-                document.getElementById('addToggle').innerHTML = 'Add Event';
             } else if (addEventToggle === 3) {
                 var desc = document.getElementById('description').value;
                 var event = {
@@ -122,7 +124,7 @@ Template.calendar.events({
                     }
                 });
                 addEventToggle = 0;
-                document.getElementById('addToggle').innerHTML = 'Add Event';
+                addEventToggleDep.changed();
                 $('#description').hide();
                 startDate = '';
                 endDate = '';
@@ -135,6 +137,7 @@ Template.calendar.events({
         if (isAdmin()) {
             if (editMode === 0) {
                 editMode = 1;
+                editModeDep.changed();
                 var desc = currEvent.title;
                 var sDay = currEvent.start.format('DD');
                 var sMonth = currEvent.start.format('MM');
@@ -218,6 +221,7 @@ Template.calendar.events({
                         refetch();
                     }
                     editMode = 0;
+                    editModeDep.changed();
                     revert();
                     document.getElementById('eventInfo').checked = false;
                 });
@@ -243,6 +247,7 @@ Template.calendar.events({
             revert();
             deleteMode = 0;
             editMode = 0;
+            editModeDep.changed();
             currEvent = null;
         }
         document.getElementById('eventInfo').checked = false;
@@ -254,6 +259,21 @@ Template.calendar.helpers({
         return Meteor.user() && (
                Meteor.users.findOne( { _id: Meteor.userId() }).admin || 
                Meteor.users.find( { admin: true } ).count() === 0);
+    },
+    add_text: function() {
+        addEventToggleDep.depend();
+        switch (addEventToggle) {
+          case 0:
+            return 'Add Event'
+          case 1:
+            return 'Select a start date (Click here to Cancel)'
+          case 2:
+            return 'Pick an end date (Click here to cancel)'
+          case 3:
+            return 'Set Title'
+          default:
+            return 'Add Event?'
+        }
     }
 });
 
