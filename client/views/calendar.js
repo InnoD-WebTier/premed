@@ -5,8 +5,17 @@ Need:
     Drop down/window for displaying event info
 */
 Events = new Mongo.Collection('events');
-addEventToggle = 0;
-var addEventToggleDep = new Tracker.Dependency;
+
+var addEventModes = {
+  BASE: 'initial state',
+  ADD_START: 'waiting for start date',
+  ADD_END: 'waiting for end date',
+  ADD_TITLE: 'waiting for a title'
+}
+
+var addEventMode = addEventModes.BASE;
+var addEventModeDep = new Tracker.Dependency;
+
 startDate = '';
 endDate = '';
 eventDescription = '';
@@ -51,14 +60,14 @@ Template.calendar.rendered = function(){
                 right: 'month,agendaWeek,agendaDay'
             },
             dayClick: function(date, jsEvent, view) {
-                if (addEventToggle === 1) {
+                if (addEventMode === addEventModes.ADD_START) {
                     startDate = date.format();
-                    addEventToggle = 2;
-                    addEventToggleDep.changed();
-                } else if (addEventToggle === 2) {
+                    addEventMode = addEventModes.ADD_END;
+                    addEventModeDep.changed();
+                } else if (addEventMode === addEventModes.ADD_END) {
                     endDate = date.format();
-                    addEventToggle = 3;
-                    addEventToggleDep.changed();
+                    addEventMode = addEventModes.ADD_TITLE;
+                    addEventModeDep.changed();
                     $('#description').show();
                 }
             },
@@ -96,15 +105,15 @@ Template.calendar.events({
     "click #addToggle": function(e) {
         e.preventDefault();
         if (isAdmin()) {
-            if (addEventToggle === 0) {
-                addEventToggle = 1;
-                addEventToggleDep.changed();
-            } else if (addEventToggle === 1 || addEventToggle === 2) {
-                addEventToggle = 0;
-                addEventToggleDep.changed();
+            if (addEventMode === addEventModes.BASE) {
+                addEventMode = addEventModes.ADD_START;
+                addEventModeDep.changed();
+            } else if (addEventMode === addEventModes.ADD_START || addEventMode === addEventModes.ADD_END) {
+                addEventMode = addEventModes.BASE;
+                addEventModeDep.changed();
                 startDate = '';
                 endDate = '';
-            } else if (addEventToggle === 3) {
+            } else if (addEventMode === addEventModes.ADD_TITLE) {
                 var desc = document.getElementById('description').value;
                 var event = {
                     title: desc,
@@ -123,8 +132,8 @@ Template.calendar.events({
                         $("#myCalendar").fullCalendar("renderEvent", event);
                     }
                 });
-                addEventToggle = 0;
-                addEventToggleDep.changed();
+                addEventMode = addEventModes.BASE;
+                addEventModeDep.changed();
                 $('#description').hide();
                 startDate = '';
                 endDate = '';
@@ -261,17 +270,18 @@ Template.calendar.helpers({
                Meteor.users.find( { admin: true } ).count() === 0);
     },
     add_text: function() {
-        addEventToggleDep.depend();
-        switch (addEventToggle) {
-          case 0:
+        addEventModeDep.depend();
+        switch (addEventMode) {
+          case addEventModes.BASE:
             return 'Add Event'
-          case 1:
+          case addEventModes.ADD_START:
             return 'Select a start date (Click here to Cancel)'
-          case 2:
+          case addEventModes.ADD_END:
             return 'Pick an end date (Click here to cancel)'
-          case 3:
+          case addEventModes.ADD_TITLE:
             return 'Set Title'
           default:
+            console.log(addEventMode);
             return 'Add Event?'
         }
     }
