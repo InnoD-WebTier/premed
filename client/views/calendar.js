@@ -13,6 +13,11 @@ var addEventModes = {
   ADD_TITLE: 'waiting for a title'
 }
 
+var editModes = {
+  EDITING: 'editing',
+  NOT_EDITING: 'not editing'
+}
+
 var addEventMode = addEventModes.BASE;
 var addEventModeDep = new Tracker.Dependency;
 
@@ -20,11 +25,21 @@ startDate = '';
 endDate = '';
 eventDescription = '';
 currEvent = null;
-editMode = 0;
+var currEventDep = new Tracker.Dependency;
+editMode = editModes.NOT_EDITING;
 var editModeDep = new Tracker.Dependency;
 deleteMode = 0;
 eventList = [];
 noEndDate = 'No end specified';
+
+function range(start, end) {
+  var list = [];
+  for(var i = start; i <= end; i++) {
+    list.push({num: i, selected: false});
+  }
+  return list;
+}
+
 function refetch() {
     eventList = Events.find({}).fetch();
     $("#myCalendar").fullCalendar('removeEvents');
@@ -85,14 +100,11 @@ Template.calendar.rendered = function(){
                         var endDay = event.end.format("MMMM Do, YYYY");
                         var endTime = event.end.format("h:mm a");
                     }
+                    if (event.end === null) {
+                      event.end = event.start;
+                    }
                     currEvent = event;
-                    var eventInfo = event.info;
-                    document.getElementById('info').innerHTML = event.title;
-                    document.getElementById('startDate').innerHTML = event.start.format("MMMM Do, YYYY");
-                    document.getElementById('startTime').innerHTML = event.start.format("h:mm a");
-                    document.getElementById('eventDescription').innerHTML = eventInfo;
-                    document.getElementById('endDate').innerHTML = endDay;
-                    document.getElementById('endTime').innerHTML = endTime;
+                    currEventDep.changed();
                     document.getElementById('eventInfo').checked = true;
                 });
             },
@@ -109,12 +121,14 @@ Template.calendar.events({
               case addEventModes.BASE:
                 addEventMode = addEventModes.ADD_START;
                 addEventModeDep.changed();
+                break;
               case addEventModes.ADD_START:
               case addEventModes.ADD_END:
                 addEventMode = addEventModes.BASE;
                 addEventModeDep.changed();
                 startDate = '';
                 endDate = '';
+                break;
               case addEventModes.ADD_TITLE:
                 var desc = document.getElementById('description').value;
                 var newEvent = {
@@ -139,6 +153,7 @@ Template.calendar.events({
                 $('#description').hide();
                 startDate = '';
                 endDate = '';
+                break;
               default:
                 break;
             }
@@ -148,48 +163,9 @@ Template.calendar.events({
     "click #edit": function(e) {
         e.preventDefault();
         if (isAdmin()) {
-            if (editMode === 0) {
-                editMode = 1;
+            if (editMode === editModes.NOT_EDITING) {
+                editMode = editModes.EDITING;
                 editModeDep.changed();
-                var desc = currEvent.title;
-                var sDay = currEvent.start.format('DD');
-                var sMonth = currEvent.start.format('MM');
-                var sYear = currEvent.start.format('YYYY');
-                var sHour = currEvent.start.format('hh');
-                var sMinute = currEvent.start.format('mm');
-                var sAM = currEvent.start.format('A');
-                var sids = ['sMonth'+sMonth, 'sDay'+sDay, 'sYear'+sYear, 'sHour'+sHour, 'sMinute'+sMinute, 's'+sAM];
-                var eDay = sDay;
-                var eMonth = sMonth;
-                var eYear = sYear;
-                var eHour = sHour;
-                var eMinute = sMinute;
-                var eAM = sAM;
-                if (currEvent.end != null) {
-                    eDay = currEvent.end.format('DD');
-                    eMonth = currEvent.end.format('MM');
-                    eYear = currEvent.end.format('YYYY');
-                    eHour = currEvent.end.format('hh');
-                    eMinute = currEvent.end.format('mm');
-                    eAM = currEvent.end.format('A');
-                }
-                var eids = ['eMonth'+eMonth, 'eDay'+eDay, 'eYear'+eYear, 'eHour'+eHour, 'eMinute'+eMinute, 'e'+eAM];
-                document.getElementById('startDate').innerHTML = "Month: <select id='sMonth'>" + sMonths + "</select>  Day: <select id='sDay'>" + sDays + 
-                                                                 "</select>  Year: <select id='sYear'>" + sYears + "</select>";
-                document.getElementById('startTime').innerHTML = "Hour: <select id='sHour'>" + sHours + "</select>  Minute: <select id='sMin'>" + sMinutes + 
-                                                                 "</select> <select id='sAM'>" + sAMOption + "</select>";
-                document.getElementById('eventDescription').innerHTML = "<textarea id='editEventDscription' rows='4' cols='58' style='resize:vertical;' value='" + info + "'></textarea>";
-                document.getElementById('endDate').innerHTML = "Month: <select id='eMonth'>" + eMonths + "</select>  Day: <select id='eDay'>" + eDays + 
-                                                                 "</select>  Year: <select id='eYear'>" + eYears + "</select>";
-                document.getElementById('endTime').innerHTML = "Hour: <select id='eHour'>" + eHours + "</select>  Minute: <select id='eMin'>" + eMinutes + 
-                                                                 "</select> <select id='eAM'>" + eAMOption + "</select>";
-                document.getElementById('info').innerHTML = "Title: <input type='text' id='editDesc' value=\"" + desc + "\"/>";
-                for (var i = 0; i < sids.length; i++) {
-                    document.getElementById(sids[i]).selected = "selected";
-                }
-                for (var i = 0; i < eids.length; i++) {
-                    document.getElementById(eids[i]).selected = "selected";
-                }
                 confirmButtons();
             }
         }
@@ -209,7 +185,7 @@ Template.calendar.events({
 
     "click #confirm": function(e) {
         if (isAdmin()) {
-            if (editMode === 1) {
+            if (editMode === editModes.EDITING) {
                 var desc = document.getElementById('editDesc').value;
                 var start = document.getElementById('sMonth').value + " " + document.getElementById('sDay').value + " " + 
                             document.getElementById('sYear').value + " " + document.getElementById('sHour').value + " " + 
@@ -233,7 +209,7 @@ Template.calendar.events({
                         console.log('event editted');
                         refetch();
                     }
-                    editMode = 0;
+                    editMode = editModes.NOT_EDITING;
                     editModeDep.changed();
                     revert();
                     document.getElementById('eventInfo').checked = false;
@@ -259,9 +235,10 @@ Template.calendar.events({
         if (isAdmin()) {
             revert();
             deleteMode = 0;
-            editMode = 0;
+            editMode = editModes.NOT_EDITING;
             editModeDep.changed();
             currEvent = null;
+            currEventDep.changed();
         }
         document.getElementById('eventInfo').checked = false;
     }
@@ -285,11 +262,95 @@ Template.calendar.helpers({
           case addEventModes.ADD_TITLE:
             return 'Set Title'
           default:
-            console.log(addEventMode);
+            console.err('inconsistent addEventMode state');
             return 'Add Event?'
         }
+    },
+    currEvent: function() {
+      currEventDep.depend();
+      if (currEvent === null) {
+        return null;
+      }
+      return {
+        title: currEvent.title,
+        startDate: currEvent.start.format('MMMM Do, YYYY'),
+        startTime: currEvent.start.format('hh:mm A'),
+        endDate: currEvent.end.format('MMMM Do, YYYY'),
+        endTime: currEvent.end.format('hh:mm A'),
+        description: currEvent.info
+      }
+    },
+    editing: function() {
+      editModeDep.depend();
+      switch(editMode) {
+        case editModes.EDITING:
+          return true;
+        case editModes.NOT_EDITING:
+          return false;
+        default:
+          console.error('Bad editMode state');
+          return false;
+      }
+    },
+    startDate: function() {
+      currEventDep.depend();
+      return generateDates(currEvent.start);
+    },
+    startTime: function() {
+      currEventDep.depend();
+      return generateTimes(currEvent.start);
+    },
+    endDate: function() {
+      currEventDep.depend();
+      return generateDates(currEvent.end);
+    },
+    endTime: function() {
+      currEventDep.depend();
+      return generateTimes(currEvent.end);
     }
 });
+
+function generateDates(activeMoment) {
+    var dates = [
+        { type: 'Year', items: range(2015, 2020) },
+        { type: 'Month', items: range(1, 12) },
+        { type: 'Day', items: range(1, 31) }
+    ]
+    dates[0].items = dates[0].items.map(function(item) {
+      if(item.num == activeMoment.format('YYYY')) { item.selected = true; }
+      return item;
+    })
+    dates[1].items = dates[1].items.map(function(item) {
+      if(item.num == activeMoment.format('M')) { item.selected = true; }
+      return item;
+    })
+    dates[2].items = dates[2].items.map(function(item) {
+      if(item.num == activeMoment.format('D')) { item.selected = true; }
+      return item;
+    })
+    return dates
+}
+
+function generateTimes(activeMoment) {
+    var times = [
+        { type: 'Hour', items: range(1, 12) },
+        { type: 'Minute', items: range(0, 59) },
+        { type: 'AM', items: [{num: 'AM', selected: false}, {num: 'PM', selected: false}] }
+    ]
+    times[0].items = times[0].items.map(function(item) {
+      if(item.num == activeMoment.format('h')) { item.selected = true; }
+      return item;
+    })
+    times[1].items = times[1].items.map(function(item) {
+      if(item.num == activeMoment.format('m')) { item.selected = true; }
+      return item;
+    })
+    times[2].items = times[2].items.map(function(item) {
+      if(item.num == activeMoment.format('a')) { item.selected = true; }
+      return item;
+    })
+    return times
+}
 
 function generateNumbers(start, end, type) {
     select = "";
