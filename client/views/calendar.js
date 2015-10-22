@@ -144,20 +144,22 @@ Template.calendar.events({
                 };
                 Meteor.call('insertEvent', newEvent, function (err, success) {
                     if (err) {
-                        console.log('event failed');
-                        console.log(err);
+                        console.err('event failed');
+                        console.err(err);
+                        alert('Server error: failed to add event');
                     } else {
                         console.log('event added');
                         newEvent._id = success;
                         console.log(newEvent);
                         $("#myCalendar").fullCalendar("renderEvent", newEvent);
+
+                        addEventMode = addEventModes.BASE;
+                        addEventModeDep.changed();
+                        $('#description').hide();
+                        startDate = '';
+                        endDate = '';
                     }
                 });
-                addEventMode = addEventModes.BASE;
-                addEventModeDep.changed();
-                $('#description').hide();
-                startDate = '';
-                endDate = '';
                 break;
               default:
                 break;
@@ -209,29 +211,33 @@ Template.calendar.events({
                     if (err) {
                         console.err('failed to edit event');
                         console.err(err);
+                        alert('Failed to edit event');
                     } else {
                         console.log('event editted');
                         refetch();
+
+                        editMode = editModes.NOT_EDITING;
+                        editModeDep.changed();
+                        revert();
+                        $('#eventInfo').checked = false;
                     }
-                    editMode = editModes.NOT_EDITING;
-                    editModeDep.changed();
-                    revert();
-                    $('#eventInfo').checked = false;
                 });
             } else if (deleteMode === deleteModes.DELETING) {
                 Meteor.call('deleteEvent', currEvent._id, function (err, success) {
                     if (err) {
                         console.log('Failed to delete event');
                         console.log(err);
+                        alert('Failed to delete event')
                     } else {
                         console.log('Event deleted');
                         refetch();
                         $('#eventInfo').checked = false;
+
+                        revert();
+                        deleteMode = deleteModes.NOT_DELETING;
+                        deleteModeDep.changed();
                     }
-                    revert();
                 })
-                deleteMode = deleteModes.NOT_DELETING;
-                deleteModeDep.changed();
             }
         }
     }, 
