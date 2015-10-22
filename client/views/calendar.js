@@ -18,6 +18,11 @@ var editModes = {
   NOT_EDITING: 'not editing'
 }
 
+var deleteModes = {
+  DELETING: 'deleting',
+  NOT_DELETING: 'not deleting'
+}
+
 var addEventMode = addEventModes.BASE;
 var addEventModeDep = new Tracker.Dependency;
 
@@ -28,7 +33,8 @@ currEvent = null;
 var currEventDep = new Tracker.Dependency;
 editMode = editModes.NOT_EDITING;
 var editModeDep = new Tracker.Dependency;
-deleteMode = 0;
+deleteMode = deleteModes.NOT_DELETING;
+var deleteModeDep = new Tracker.Dependency;
 eventList = [];
 noEndDate = 'No end specified';
 
@@ -58,7 +64,6 @@ function revert() {
     document.getElementById('edit').style.display = "inline";
     document.getElementById('confirm').style.display = "none";
     document.getElementById('cancel').style.display = "none";
-    document.getElementById('deleteMessage').style.display = "none";
 }
 
 function isAdmin() {
@@ -174,10 +179,9 @@ Template.calendar.events({
     "click #delete": function(e) {
         e.preventDefault();
         if (isAdmin()) {
-            if (deleteMode === 0) {
-                deleteMode = 1;
-                document.getElementById('deleteMessage').innerHTML = "Are you sure you want to delete this event?\n";
-                document.getElementById('deleteMessage').style.display = "inline";
+            if (deleteMode === deleteModes.NOT_DELETING) {
+                deleteMode = deleteModes.DELETING;
+                deleteModeDep.changed();
                 confirmButtons();
             }
         }
@@ -186,14 +190,14 @@ Template.calendar.events({
     "click #confirm": function(e) {
         if (isAdmin()) {
             if (editMode === editModes.EDITING) {
-                var desc = document.getElementById('editDesc').value;
-                var start = document.getElementById('sMonth').value + " " + document.getElementById('sDay').value + " " + 
-                            document.getElementById('sYear').value + " " + document.getElementById('sHour').value + " " + 
-                            document.getElementById('sMin').value + " " + document.getElementById('sAM').value;
-                var end = document.getElementById('eMonth').value + " " + document.getElementById('eDay').value + " " + 
-                          document.getElementById('eYear').value + " " + document.getElementById('eHour').value + " " + 
-                          document.getElementById('eMin').value + " " + document.getElementById('eAM').value;
-                var eventDescription = document.getElementById('editEventDscription').value;
+                var desc = $('#editDesc').val();
+                var start = $('#sMonth').val() + " " + $('#sDay').val() + " " +
+                            $('#sYear').val() + " " + $('#sHour').val() + " " +
+                            $('#sMinute').val() + " " + $('#sAM').val();
+                var end = $('#eMonth').val() + " " + $('#eDay').val() + " " +
+                          $('#eYear').val() + " " + $('#eHour').val() + " " +
+                          $('#eMinute').val() + " " + $('#eAM').val();
+                var eventDescription = $('#editEventDescription').val();
                 var modEvent = {
                     _id: currEvent._id,
                     start: $.fullCalendar.moment(start, "M D YYYY h m A").toISOString(),
@@ -203,8 +207,8 @@ Template.calendar.events({
                 };
                 Meteor.call('updateEvent', modEvent, function (err, success) {
                     if (err) {
-                        console.log('failed to edit event');
-                        console.log(err);
+                        console.err('failed to edit event');
+                        console.err(err);
                     } else {
                         console.log('event editted');
                         refetch();
@@ -212,9 +216,9 @@ Template.calendar.events({
                     editMode = editModes.NOT_EDITING;
                     editModeDep.changed();
                     revert();
-                    document.getElementById('eventInfo').checked = false;
+                    $('#eventInfo').checked = false;
                 });
-            } else if (deleteMode === 1) {
+            } else if (deleteMode === deleteModes.DELETING) {
                 Meteor.call('deleteEvent', currEvent._id, function (err, success) {
                     if (err) {
                         console.log('Failed to delete event');
@@ -222,11 +226,12 @@ Template.calendar.events({
                     } else {
                         console.log('Event deleted');
                         refetch();
-                        document.getElementById('eventInfo').checked = false;
+                        $('#eventInfo').checked = false;
                     }
                     revert();
                 })
-                deleteMode = 0;
+                deleteMode = deleteModes.NOT_DELETING;
+                deleteModeDep.changed();
             }
         }
     }, 
@@ -234,7 +239,8 @@ Template.calendar.events({
     "click #cancel, click #closebox, click #close": function(e) {
         if (isAdmin()) {
             revert();
-            deleteMode = 0;
+            deleteMode = deleteModes.NOT_DELETING;
+            deleteModeDep.changed();
             editMode = editModes.NOT_EDITING;
             editModeDep.changed();
             currEvent = null;
@@ -278,6 +284,15 @@ Template.calendar.helpers({
         endDate: currEvent.end.format('MMMM Do, YYYY'),
         endTime: currEvent.end.format('hh:mm A'),
         description: currEvent.info
+      }
+    },
+    deleting: function() {
+      deleteModeDep.depend();
+      switch(deleteMode) {
+        case deleteModes.DELETING:
+          return true;
+        default:
+          return false;
       }
     },
     editing: function() {

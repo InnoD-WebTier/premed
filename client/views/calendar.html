@@ -24,7 +24,6 @@
         {{#if currEvent}}
         <div class="modal-dialog">
           <div class="modal-header">
-            <h2 id="deleteMessage" style="display:none;"></h2>
             {{#if editing}}
               <h2 id="info">Title: <input type='text' id='editDesc' value={{currEvent.title}} /></h2>
             {{else}}
@@ -93,6 +92,9 @@
           </div>
           <div class="modal-footer">
             {{#if is_admin}}
+              {{#if deleting}}
+              <h2 id="deleteMessage">Are you sure you want to delete this event?</h2>
+              {{/if}}
               <button id="delete" for="eventInfo">Delete</button>
               <button id="edit" for="eventInfo">Edit</button>
               <button id="confirm" for="eventInfo" style="display:none;">Confirm</button>
