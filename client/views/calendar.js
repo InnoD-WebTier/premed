@@ -117,21 +117,21 @@ Template.calendar.events({
                 endDate = '';
               case addEventModes.ADD_TITLE:
                 var desc = document.getElementById('description').value;
-                var event = {
+                var newEvent = {
                     title: desc,
                     start: startDate,
                     info: '',
                     end: endDate
                 };
-                Meteor.call('insertEvent', event, function (err, success) {
+                Meteor.call('insertEvent', newEvent, function (err, success) {
                     if (err) {
                         console.log('event failed');
                         console.log(err);
                     } else {
                         console.log('event added');
-                        event._id = success;
-                        console.log(event);
-                        $("#myCalendar").fullCalendar("renderEvent", event);
+                        newEvent._id = success;
+                        console.log(newEvent);
+                        $("#myCalendar").fullCalendar("renderEvent", newEvent);
                     }
                 });
                 addEventMode = addEventModes.BASE;
@@ -218,14 +218,14 @@ Template.calendar.events({
                           document.getElementById('eYear').value + " " + document.getElementById('eHour').value + " " + 
                           document.getElementById('eMin').value + " " + document.getElementById('eAM').value;
                 var eventDescription = document.getElementById('editEventDscription').value;
-                var event = {
+                var modEvent = {
                     _id: currEvent._id,
                     start: $.fullCalendar.moment(start, "M D YYYY h m A").toISOString(),
                     end: $.fullCalendar.moment(end, "M D YYYY h m A").toISOString(),
                     info: eventDescription,
                     title: desc
                 };
-                Meteor.call('updateEvent', event, function (err, success) {
+                Meteor.call('updateEvent', modEvent, function (err, success) {
                     if (err) {
                         console.log('failed to edit event');
                         console.log(err);
