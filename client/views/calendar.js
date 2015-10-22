@@ -52,20 +52,6 @@ function refetch() {
     $("#myCalendar").fullCalendar('addEventSource', eventList);
 }
 
-function confirmButtons() {
-    document.getElementById('delete').style.display = "none";
-    document.getElementById('edit').style.display = "none";
-    document.getElementById('confirm').style.display = "inline";
-    document.getElementById('cancel').style.display = "inline";
-}
-
-function revert() {
-    document.getElementById('delete').style.display = "inline";
-    document.getElementById('edit').style.display = "inline";
-    document.getElementById('confirm').style.display = "none";
-    document.getElementById('cancel').style.display = "none";
-}
-
 function isAdmin() {
     return Meteor.user() && Meteor.users.findOne( { _id: Meteor.userId() }).admin;
 }
@@ -173,7 +159,6 @@ Template.calendar.events({
             if (editMode === editModes.NOT_EDITING) {
                 editMode = editModes.EDITING;
                 editModeDep.changed();
-                confirmButtons();
             }
         }
     },
@@ -184,7 +169,6 @@ Template.calendar.events({
             if (deleteMode === deleteModes.NOT_DELETING) {
                 deleteMode = deleteModes.DELETING;
                 deleteModeDep.changed();
-                confirmButtons();
             }
         }
     },
@@ -218,8 +202,7 @@ Template.calendar.events({
 
                         editMode = editModes.NOT_EDITING;
                         editModeDep.changed();
-                        revert();
-                        $('#eventInfo').checked = false;
+                        document.getElementById('eventInfo').checked = false;
                     }
                 });
             } else if (deleteMode === deleteModes.DELETING) {
@@ -231,9 +214,8 @@ Template.calendar.events({
                     } else {
                         console.log('Event deleted');
                         refetch();
-                        $('#eventInfo').checked = false;
+                        document.getElementById('eventInfo').checked = false;
 
-                        revert();
                         deleteMode = deleteModes.NOT_DELETING;
                         deleteModeDep.changed();
                     }
@@ -244,7 +226,6 @@ Template.calendar.events({
 
     "click #cancel, click #closebox, click #close": function(e) {
         if (isAdmin()) {
-            revert();
             deleteMode = deleteModes.NOT_DELETING;
             deleteModeDep.changed();
             editMode = editModes.NOT_EDITING;
@@ -277,6 +258,13 @@ Template.calendar.helpers({
             console.err('inconsistent addEventMode state');
             return 'Add Event?'
         }
+    },
+    confirmationButtons: function() {
+      deleteModeDep.depend();
+      editModeDep.depend();
+      var deleting = deleteMode === deleteModes.DELETING;
+      var editing = editMode === editModes.EDITING;
+      return deleting || editing;
     },
     currEvent: function() {
       currEventDep.depend();

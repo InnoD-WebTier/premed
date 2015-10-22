@@ -95,10 +95,13 @@
               {{#if deleting}}
               <h2 id="deleteMessage">Are you sure you want to delete this event?</h2>
               {{/if}}
+              {{#unless confirmationButtons}}
               <button id="delete" for="eventInfo">Delete</button>
               <button id="edit" for="eventInfo">Edit</button>
-              <button id="confirm" for="eventInfo" style="display:none;">Confirm</button>
-              <button id="cancel" for="eventInfo" style="display:none;">Cancel</button>
+              {{else}}
+              <button id="confirm" for="eventInfo">Confirm</button>
+              <button id="cancel" for="eventInfo">Cancel</button>
+              {{/unless}}
             {{else}}
               <button id="close" for="eventInfo">Close</button>
             {{/if}}
