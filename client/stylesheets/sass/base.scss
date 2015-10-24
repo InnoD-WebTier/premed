@@ -15,6 +15,14 @@ html {
 .page-container {
     padding: 0 17%;
     font-family: 'DinPro', sans-serif;
+    a {
+        text-decoration: none;
+        color: $light-blue;
+        transition: 200ms;
+        &:hover {
+            color: $gold;
+        }
+    }
 }
 
 .title {
