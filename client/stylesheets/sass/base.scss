@@ -62,6 +62,9 @@ html {
         @extend .col--m-1-of-1;
         text-align: left;
         font-family: 'DinPro', sans-serif;
+        .section-list {
+            list-style-type: none;
+        }
     }
 }
 

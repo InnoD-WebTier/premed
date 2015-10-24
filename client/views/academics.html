@@ -9,10 +9,20 @@
                 Majors
             </div>
             <div class="section-content">
-                <p>UC Berkeley does not offer a Pre-med major.</p>
-                <p>You can major in ANYTHING and still be eligible to apply for medical school.</p>
-                <p>IN ADDITION OR IN CONJUNCTION take the pre-requisite courses.</p>
-                <p>Even if you are not within these majors, you still haves access to their advisors who may offer relevant insight about many of the pre-med pre-requisite courses.</p>
+                <ul class="section-list">
+                    {{ #each majors }}
+                    <li>
+                        {{ major }}
+                        (<a href="{{ requirements }}">Major Requirements</a> | <a href="{{ info }}">Dept Info</a>)
+                    </li>
+                    {{ /each }}
+                    <li>
+                        Psychology
+                        (Major Requirements
+                        [<a href="http://psychology.berkeley.edu/students/undergraduate-program/lower-division-requirements-fall-2014-freshmenfall-2015-transfers">Lower Div</a> and
+                        <a href="http://psychology.berkeley.edu/students/undergraduate-program/upper-division-requirements-applicable-fall-2013-admits">Upper Div</a>] | <a href="http://psychology.berkeley.edu/">Dept Info</a>)
+                    </li>
+                </ul>
             </div>
         </div>
         <div class="section-container">
