@@ -1,21 +1,19 @@
-.visible {
-    display: block;
-}
-
-.contact-us {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-
-.section-item {
-    margin-bottom: 20px;
-    .section-item-title {
-        color: $gold;
-        cursor: pointer;
+.clubs-page {
+    .visible {
+        display: block;
     }
-      .section-item-body {
-        display: none;
+    .contact-us {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+    .section-item {
+        margin-bottom: 20px;
+        .section-item-title {
+            color: $gold;
+            cursor: pointer;
+        }
+          .section-item-body {
+            display: none;
+        }
     }
 }
-
