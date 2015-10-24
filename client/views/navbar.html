@@ -23,9 +23,9 @@
 	        	<a class="main-link" href="/advising">advising</a>
 	        	<input type="checkbox" id="drop-2">
 	        	<ul>
-	        		<li><a href="/advising#career">cal career</a></li>
-	        		<li><a href="/advising#department">department</a></li>
-	        		<li><a href="/advising#peer">peer</a></li>
+	        		<li><a class="anchorLink" href="{{ pathFor 'advising' hash='career' }}">cal career</a></li>
+	        		<li><a class="anchorLink" href="{{ pathFor 'advising' hash='department'}}">department</a></li>
+	        		<li><a class="anchorLink" href="{{ pathFor 'advising' hash='peer'}}">peer</a></li>
 	        	</ul>
 	        </li>
 	        <li class="main {{ isActivePath '/orgs' }}">

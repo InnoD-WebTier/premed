@@ -35,14 +35,6 @@ html {
     margin: 0 auto 40px;
 }
 
-// Allows centering of toast cols that are not in their own row
-.row--centered {
-    text-align: center;
-    .col {
-        text-align: left;
-    }
-}
-
 // Page Grid Layout
 .section-container {
     @extend .row;
@@ -62,6 +54,14 @@ html {
         @extend .col--m-1-of-1;
         text-align: left;
         font-family: 'DinPro', sans-serif;
+    }
+}
+
+// Allows centering of toast cols that are not in their own row
+.row--centered {
+    text-align: center;
+    .col {
+        text-align: left;
     }
 }
 
