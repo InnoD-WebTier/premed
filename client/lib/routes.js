@@ -96,7 +96,7 @@ Router.onAfterAction(function() {
             if (typeof $("#" + self.params.hash).offset() !== "undefined") {
             	var elem = $("#" + self.params.hash);
             	var elemHeight = elem.height();
-                $(document).scrollTop(elem.offset().top - elemHeight - 20);
+                $(document).scrollTop(elem.offset().top - elemHeight - 60);
             }
         });
     }

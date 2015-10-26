@@ -1,4 +1,8 @@
 // Base Styles
+html {
+    font-size: 13px;
+}
+
 *, *:before, *:after {
     @include box-sizing(border-box);
 }
@@ -6,26 +10,29 @@
 .content {
     position: relative;
     padding-top: $navbar-height;
-    font-family: 'DinPro', sans-serif;
-    font-size: 18px;
 }
 
 .page-container {
     padding: 0 17%;
+    font-family: 'DinPro', sans-serif;
+    a {
+        text-decoration: none;
+        color: $light-blue;
+        transition: 200ms;
+        &:hover {
+            color: $gold;
+        }
+    }
 }
 
-// Use with h2 tag
 .title {
+    @extend .row;
     font-family: 'DINProBold';
     color: $light-blue;
-    font-size: 52px;
-}
-
-// Use with h3 tag
-.subtitle {
-    font-family: 'DINProMedium', sans-serif;
-    color: $light-blue;
-    font-size: 28px;
+    font-size: 4rem;
+    text-align: center;
+    margin: 20px 0;
+    line-height: 6.75rem;
 }
 
 .title-underline {
@@ -34,6 +41,31 @@
     color: $light-blue;
     width: 200px;
     margin: 0 auto 40px;
+}
+
+// Page Grid Layout
+.section-container {
+    @extend .row;
+    .section-header {
+        @extend .col;
+        @extend .col--1-of-4;
+        @extend .col--m-1-of-1;
+        text-align: right;
+        font-family: 'DINProMedium', sans-serif;
+        color: $light-blue;
+        font-size: 2.5rem;
+        line-height: 2.5rem;
+    }
+    .section-content {
+        @extend .col;
+        @extend .col--3-of-4;
+        @extend .col--m-1-of-1;
+        text-align: left;
+        font-family: 'DinPro', sans-serif;
+        .section-list {
+            list-style-type: none;
+        }
+    }
 }
 
 // Allows centering of toast cols that are not in their own row
@@ -88,20 +120,26 @@
 }
 
 // Media Queries
-@media (max-width: 720px) {
-    .content {
-        font-size: 16px;
-    }
+@media (max-width: 920px) {
     .page-container {
         padding: 0 10%;
     }
 }
 
-@media (max-width: 520px) {
-    .title {
-        font-size: 48px;
+@media (max-width: 720px) {
+    html {
+        font-size: 11px;
     }
-    .subtitle {
-        font-size: 24px;
+    .section-container {
+        .section-header {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+@media (max-width: 520px) {
+    html {
+        font-size: 10px;
     }
 }

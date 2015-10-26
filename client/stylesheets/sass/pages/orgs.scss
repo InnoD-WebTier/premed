@@ -1,65 +1,19 @@
-.visible {
-  display: block;
-}
-
-.title-row {
-  text-align: center;
-  margin: 20px 0;
-}
-
-.contact-us {
-  text-align: center;
-  margin-top: 15px;
-}
-
-.section-nav-row {
-  margin: 10px 0;
-
-  ul.section-nav {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-
-    li.section-nav-item {
-      margin: 10px;
-      padding: 1em;
-      color: $grey;
-      background-color: $light-grey;
-      display: inline-block;
-      cursor: pointer;
+.clubs-page {
+    .visible {
+        display: block;
     }
-
-  }
-}
-
-// Should be added to h4.subtitle element
-.section-title {
-  font-family: 'DINProMedium';
-  color: $light-blue;
-
-  @media screen and (min-width: $toast-breakpoint-medium) {
-    text-align: right;
-  }
-}
-
-.section-list {
-  margin-bottom: 20px;
-
-  .section-list-item {
-    margin-bottom: 20px;
-
-    @media screen and (min-width: $toast-breakpoint-medium) {
-      margin-left: 20px;
+    .contact-us {
+        text-align: center;
+        margin-bottom: 40px;
     }
-
-    .section-list-item-title {
-        color: $gold;
-        cursor: pointer;
-      }
-
-      .section-list-item-body {
-        display: none;
-      }
-  }
+    .section-item {
+        margin-bottom: 20px;
+        .section-item-title {
+            color: $gold;
+            cursor: pointer;
+        }
+          .section-item-body {
+            display: none;
+        }
+    }
 }

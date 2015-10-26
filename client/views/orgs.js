@@ -6,7 +6,7 @@ Template.orgs.events({
         console.log("org : " + org);
         // additional code to do what you want with the category
     },
-    
+
     "change #imageUploader": function(event, template) {
       var file = event.target.files[0];
       if (file) {
@@ -24,26 +24,26 @@ Template.orgs.events({
       var message = $('#message').val();
       var image = $('#image').val();
       var link = $('#link').val();
-      
+
 
       if (template.uploadedImage) {
         Images.insert(template.uploadedImage, function(err, fileObj) {
           if (!err) {
             image = genImageName(image, fileObj);
             Meteor.call('insertClubSuggestion', name, email, subject,
-                        message,link, image, insertMsg); 
+                        message,link, image, insertMsg);
             template.uploadedImage = undefined;
           }
         });
       } else {
-        Meteor.call('insertClubSuggestion', name, email, subject, 
+        Meteor.call('insertClubSuggestion', name, email, subject,
                   message, link, image, insertMsg);
     }
 	},
 
-  'click .section-list-item-title': function(event, template) {
+  'click .section-item-title': function(event, template) {
     var list_item = template.$(event.target).parent();
-    var desc_body = list_item.children('.section-list-item-body');
+    var desc_body = list_item.children('.section-item-body');
     desc_body.is(':visible') ? desc_body.slideUp() : desc_body.slideDown();
   }
 });

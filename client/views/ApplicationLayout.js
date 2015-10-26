@@ -16,7 +16,7 @@ Template.ApplicationLayout.events({
             if (elem && elem.offset() !== 'undefined') {
                 var elemHeight = elem.height();
                 $('html,body').animate({
-                    scrollTop: (elem.offset().top - elemHeight - 20) + 'px'
+                    scrollTop: (elem.offset().top - elemHeight - 60) + 'px'
                 }, {
                     duration: 250
                 });
