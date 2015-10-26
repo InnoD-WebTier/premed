@@ -70,6 +70,8 @@ Meteor.methods({
 			throw 'Invalid Start Date';
 		} else if (event.end == '') {
 			throw 'Invalid End Date';
+		} else if (event.title == '') {
+			throw 'Your event must have a name!'
 		} else {
 			var id = Events.insert({
 				title: event.title,

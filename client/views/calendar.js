@@ -49,15 +49,28 @@ Template.calendar.rendered = function(){
                 right: 'month,agendaWeek,agendaDay'
             },
             dayClick: function(date, jsEvent, view) {
-                if (addEventToggle === 1) {
+
+                var currentDate = new Date();
+                currentDate = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate();
+
+                if (addEventToggle === 1 && date.format() >= currentDate) {
                     startDate = date.format();
+                    console.log(startDate)
                     addEventToggle = 2;
                     document.getElementById('addToggle').innerHTML = 'Pick an end date (Click here to cancel)';
                 } else if (addEventToggle === 2) {
                     endDate = date.format();
-                    addEventToggle = 3;
-                    document.getElementById('addToggle').innerHTML = "Add Event";
-                    document.getElementById('description').style.visibility = "visible";
+                    if (endDate > startDate) {
+                        addEventToggle = 3;
+                        document.getElementById('addToggle').innerHTML = "Add Event";
+                        document.getElementById('description').style.visibility = "visible";
+                    } else {
+                        alert("Your event must have a name!");
+                        addEventToggle = 0;
+                        startDate = '';
+                        endDate = '';
+                        document.getElementById('addToggle').innerHTML = "Add Event";
+                    }
                 }
             },
             defaultDate: new Date(),
@@ -257,10 +270,10 @@ Template.calendar.helpers({
     }
 });
 
-function generateNumbers(start, end, type) {
+function generateNumbers(start, end, increment, type) {
     select = "";
     var num;
-    for (var i = start; i <= end; i++) {
+    for (var i = start; i <= end; i += increment) {
         num = (i < 10 ? '0' : '') + i.toString();
         select = select + "<option id=\'" + type + num + "\' value=\'" + num + "\'>" + num + "</option>";
     }
@@ -270,15 +283,15 @@ function generateNumbers(start, end, type) {
 
 var d = new Date();
 sYears = generateNumbers(d.getFullYear(), d.getFullYear() + 5, 'sYear');
-sMonths = generateNumbers(1, 12, 'sMonth');
-sDays = generateNumbers(1, 31, 'sDay');
-sHours = generateNumbers(1, 12, 'sHour');
-sMinutes = generateNumbers(0, 59, 'sMinute');
+sMonths = generateNumbers(1, 12, 1, 'sMonth');
+sDays = generateNumbers(1, 31, 1, 'sDay');
+sHours = generateNumbers(1, 12, 1, 'sHour');
+sMinutes = generateNumbers(0, 59, 15, 'sMinute');
 sAMOption = "<option id='sAM' value='AM'>AM</option><option id='sPM' value='PM'>PM</option>";
 
 eYears = generateNumbers(d.getFullYear(), d.getFullYear() + 5, 'eYear');
-eMonths = generateNumbers(1, 12, 'eMonth');
-eDays = generateNumbers(1, 31, 'eDay');
-eHours = generateNumbers(1, 12, 'eHour');
-eMinutes = generateNumbers(0, 59, 'eMinute');
+eMonths = generateNumbers(1, 12, 1, 'eMonth');
+eDays = generateNumbers(1, 31, 1, 'eDay');
+eHours = generateNumbers(1, 12, 1, 'eHour');
+eMinutes = generateNumbers(0, 59, 15, 'eMinute');
 eAMOption = "<option id='eAM' value='AM'>AM</option><option id='ePM' value='PM'>PM</option>";
