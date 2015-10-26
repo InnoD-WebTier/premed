@@ -1,24 +1,13 @@
-/*
-Need:
-    How to log in - add isAdmin later
-    Modale/stylish popup for adding event
-    Drop down/window for displaying event info
-*/
 Events = new Mongo.Collection('events');
-addEventToggle = 0;
-startDate = '';
-endDate = '';
-eventDescription = '';
-currEvent = null;
-editMode = 0;
-deleteMode = 0;
-eventList = [];
-noEndDate = 'No end specified';
-function refetch() {
-    eventList = Events.find({}).fetch();
-    $("#myCalendar").fullCalendar('removeEvents');
-    $("#myCalendar").fullCalendar('addEventSource', eventList);
-}
+var addEventToggle = 0;
+var startDate = '';
+var endDate = '';
+var eventDescription = '';
+var currEvent = null;
+var editMode = 0;
+var deleteMode = 0;
+var eventList = [];
+var noEndDate = 'No end specified';
 
 function confirmButtons() {
     document.getElementById('delete').style.display = "none";
@@ -60,7 +49,7 @@ Template.calendar.rendered = function(){
                     document.getElementById('addToggle').innerHTML = 'Pick an end date (Click here to cancel)';
                 } else if (addEventToggle === 2) {
                     endDate = date.format();
-                    if (endDate > startDate) {
+                    if (endDate >= startDate) {
                         addEventToggle = 3;
                         document.getElementById('addToggle').innerHTML = "Add Event";
                         document.getElementById('description').style.visibility = "visible";
@@ -76,7 +65,9 @@ Template.calendar.rendered = function(){
             defaultDate: new Date(),
             defaultView: 'month',
             editable: true,
-            events: eventList,
+            events: function (start, end, timezone, callback) {
+                callback(Events.find({}).fetch());
+            },
             eventRender: function (event, element) {
                 element.attr('href', 'javascript:void(0);');
                 element.click(function () {
@@ -131,7 +122,7 @@ Template.calendar.events({
                         console.log('event added');
                         event._id = success;
                         console.log(event);
-                        $("#myCalendar").fullCalendar("renderEvent", event);
+                        $("#myCalendar").fullCalendar('refetchEvents');
                     }
                 });
                 addEventToggle = 0;
@@ -174,12 +165,12 @@ Template.calendar.events({
                 document.getElementById('startDate').innerHTML = "Month: <select id='sMonth'>" + sMonths + "</select>  Day: <select id='sDay'>" + sDays + 
                                                                  "</select>  Year: <select id='sYear'>" + sYears + "</select>";
                 document.getElementById('startTime').innerHTML = "Hour: <select id='sHour'>" + sHours + "</select>  Minute: <select id='sMin'>" + sMinutes + 
-                                                                 "</select> <select id='sAM'>" + sAMOption + "</select>";
+                                                                 "</select> <select id='sMeridian'>" + sAMOption + "</select>";
                 document.getElementById('eventDescription').innerHTML = "<textarea id='editEventDscription' rows='4' cols='58' style='resize:vertical;' value='" + info + "'></textarea>";
                 document.getElementById('endDate').innerHTML = "Month: <select id='eMonth'>" + eMonths + "</select>  Day: <select id='eDay'>" + eDays + 
                                                                  "</select>  Year: <select id='eYear'>" + eYears + "</select>";
                 document.getElementById('endTime').innerHTML = "Hour: <select id='eHour'>" + eHours + "</select>  Minute: <select id='eMin'>" + eMinutes + 
-                                                                 "</select> <select id='eAM'>" + eAMOption + "</select>";
+                                                                 "</select> <select id='eMeridian'>" + eAMOption + "</select>";
                 document.getElementById('info').innerHTML = "Title: <input type='text' id='editDesc' value=\"" + desc + "\"/>";
                 for (var i = 0; i < sids.length; i++) {
                     document.getElementById(sids[i]).selected = "selected";
@@ -210,10 +201,10 @@ Template.calendar.events({
                 var desc = document.getElementById('editDesc').value;
                 var start = document.getElementById('sMonth').value + " " + document.getElementById('sDay').value + " " + 
                             document.getElementById('sYear').value + " " + document.getElementById('sHour').value + " " + 
-                            document.getElementById('sMin').value + " " + document.getElementById('sAM').value;
+                            document.getElementById('sMin').value + " " + document.getElementById('sMeridian').value;
                 var end = document.getElementById('eMonth').value + " " + document.getElementById('eDay').value + " " + 
                           document.getElementById('eYear').value + " " + document.getElementById('eHour').value + " " + 
-                          document.getElementById('eMin').value + " " + document.getElementById('eAM').value;
+                          document.getElementById('eMin').value + " " + document.getElementById('eMeridian').value;
                 var eventDescription = document.getElementById('editEventDscription').value;
                 var event = {
                     _id: currEvent._id,
@@ -228,7 +219,7 @@ Template.calendar.events({
                         console.log(err);
                     } else {
                         console.log('event editted');
-                        refetch();
+                        $("#myCalendar").fullCalendar('refetchEvents');
                     }
                     editMode = 0;
                     revert();
@@ -241,7 +232,7 @@ Template.calendar.events({
                         console.log(err);
                     } else {
                         console.log('Event deleted');
-                        refetch();
+                        $("#myCalendar").fullCalendar('refetchEvents');
                         document.getElementById('eventInfo').checked = false;
                     }
                     revert();
@@ -264,14 +255,12 @@ Template.calendar.events({
 
 Template.calendar.helpers({
     is_admin: function() {
-        return Meteor.user() && (
-               Meteor.users.findOne( { _id: Meteor.userId() }).admin || 
-               Meteor.users.find( { admin: true } ).count() === 0);
+        return isAdmin();
     }
 });
 
 function generateNumbers(start, end, increment, type) {
-    select = "";
+    var select = "";
     var num;
     for (var i = start; i <= end; i += increment) {
         num = (i < 10 ? '0' : '') + i.toString();
@@ -282,16 +271,16 @@ function generateNumbers(start, end, increment, type) {
 
 
 var d = new Date();
-sYears = generateNumbers(d.getFullYear(), d.getFullYear() + 5, 'sYear');
-sMonths = generateNumbers(1, 12, 1, 'sMonth');
-sDays = generateNumbers(1, 31, 1, 'sDay');
-sHours = generateNumbers(1, 12, 1, 'sHour');
-sMinutes = generateNumbers(0, 59, 15, 'sMinute');
-sAMOption = "<option id='sAM' value='AM'>AM</option><option id='sPM' value='PM'>PM</option>";
+var sYears = generateNumbers(d.getFullYear(), d.getFullYear() + 5, 1, 'sYear');
+var sMonths = generateNumbers(1, 12, 1, 'sMonth');
+var sDays = generateNumbers(1, 31, 1, 'sDay');
+var sHours = generateNumbers(1, 12, 1, 'sHour');
+var sMinutes = generateNumbers(0, 59, 15, 'sMinute');
+var sAMOption = "<option id='sAM' value='AM'>AM</option><option id='sPM' value='PM'>PM</option>";
 
-eYears = generateNumbers(d.getFullYear(), d.getFullYear() + 5, 'eYear');
-eMonths = generateNumbers(1, 12, 1, 'eMonth');
-eDays = generateNumbers(1, 31, 1, 'eDay');
-eHours = generateNumbers(1, 12, 1, 'eHour');
-eMinutes = generateNumbers(0, 59, 15, 'eMinute');
-eAMOption = "<option id='eAM' value='AM'>AM</option><option id='ePM' value='PM'>PM</option>";
+var eYears = generateNumbers(d.getFullYear(), d.getFullYear() + 5, 1, 'eYear');
+var eMonths = generateNumbers(1, 12, 1, 'eMonth');
+var eDays = generateNumbers(1, 31, 1, 'eDay');
+var eHours = generateNumbers(1, 12, 1, 'eHour');
+var eMinutes = generateNumbers(0, 59, 15, 'eMinute');
+var eAMOption = "<option id='eAM' value='AM'>AM</option><option id='ePM' value='PM'>PM</option>";
