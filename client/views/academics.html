@@ -57,18 +57,18 @@
                     </ul>
                 </p>
                 <p>
-                    Upcoming Dates:
-                    <a href="http://registrar.berkeley.edu/about_telebears.html">Click to find out about Tele-bears</a>
+                    <strong>Chemistry</strong>
+                    <ul>
+                        {{ #each chemistry }}
+                        <li>
+                            {{ class1 }} (<a href="{{ info1 }}">information</a> | <a href="{{ ratings1 }}">ratings</a>) and
+                            {{ class2 }} (<a href="{{ info2 }}">information</a> | <a href="{{ ratings2 }}">ratings</a>)
+                        </li>
+                        {{ /each }}
+                    </ul>
                 </p>
                 <p>
-                    Phase I for Fall 2015:
-                    <ul>
-                        <li>Apr 6 - June 1</li>
-                    </ul>
-                    Phase II for Fall 2015:
-                    <ul>
-                        <li>July 16 - Aug 12</li>
-                    </ul>
+                    <strong>Biology</strong>
                 </p>
                 <p>
                     Here is the breakdown for Fall 2015 Telebears Appointments:
