@@ -1,3 +1,4 @@
+// Handles jumping to anchor links on the same page
 Template.ApplicationLayout.events({
     'click a.anchorLink': function(e) {
         var link = e.target;
@@ -13,10 +14,9 @@ Template.ApplicationLayout.events({
             var elem = $('#' + hash);
 
             if (elem && elem.offset() !== 'undefined') {
-                console.log("found element")
                 var elemHeight = elem.height();
                 $('html,body').animate({
-                    scrollTop: (elem.offset().top - elemHeight - 20) + 'px'
+                    scrollTop: (elem.offset().top - elemHeight - 60) + 'px'
                 }, {
                     duration: 250
                 });

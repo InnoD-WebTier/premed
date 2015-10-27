@@ -1,11 +1,13 @@
-body {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 14px;
-    font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+.calendar-buttons {
+  margin-top: 2em;
+  text-align: center;
+  #addToggle, #description {
+    background-color: $white;
+  }
 }
-
 #myCalendar {
     width: 900px;
-    margin: 0 auto;
+    margin: 2em auto;
+    padding: 1.5em;
+    background-color: $white;
 }

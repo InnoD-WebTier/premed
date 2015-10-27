@@ -1,6 +1,5 @@
 Router.route('/', function() {
 	this.render('landing');
-	this.render('calendar', {to: 'calendar'});
 }, {
 	onAfterAction: function() {
 		return setTitle('Home');
@@ -97,7 +96,7 @@ Router.onAfterAction(function() {
             if (typeof $("#" + self.params.hash).offset() !== "undefined") {
             	var elem = $("#" + self.params.hash);
             	var elemHeight = elem.height();
-                $(document).scrollTop(elem.offset().top - elemHeight);
+                $(document).scrollTop(elem.offset().top - elemHeight - 60);
             }
         });
     }

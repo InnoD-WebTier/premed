@@ -46,6 +46,7 @@ ecmascript-collections@0.1.6
 ejson@1.0.7
 facebook@1.2.2
 fastclick@1.0.7
+fortawesome:fontawesome@4.4.0
 fourseven:scss@3.2.0
 geojson-utils@1.0.4
 hot-code-push@1.0.0

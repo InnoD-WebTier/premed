@@ -1,13 +1,5 @@
 Meteor.subscribe("users");
 
-Template.orgs.onCreated(function(){
-	Meteor.call('getClubs', function(err, itemList){
-		Session.set("clubs", itemList);
-	});
-
-  // template.$('.club-link-exp-body').hide();
-});
-
 Template.orgs.events({
     "change #category-select": function (event, template) {
         var org = $(event.currentTarget).val();
@@ -15,67 +7,44 @@ Template.orgs.events({
         // additional code to do what you want with the category
     },
 
-    // There has to be an easier way to do this
+    "change #imageUploader": function(event, template) {
+      var file = event.target.files[0];
+      if (file) {
+        template.uploadedImage = file;
+        template.$("#image").val(file.name).prop("disabled", true);
+      }
+    },
 
-   	"click #renderForm": function(event, template) {
-   		template.$(".test").toggle();
-   	},
+   	"submit #suggestion-form": function(event, template) {
+      event.preventDefault();
 
-   	"click #first": function(event, template) {
-   		template.$(".contents1").toggle();
-   	},
-
-   	"click #second": function(event, template) {
-   		template.$(".contents2").toggle();
-   	},
-
-   	"click #third": function(event, template) {
-   		template.$(".contents3").toggle();
-   	},
-
-   	"click #fourth": function(event, template) {
-   		template.$(".contents4").toggle();
-   	},
-
-   	"click #fifth": function(event, template) {
-   		template.$(".contents5").toggle();
-   	},
-
-   	"click #sixth": function(event, template) {
-   		template.$(".contents6").toggle();
-   	},
-
-   	"click #seventh": function(event, template) {
-   		template.$(".contents7").toggle();
-   	},
-
-   	"click #eighth": function(event, template) {
-   		template.$(".contents8").toggle();
-   	},
-
-   	'submit #suggestion-form': function(event) {
-		event.preventDefault();
-
-		var name = $('#name').val();
-		var email = $('#email').val();
-		var subject = $('#subject').val();
-		var message = $('#message').val();
-		var image = $('#image').val();
-		var link = $('#link').val();
+      var name = $('#name').val();
+      var email = $('#email').val();
+      var subject = $('#subject').val();
+      var message = $('#message').val();
+      var image = $('#image').val();
+      var link = $('#link').val();
 
 
-		Meteor.call('insertClubSuggestion', name, email, subject, message, link, image, function(err, success) {
-			if (success) {
-				alert("You've added content! ;)");
-			} else {
-				alert("Failed to add content ):");
-			}
-		});
+      if (template.uploadedImage) {
+        Images.insert(template.uploadedImage, function(err, fileObj) {
+          if (!err) {
+            image = genImageName(image, fileObj);
+            Meteor.call('insertClubSuggestion', name, email, subject,
+                        message,link, image, insertMsg);
+            template.uploadedImage = undefined;
+          }
+        });
+      } else {
+        Meteor.call('insertClubSuggestion', name, email, subject,
+                  message, link, image, insertMsg);
+    }
 	},
 
-  'click .club-link-list-item-title': function(event, template) {
-    template.$('.club-link-list-item-body').toggleClass('visible');
-    template.$('.club-link-list-item-body').toggleClass('hidden');
+  'click .section-item-title': function(event, template) {
+    var list_item = template.$(event.target).parent();
+    var desc_body = list_item.children('.section-item-body');
+    desc_body.is(':visible') ? desc_body.slideUp() : desc_body.slideDown();
   }
 });
 
@@ -90,7 +59,80 @@ Template.orgs.helpers({
 	},
 
 	clubs: function() {
-		return Session.get("clubs");
+    return [
+      {
+        category: 'DeCals',
+        clubs: [
+          {
+            name: 'AAPI Community Health Issues DeCal',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa.',
+            website: 'lol.com'
+          },
+          {
+            name: 'Critical Understanding of Global Health DeCal',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impe    dit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa.',
+            website: 'lol.com'
+          }
+        ]
+      },
+      {
+        category: 'Global Abroad Organizations',
+        clubs: [
+          {
+            name: 'Berkeley Alliance for Global Health',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa.',
+            website: 'lol.com'
+          },
+          {
+            name: 'Engineering World Health',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa.',
+            website: 'lol.com'
+          },
+          {
+            name: 'Foundation for International Medical Relief for Children',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa.',
+            website: 'lol.com'
+          }
+        ]
+      },
+      {
+        category: 'Health Related Clubs',
+        clubs: [
+          {
+            name: 'Active Minds',
+            description: ''
+          },
+          {
+            name: 'American Medical Student Association (AMSA) Premedical Chapter',
+            description: ''
+          },
+          {
+            name: "American Medical Woman's Association (AMWA)",
+            description: ''
+          }
+        ]
+      },
+      {
+        category: 'Pre-Health Fraternities & Sororities',
+        clubs: [
+          {
+            name: 'PhiDE',
+            description: '',
+            website: ''
+          },
+          {
+            name: 'Phi Chi',
+            description: '',
+          },
+          {
+            name: 'KGD',
+          },
+          {
+            name: 'Sigma Mu Delta',
+          }
+        ]
+      }
+    ]
 	},
 
 	clubCheck: function(string1, string2) {
