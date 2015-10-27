@@ -14,13 +14,15 @@ function createEvent(start, end, title, info, id) {
 }
 
 function revert() {
+    addEventMode = addEventModes.BASE;
+    addEventModeDep.changed();
     currEvent = null;
     currEventDep.changed();
-    addEventMode = addEventModes.BASE;
     editMode = editModes.NOT_EDITING;
+    editModeDep.changed();
+    errorMessage = errorMessages.NONE;
+    errorMessageDep.changed();
     deleteMode = deleteModes.NOT_DELETING;
-    addEventModeDep.changed();
-    currEventDep.changed();
     deleteModeDep.changed();    
 }
 
@@ -41,6 +43,13 @@ var deleteModes = {
   NOT_DELETING: 'not deleting'
 }
 
+var errorMessages = {
+    NONE: '',
+    START_BEFORE_NOW: "You cannot create an event before today!",
+    END_BEFORE_START: "Your event cannot end before it begins!",
+    NO_TITLE: "Your event must have a title!"
+}
+
 var addEventMode = addEventModes.BASE;
 var addEventModeDep = new Tracker.Dependency;
 
@@ -51,6 +60,8 @@ var currEvent = null;
 var currEventDep = new Tracker.Dependency;
 var editMode = editModes.NOT_EDITING;
 var editModeDep = new Tracker.Dependency;
+var errorMessage = errorMessages.NONE;
+var errorMessageDep = new Tracker.Dependency;
 var deleteMode = deleteModes.NOT_DELETING;
 var deleteModeDep = new Tracker.Dependency;
 var eventList = [];
@@ -93,16 +104,21 @@ Template.calendar.rendered = function(){
                 switch(addEventMode) {
                   case addEventModes.ADD_START:
                     if (date.format() >= currentDate) {
+                        errorMessage = errorMessages.NONE;
+                        errorMessageDep.changed();
                         startDate = date.format();
                         addEventMode = addEventModes.ADD_END;
                         addEventModeDep.changed();
                     } else {
-                        alert("Your event cannot start before today!");
+                        errorMessage = errorMessages.START_BEFORE_NOW;
+                        errorMessageDep.changed();
                     }
                     break;
                   case addEventModes.ADD_END:
                     endDate = date.format();
                     if (endDate >= startDate) {
+                        errorMessage = errorMessages.NONE;
+                        errorMessageDep.changed();
                         currEvent = createEvent($.fullCalendar.moment(startDate), $.fullCalendar.moment(endDate));
                         currEventDep.changed();
                         addEventMode = addEventModes.ADD_TITLE;
@@ -110,7 +126,8 @@ Template.calendar.rendered = function(){
                         editMode = editModes.EDITING;
                         editModeDep.changed();
                     } else {
-                        alert("Your event cannot end before it starts!");
+                        errorMessage = errorMessages.END_BEFORE_START;
+                        errorMessageDep.changed();
                         endDate = '';
                     }
                     break;
@@ -174,7 +191,7 @@ Template.calendar.events({
     "click #confirm": function(e) {
         if (isAdmin()) {
             if (editMode === editModes.EDITING) {
-                var desc = $('#editDesc').val();
+                var title = $('#editDesc').val();
                 var start = $('#sMonth').val() + " " + $('#sDay').val() + " " +
                             $('#sYear').val() + " " + $('#sHour').val() + " " +
                             $('#sMinute').val() + " " + $('#sAM').val();
@@ -182,29 +199,39 @@ Template.calendar.events({
                           $('#eYear').val() + " " + $('#eHour').val() + " " +
                           $('#eMinute').val() + " " + $('#eAM').val();
                 var eventDescription = $('#editEventDescription').val();
-                var modEvent = {
-                    _id: currEvent._id,
-                    start: $.fullCalendar.moment(start, "M D YYYY h m A").toISOString(),
-                    end: $.fullCalendar.moment(end, "M D YYYY h m A").toISOString(),
-                    info: eventDescription,
-                    title: desc
-                };
-                Meteor.call('updateEvent', modEvent, function (err, success) {
-                    if (err) {
-                        console.error('failed to edit event');
-                        console.error(err);
-                        alert('Failed to edit event');
-                    } else {
-                        console.log('event editted');
-                        $("#myCalendar").fullCalendar('refetchEvents');
-                        revert();
-                    }
-                });
+                start = $.fullCalendar.moment(start, "M D YYYY h m A");
+                end = $.fullCalendar.moment(end, "M D YYYY h m A");
+                if (end < start) {
+                    errorMessage = errorMessages.END_BEFORE_START;
+                    errorMessageDep.changed();
+                } else if (title === '') {
+                    errorMessage = errorMessages.NO_TITLE;
+                    errorMessageDep.changed();
+                } else {
+                    var modEvent = {
+                        _id: currEvent._id,
+                        start: start.toISOString(),
+                        end: end.toISOString(),
+                        info: eventDescription,
+                        title: title
+                    };
+                    Meteor.call('updateEvent', modEvent, function (err, success) {
+                        if (err) {
+                            console.error('failed to edit event');
+                            console.error(err);
+                            alert('Failed to edit event');
+                        } else {
+                            console.log('event editted');
+                            $("#myCalendar").fullCalendar('refetchEvents');
+                            revert();
+                        }
+                    });
+                }
             } else if (deleteMode === deleteModes.DELETING) {
                 Meteor.call('deleteEvent', currEvent._id, function (err, success) {
                     if (err) {
-                        console.log('Failed to delete event');
-                        console.log(err);
+                        console.error('Failed to delete event');
+                        console.error(err);
                         alert('Failed to delete event')
                     } else {
                         console.log('Event deleted');
@@ -270,6 +297,14 @@ Template.calendar.helpers({
     editing: function() {
       editModeDep.depend();
       return editMode === editModes.EDITING;
+    },
+    error: function() {
+        errorMessageDep.depend();
+        if (errorMessage === '') {
+            return 0;
+        } else {
+            return errorMessage;
+        }
     },
     showModal: function() {
       currEventDep.depend();
