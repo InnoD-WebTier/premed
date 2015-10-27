@@ -9,6 +9,19 @@ var deleteMode = 0;
 var eventList = [];
 var noEndDate = 'No end specified';
 
+function createEvent(start, end, title, info, id) {
+    title = typeof title !== 'undefined' ? title : '';
+    info = typeof info !== 'undefined' ? info : '';
+    id = typeof id !== 'undefined' ? id : '';
+    return {
+        start: start,
+        end: end,
+        title: title,
+        info: info,
+        _id: id
+    }
+}
+
 function confirmButtons() {
     document.getElementById('delete').style.display = "none";
     document.getElementById('edit').style.display = "none";
@@ -17,6 +30,11 @@ function confirmButtons() {
 }
 
 function revert() {
+    addEventToggle = 0;
+    document.getElementById('addToggle').innerHTML = 'Add Event';
+    document.getElementById('description').style.visibility = "hidden";
+    startDate = '';
+    endDate = '';
     document.getElementById('delete').style.display = "inline";
     document.getElementById('edit').style.display = "inline";
     document.getElementById('confirm').style.display = "none";
@@ -26,6 +44,53 @@ function revert() {
 
 function isAdmin() {
     return Meteor.user() && Meteor.users.findOne( { _id: Meteor.userId() }).admin;
+}
+
+function editWindow(event) {
+    if (editMode === 0) {
+        editMode = 1;
+        var desc = event.title;
+        var info = event.info;
+        var sDay = event.start.format('DD');
+        var sMonth = event.start.format('MM');
+        var sYear = event.start.format('YYYY');
+        var sHour = event.start.format('hh');
+        var sMinute = event.start.format('mm');
+        var sAM = event.start.format('A');
+        var sids = ['sMonth'+sMonth, 'sDay'+sDay, 'sYear'+sYear, 'sHour'+sHour, 'sMinute'+sMinute, 's'+sAM];
+        var eDay = sDay;
+        var eMonth = sMonth;
+        var eYear = sYear;
+        var eHour = sHour;
+        var eMinute = sMinute;
+        var eAM = sAM;
+        if (event.end != null) {
+            eDay = event.end.format('DD');
+            eMonth = event.end.format('MM');
+            eYear = event.end.format('YYYY');
+            eHour = event.end.format('hh');
+            eMinute = event.end.format('mm');
+            eAM = event.end.format('A');
+        }
+        var eids = ['eMonth'+eMonth, 'eDay'+eDay, 'eYear'+eYear, 'eHour'+eHour, 'eMinute'+eMinute, 'e'+eAM];
+        document.getElementById('startDate').innerHTML = "Month: <select id='sMonth'>" + sMonths + "</select>  Day: <select id='sDay'>" + sDays + 
+                                                         "</select>  Year: <select id='sYear'>" + sYears + "</select>";
+        document.getElementById('startTime').innerHTML = "Hour: <select id='sHour'>" + sHours + "</select>  Minute: <select id='sMin'>" + sMinutes + 
+                                                         "</select> <select id='sMeridian'>" + sAMOption + "</select>";
+        document.getElementById('eventDescription').innerHTML = "<textarea id='editEventDscription' rows='4' cols='58' style='resize:vertical;' value='" + info + "'>" + info + "</textarea>";
+        document.getElementById('endDate').innerHTML = "Month: <select id='eMonth'>" + eMonths + "</select>  Day: <select id='eDay'>" + eDays + 
+                                                         "</select>  Year: <select id='eYear'>" + eYears + "</select>";
+        document.getElementById('endTime').innerHTML = "Hour: <select id='eHour'>" + eHours + "</select>  Minute: <select id='eMin'>" + eMinutes + 
+                                                         "</select> <select id='eMeridian'>" + eAMOption + "</select>";
+        document.getElementById('info').innerHTML = "Title: <input type='text' id='editDesc' value=\"" + desc + "\"/>";
+        for (var i = 0; i < sids.length; i++) {
+            document.getElementById(sids[i]).selected = "selected";
+        }
+        for (var i = 0; i < eids.length; i++) {
+            document.getElementById(eids[i]).selected = "selected";
+        }
+        confirmButtons();
+    }
 }
 
 Template.calendar.rendered = function(){
@@ -51,14 +116,13 @@ Template.calendar.rendered = function(){
                     endDate = date.format();
                     if (endDate >= startDate) {
                         addEventToggle = 3;
-                        document.getElementById('addToggle').innerHTML = "Add Event";
-                        document.getElementById('description').style.visibility = "visible";
+                        currEvent = createEvent($.fullCalendar.moment(startDate), $.fullCalendar.moment(endDate));
+                        editWindow(currEvent);
+                        document.getElementById('eventInfo').checked = true;
+                        document.getElementById('addToggle').innerHTML = 'Add details to your event!';
                     } else {
-                        alert("Your event must have a name!");
-                        addEventToggle = 0;
-                        startDate = '';
+                        alert("Your event cannot end before it starts!");
                         endDate = '';
-                        document.getElementById('addToggle').innerHTML = "Add Event";
                     }
                 }
             },
@@ -79,11 +143,10 @@ Template.calendar.rendered = function(){
                         var endTime = event.end.format("h:mm a");
                     }
                     currEvent = event;
-                    var eventInfo = event.info;
                     document.getElementById('info').innerHTML = event.title;
                     document.getElementById('startDate').innerHTML = event.start.format("MMMM Do, YYYY");
                     document.getElementById('startTime').innerHTML = event.start.format("h:mm a");
-                    document.getElementById('eventDescription').innerHTML = eventInfo;
+                    document.getElementById('eventDescription').innerHTML = event.info;
                     document.getElementById('endDate').innerHTML = endDay;
                     document.getElementById('endTime').innerHTML = endTime;
                     document.getElementById('eventInfo').checked = true;
@@ -106,30 +169,25 @@ Template.calendar.events({
                 startDate = '';
                 endDate = '';
                 document.getElementById('addToggle').innerHTML = 'Add Event';
-            } else if (addEventToggle === 3) {
-                var desc = document.getElementById('description').value;
-                var event = {
-                    title: desc,
-                    start: startDate,
-                    info: '',
-                    end: endDate
-                };
-                Meteor.call('insertEvent', event, function (err, success) {
-                    if (err) {
-                        console.log('event failed');
-                        console.log(err);
-                    } else {
-                        console.log('event added');
-                        event._id = success;
-                        console.log(event);
-                        $("#myCalendar").fullCalendar('refetchEvents');
-                    }
-                });
-                addEventToggle = 0;
-                document.getElementById('addToggle').innerHTML = 'Add Event';
-                document.getElementById('description').style.visibility = "hidden";
-                startDate = '';
-                endDate = '';
+            // } else if (addEventToggle === 3) {
+            //     var desc = document.getElementById('description').value;
+            //     var event = {
+            //         title: desc,
+            //         start: startDate,
+            //         info: '',
+            //         end: endDate
+            //     };
+            //     Meteor.call('insertEvent', event, function (err, success) {
+            //         if (err) {
+            //             console.log('event failed');
+            //             console.log(err);
+            //         } else {
+            //             console.log('event added');
+            //             event._id = success;
+            //             console.log(event);
+            //             $("#myCalendar").fullCalendar('refetchEvents');
+            //         }
+            //     });
             }
         }
     },
@@ -137,49 +195,7 @@ Template.calendar.events({
     "click #edit": function(e) {
         e.preventDefault();
         if (isAdmin()) {
-            if (editMode === 0) {
-                editMode = 1;
-                var desc = currEvent.title;
-                var sDay = currEvent.start.format('DD');
-                var sMonth = currEvent.start.format('MM');
-                var sYear = currEvent.start.format('YYYY');
-                var sHour = currEvent.start.format('hh');
-                var sMinute = currEvent.start.format('mm');
-                var sAM = currEvent.start.format('A');
-                var sids = ['sMonth'+sMonth, 'sDay'+sDay, 'sYear'+sYear, 'sHour'+sHour, 'sMinute'+sMinute, 's'+sAM];
-                var eDay = sDay;
-                var eMonth = sMonth;
-                var eYear = sYear;
-                var eHour = sHour;
-                var eMinute = sMinute;
-                var eAM = sAM;
-                if (currEvent.end != null) {
-                    eDay = currEvent.end.format('DD');
-                    eMonth = currEvent.end.format('MM');
-                    eYear = currEvent.end.format('YYYY');
-                    eHour = currEvent.end.format('hh');
-                    eMinute = currEvent.end.format('mm');
-                    eAM = currEvent.end.format('A');
-                }
-                var eids = ['eMonth'+eMonth, 'eDay'+eDay, 'eYear'+eYear, 'eHour'+eHour, 'eMinute'+eMinute, 'e'+eAM];
-                document.getElementById('startDate').innerHTML = "Month: <select id='sMonth'>" + sMonths + "</select>  Day: <select id='sDay'>" + sDays + 
-                                                                 "</select>  Year: <select id='sYear'>" + sYears + "</select>";
-                document.getElementById('startTime').innerHTML = "Hour: <select id='sHour'>" + sHours + "</select>  Minute: <select id='sMin'>" + sMinutes + 
-                                                                 "</select> <select id='sMeridian'>" + sAMOption + "</select>";
-                document.getElementById('eventDescription').innerHTML = "<textarea id='editEventDscription' rows='4' cols='58' style='resize:vertical;' value='" + info + "'></textarea>";
-                document.getElementById('endDate').innerHTML = "Month: <select id='eMonth'>" + eMonths + "</select>  Day: <select id='eDay'>" + eDays + 
-                                                                 "</select>  Year: <select id='eYear'>" + eYears + "</select>";
-                document.getElementById('endTime').innerHTML = "Hour: <select id='eHour'>" + eHours + "</select>  Minute: <select id='eMin'>" + eMinutes + 
-                                                                 "</select> <select id='eMeridian'>" + eAMOption + "</select>";
-                document.getElementById('info').innerHTML = "Title: <input type='text' id='editDesc' value=\"" + desc + "\"/>";
-                for (var i = 0; i < sids.length; i++) {
-                    document.getElementById(sids[i]).selected = "selected";
-                }
-                for (var i = 0; i < eids.length; i++) {
-                    document.getElementById(eids[i]).selected = "selected";
-                }
-                confirmButtons();
-            }
+            editWindow(currEvent);
         }
     },
 
@@ -197,7 +213,7 @@ Template.calendar.events({
 
     "click #confirm": function(e) {
         if (isAdmin()) {
-            if (editMode === 1) {
+            if (editMode === 1 || addToggle === 3) {
                 var desc = document.getElementById('editDesc').value;
                 var start = document.getElementById('sMonth').value + " " + document.getElementById('sDay').value + " " + 
                             document.getElementById('sYear').value + " " + document.getElementById('sHour').value + " " + 
