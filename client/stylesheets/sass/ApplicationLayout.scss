@@ -12,6 +12,7 @@ nav {
     font-family: 'DinPro', sans-serif;
     text-align: center;
     background-color: $white;
+    opacity: 0.98;
     z-index: 100;
     &:after {
         content: "";
@@ -53,7 +54,9 @@ nav {
                 display: none;
                 list-style-type: none;
                 position: absolute;
+                opacity: 0.98;
                 li {
+                    z-index: 2;
                     margin: 0;
                     float: none;
                     display: list-item;
