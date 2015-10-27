@@ -103,11 +103,11 @@ Meteor.methods({
 		console.log(event);
 		if (event._id === '') {
 			if (event.start == '') {
-				throw 'Invalid Start Date';
+				console.error('Invalid Start Date');
 			} else if (event.end == '') {
-				throw 'Invalid End Date';
+				console.error('Invalid End Date');
 			} else if (event.title == '') {
-				throw 'Your event must have a name!'
+				console.error('Your event must have a name!')
 			} else {
 				var id = Events.insert({
 					title: event.title,

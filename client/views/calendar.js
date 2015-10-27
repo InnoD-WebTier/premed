@@ -191,8 +191,8 @@ Template.calendar.events({
                 };
                 Meteor.call('updateEvent', modEvent, function (err, success) {
                     if (err) {
-                        console.err('failed to edit event');
-                        console.err(err);
+                        console.error('failed to edit event');
+                        console.error(err);
                         alert('Failed to edit event');
                     } else {
                         console.log('event editted');
@@ -238,7 +238,7 @@ Template.calendar.helpers({
           case addEventModes.ADD_TITLE:
             return 'Add details to your event!'
           default:
-            console.err('inconsistent addEventMode state');
+            console.error('inconsistent addEventMode state');
             return 'Add Event?'
         }
     },
