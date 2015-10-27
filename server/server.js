@@ -65,24 +65,6 @@ Meteor.methods({
 		return true;
 	},
 
-	// insertEvent: function (event) {
-	// 	if (event.start == '') {
-	// 		throw 'Invalid Start Date';
-	// 	} else if (event.end == '') {
-	// 		throw 'Invalid End Date';
-	// 	} else if (event.title == '') {
-	// 		throw 'Your event must have a name!'
-	// 	} else {
-	// 		var id = Events.insert({
-	// 			title: event.title,
-	// 			start: event.start,
-	// 			info: event.info,
-	// 			end: event.end
-	// 		});
-	// 		return id;
-	// 	}
-	// },
-	
 	getClubs: function () {
 		var itemList = Clubs.find({}).fetch();
 		console.log(itemList);

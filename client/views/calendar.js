@@ -164,30 +164,11 @@ Template.calendar.events({
             if (addEventToggle === 0) {
                 addEventToggle = 1;
                 document.getElementById('addToggle').innerHTML = 'Select a start date (Click here to Cancel)';
-            } else if (addEventToggle === 1 || addEventToggle === 2) {
+            } else {
                 addEventToggle = 0;
                 startDate = '';
                 endDate = '';
                 document.getElementById('addToggle').innerHTML = 'Add Event';
-            // } else if (addEventToggle === 3) {
-            //     var desc = document.getElementById('description').value;
-            //     var event = {
-            //         title: desc,
-            //         start: startDate,
-            //         info: '',
-            //         end: endDate
-            //     };
-            //     Meteor.call('insertEvent', event, function (err, success) {
-            //         if (err) {
-            //             console.log('event failed');
-            //             console.log(err);
-            //         } else {
-            //             console.log('event added');
-            //             event._id = success;
-            //             console.log(event);
-            //             $("#myCalendar").fullCalendar('refetchEvents');
-            //         }
-            //     });
             }
         }
     },
