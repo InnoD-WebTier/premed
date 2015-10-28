@@ -1,5 +1,4 @@
 // Landing Page Styles
-
 .background {
     background: url("/img/logo/logo.png") no-repeat center center;
     background-size: contain;
@@ -7,12 +6,13 @@
     width: 100%;
     .landing-text {
         @include vertical-align();
-        width: 50%;
+        width: 80%;
         margin: 0 auto;
         text-align: center;
+        color: $blue;
         .landing-title {
-            color: $blue;
-            font-weight: bold;
+            font-family: 'DINProMedium', sans-serif;
+            font-size: 4rem;
             #at {
                 margin: 0;
                 padding: 0;
@@ -20,7 +20,8 @@
             }
         }
         .landing-subtitle {
-            color: $blue;
+            font-family: 'DINPro', sans-serif;
+            font-size: 2rem;
         }
     }
 }
@@ -35,5 +36,26 @@
         margin: 0 auto;
         color: $white;
         text-align: center;
+    }
+}
+
+@media (max-width: 1150px) {
+    .background {
+        .landing-text {
+            width: 50%;
+        }
+    }
+}
+
+@media (max-width: 850px) {
+    .background {
+        .landing-text {
+            .landing-title {
+                font-size: 3.5rem;
+            }
+            .landing-subtitle {
+                font-size: 2rem;
+            }
+        }
     }
 }
