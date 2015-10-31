@@ -89,6 +89,8 @@ Router.configure({
 
 // Allows clicking on sublink from a different page
 Router.onAfterAction(function() {
+    $('.dropdown-selector').attr('checked', false);
+
     var self = this;
     $(window).scrollTop(0);
     if (this.params.hash) {
@@ -96,7 +98,11 @@ Router.onAfterAction(function() {
             if (typeof $("#" + self.params.hash).offset() !== "undefined") {
             	var elem = $("#" + self.params.hash);
             	var elemHeight = elem.height();
-                $(document).scrollTop(elem.offset().top - elemHeight - 60);
+                var navHeight = 60;
+                if (document.body.clientWidth <= 1044) {
+                    navHeight = 0;
+                }
+                $(document).scrollTop(elem.offset().top - elemHeight - navHeight);
             }
         });
     }
