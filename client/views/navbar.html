@@ -1,7 +1,12 @@
 <template name="navbar">
-	<nav>
-		<label for="drop" class="toggle">Menu</label>
+	<nav id="app-nav">
 		<input class="dropdown-selector" type="checkbox" id="drop">
+		<label for="drop" class="toggle toggle-menu">
+			<div class="arrow">
+				<div class="bar bar-left"></div>
+				<div class="bar bar-right"></div>
+			</div>
+		</label>
 	    <ul class="menu">
 	    	<li class="main {{ isActivePath '/' }}">
 	    		<a class="main-link" href="/">home</a>

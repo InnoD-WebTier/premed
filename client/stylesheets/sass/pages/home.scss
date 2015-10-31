@@ -1,4 +1,4 @@
-// Home Page Styles
+// Landing Page Styles
 .background {
     background: url("/img/logo/logo.png") no-repeat center center;
     background-size: contain;
@@ -6,7 +6,7 @@
     width: 100%;
     .landing-text {
         @include vertical-align();
-        width: 80%;
+        width: 100%;
         margin: 0 auto;
         text-align: center;
         color: $blue;
@@ -32,18 +32,9 @@
     margin-top: 20px;
     padding: 40px 0 40px 0;
     .calendar-title {
-        width: 50%;
         margin: 0 auto;
         color: $white;
         text-align: center;
-    }
-}
-
-@media (max-width: 1150px) {
-    .background {
-        .landing-text {
-            width: 50%;
-        }
     }
 }
 

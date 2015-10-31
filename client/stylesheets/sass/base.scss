@@ -10,7 +10,6 @@ html {
 .content {
     position: relative;
     padding-top: $navbar-height;
-    margin-bottom: 20px;
 
     @media all and (max-width: 1044px) {
         padding-top: 0;
@@ -18,7 +17,7 @@ html {
 }
 
 .page-container {
-    padding: 0 17%;
+    padding: 0 17% 60px 17%;
     font-family: 'DinPro', sans-serif;
     a {
         text-decoration: none;
@@ -130,7 +129,8 @@ html {
 // Media Queries
 @media (max-width: 920px) {
     .page-container {
-        padding: 0 10%;
+        padding-left: 10%;
+        padding-right: 10%;
     }
 }
 

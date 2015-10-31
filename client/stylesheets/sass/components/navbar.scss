@@ -101,7 +101,7 @@ nav {
     nav {
         position: relative;
         padding: 15px;
-        box-shadow: 0px 0px 10px 2px $grey;
+        box-shadow: 0px -5px 10px 2px lighten($grey, 25%);
         label.toggle {
             padding: 7px 0;
             font-size: 18px;
@@ -112,10 +112,36 @@ nav {
             width: 100%;
             text-align: center;
             cursor: pointer;
+            &.toggle-menu {
+                padding: 0;
+                margin-bottom: 0;
+                div.arrow {
+                    position: relative;
+                    margin: 0 auto;
+                    padding: 12px 0;
+                    width: 40px;
+                    div.bar {
+                        position: absolute;
+                        width: 24px;
+                        height: 4px;
+                        background-color: lighten($grey, 15%);
+                        transition: transform 200ms;
+                        &.bar-left {
+                            left: 0px;
+                            transform: rotate(30deg);
+                        }
+                        &.bar-right {
+                            left: 18px;
+                            transform: rotate(-30deg);
+                        }
+                    }
+                }
+            }
         }
         ul.menu {
             display: none;
             height: auto;
+            margin-top: 25px;
             li.main {
                 position: relative;
                 top: 0;
@@ -128,17 +154,21 @@ nav {
                 -ms-transform: none;
                 transform: none;
                 a.main-link {
-                    margin: 4px 0;
+                    margin: 5px 0;
                     transition: background 200ms;
                     border-bottom: solid 2px transparent;
+                    border-radius: 4px;
+                    background-clip: padding-box;
                 }
                 label.toggle {
                     display: block;
-                    margin: 4px 0;
+                    margin: 5px 0;
                     border-top: solid 2px transparent;
                     border-bottom: solid 2px transparent;
                     cursor: pointer;
                     transition: background 200ms;
+                    border-radius: 4px;
+                    background-clip: padding-box;
                     & + a.main-link {
                         display: none;
                     }
@@ -149,6 +179,7 @@ nav {
                     padding: 0;
                     opacity: 0.98;
                     border-radius: 4px;
+                    background-clip: padding-box;
                     li {
                         text-align: center;
                         transition: background 200ms;
@@ -170,12 +201,10 @@ nav {
                         color: $white;
                         background: $light-blue;
                         border-bottom: solid 2px transparent;
-                        border-radius: 4px;
                     }
                     label.toggle {
                         color: $white;
                         background: $light-blue;
-                        border-radius: 4px;
                     }
                 }
                 &:hover {
@@ -183,12 +212,10 @@ nav {
                         color: $white;
                         background: $light-blue;
                         border-bottom: solid 2px transparent;
-                        border-radius: 4px;
                     }
                     label.toggle {
                         color: $white;
                         background: $light-blue;
-                        border-radius: 4px;
                     }
                     ul {
                         display: none;
@@ -197,8 +224,20 @@ nav {
             }
         }
         input.dropdown-selector[id^=drop]:checked {
-            & + ul.menu {
+            & ~ ul.menu {
                 display: block;
+            }
+            & + label.toggle.toggle-menu {
+                div.arrow {
+                    div.bar {
+                        &.bar-left {
+                            transform: rotate(-30deg);
+                        }
+                        &.bar-right {
+                            transform: rotate(30deg);
+                        }
+                    }
+                }
             }
         }
     }
