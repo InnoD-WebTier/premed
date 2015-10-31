@@ -10,10 +10,6 @@ html {
 .content {
     position: relative;
     padding-top: $navbar-height;
-
-    @media all and (max-width: 1044px) {
-        padding-top: 0;
-    }
 }
 
 .page-container {
@@ -127,6 +123,12 @@ html {
 }
 
 // Media Queries
+@media all and (max-width: 1044px) {
+    .content {
+        padding-top: 0;
+    }
+}
+
 @media (max-width: 920px) {
     .page-container {
         padding-left: 10%;
