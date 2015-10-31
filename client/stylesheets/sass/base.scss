@@ -10,6 +10,7 @@ html {
 .content {
     position: relative;
     padding-top: $navbar-height;
+    margin-bottom: 20px;
 
     @media all and (max-width: 1044px) {
         padding-top: 0;
