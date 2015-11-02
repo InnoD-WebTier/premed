@@ -44,7 +44,14 @@ Template.orgs.events({
   'click .section-item-title': function(event, template) {
     var list_item = template.$(event.target).parent();
     var desc_body = list_item.children('.section-item-body');
-    desc_body.is(':visible') ? desc_body.slideUp() : desc_body.slideDown();
+    // desc_body.is(':visible') ? desc_body.slideUp() : desc_body.slideDown();
+    if (list_item.hasClass('expanded')) {
+      list_item.removeClass('expanded');
+      desc_body.slideUp();
+    } else {
+      list_item.addClass('expanded');
+      desc_body.slideDown();
+    }
   }
 });
 

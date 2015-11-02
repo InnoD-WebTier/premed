@@ -1,7 +1,4 @@
 .clubs-page {
-    .visible {
-        display: block;
-    }
     .contact-us {
         text-align: center;
         margin-bottom: 40px;
@@ -9,11 +6,21 @@
     .section-item {
         margin-bottom: 20px;
         .section-item-title {
-            color: $gold;
+            // color: $gold;
             cursor: pointer;
         }
-          .section-item-body {
+        .section-item-body {
             display: none;
+        }
+        .site-btn {
+            color: $gold;
+            border: 1px solid $gold;
+        }
+    }
+    .section-item.expanded {
+        .section-item-title {
+            color: $gold;
+            cursor: pointer;
         }
     }
 }

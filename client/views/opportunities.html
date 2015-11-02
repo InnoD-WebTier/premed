@@ -1,3 +1,35 @@
-<template name='opportunities'>
+<template name="opportunities">
+    <div class="page-container opportunities-page">
+        <div class="title">
+            Opportunities
+        </div>
+        <hr class="title-underline">
+        <div class="tagline">
+            Get clinical and research experience.
+        </div>
 
+        {{#each opportunities}}
+
+        <div class="section-container">
+            <div class="section-header">
+                {{this.category}}
+            </div>
+            <div class="section-content">
+            {{#each this.opportunities}}
+                <div class="section-item">
+                    <div class="section-item-title">
+              {{this.name}}
+                    </div>
+                    <div class="section-item-body">
+                        <p>{{this.description}}</p>
+                        <button>View Website</button>
+                    </div>
+                </div>
+            {{/each}}
+            </div>
+        </div>
+
+        {{/each}}
+
+    </div>
 </template>
