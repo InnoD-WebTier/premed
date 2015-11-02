@@ -1,10 +1,28 @@
-/*
-Need:
-    How to log in - add isAdmin later
-    Modale/stylish popup for adding event
-    Drop down/window for displaying event info
-*/
 Events = new Mongo.Collection('events');
+
+function createEvent(start, end, title, info, id) {
+    title = typeof title !== 'undefined' ? title : '';
+    info = typeof info !== 'undefined' ? info : '';
+    id = typeof id !== 'undefined' ? id : '';
+    return {
+        start: start,
+        end: end,
+        title: title,
+        info: info,
+        _id: id
+    }
+}
+
+function revert() {
+    currEvent = null;
+    currEventDep.changed();
+    addEventMode = addEventModes.BASE;
+    editMode = editModes.NOT_EDITING;
+    deleteMode = deleteModes.NOT_DELETING;
+    addEventModeDep.changed();
+    currEventDep.changed();
+    deleteModeDep.changed();    
+}
 
 var addEventModes = {
   BASE: 'initial state',
@@ -26,17 +44,17 @@ var deleteModes = {
 var addEventMode = addEventModes.BASE;
 var addEventModeDep = new Tracker.Dependency;
 
-startDate = '';
-endDate = '';
-eventDescription = '';
-currEvent = null;
+var startDate = '';
+var endDate = '';
+var eventDescription = '';
+var currEvent = null;
 var currEventDep = new Tracker.Dependency;
-editMode = editModes.NOT_EDITING;
+var editMode = editModes.NOT_EDITING;
 var editModeDep = new Tracker.Dependency;
-deleteMode = deleteModes.NOT_DELETING;
+var deleteMode = deleteModes.NOT_DELETING;
 var deleteModeDep = new Tracker.Dependency;
-eventList = [];
-noEndDate = 'No end specified';
+var eventList = [];
+var noEndDate = 'No end specified';
 
 function range(start, end) {
   var list = [];
@@ -69,18 +87,32 @@ Template.calendar.rendered = function(){
                 if(!isAdmin()) {
                   return;
                 }
+                var currentDate = new Date();
+                currentDate = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate();
+
                 switch(addEventMode) {
-                  case addEventModes.BASE:
                   case addEventModes.ADD_START:
-                    startDate = date.format();
-                    addEventMode = addEventModes.ADD_END;
-                    addEventModeDep.changed();
+                    if (date.format() >= currentDate) {
+                        startDate = date.format();
+                        addEventMode = addEventModes.ADD_END;
+                        addEventModeDep.changed();
+                    } else {
+                        alert("Your event cannot start before today!");
+                    }
                     break;
                   case addEventModes.ADD_END:
                     endDate = date.format();
-                    addEventMode = addEventModes.ADD_TITLE;
-                    addEventModeDep.changed();
-                    $('#description').show();
+                    if (endDate >= startDate) {
+                        currEvent = createEvent($.fullCalendar.moment(startDate), $.fullCalendar.moment(endDate));
+                        currEventDep.changed();
+                        addEventMode = addEventModes.ADD_TITLE;
+                        addEventModeDep.changed();
+                        editMode = editModes.EDITING;
+                        editModeDep.changed();
+                    } else {
+                        alert("Your event cannot end before it starts!");
+                        endDate = '';
+                    }
                     break;
                   default:
                     return;
@@ -89,7 +121,9 @@ Template.calendar.rendered = function(){
             defaultDate: new Date(),
             defaultView: 'month',
             editable: true,
-            events: eventList,
+            events: function (start, end, timezone, callback) {
+                callback(Events.find({}).fetch());
+            },
             eventRender: function (event, element) {
                 element.attr('href', 'javascript:void(0);');
                 element.click(function () {
@@ -114,41 +148,8 @@ Template.calendar.events({
                 addEventMode = addEventModes.ADD_START;
                 addEventModeDep.changed();
                 break;
-              case addEventModes.ADD_START:
-              case addEventModes.ADD_END:
-                addEventMode = addEventModes.BASE;
-                addEventModeDep.changed();
-                startDate = '';
-                endDate = '';
-                break;
-              case addEventModes.ADD_TITLE:
-                var desc = document.getElementById('description').value;
-                var newEvent = {
-                    title: desc,
-                    start: startDate,
-                    info: '',
-                    end: endDate
-                };
-                Meteor.call('insertEvent', newEvent, function (err, success) {
-                    if (err) {
-                        console.err('event failed');
-                        console.err(err);
-                        alert('Server error: failed to add event');
-                    } else {
-                        console.log('event added');
-                        newEvent._id = success;
-                        console.log(newEvent);
-                        $("#myCalendar").fullCalendar("renderEvent", newEvent);
-
-                        addEventMode = addEventModes.BASE;
-                        addEventModeDep.changed();
-                        $('#description').hide();
-                        startDate = '';
-                        endDate = '';
-                    }
-                });
-                break;
               default:
+                revert();
                 break;
             }
         }
@@ -190,17 +191,13 @@ Template.calendar.events({
                 };
                 Meteor.call('updateEvent', modEvent, function (err, success) {
                     if (err) {
-                        console.err('failed to edit event');
-                        console.err(err);
+                        console.error('failed to edit event');
+                        console.error(err);
                         alert('Failed to edit event');
                     } else {
                         console.log('event editted');
-                        refetch();
-
-                        editMode = editModes.NOT_EDITING;
-                        editModeDep.changed();
-                        currEvent = null;
-                        currEventDep.changed();
+                        $("#myCalendar").fullCalendar('refetchEvents');
+                        revert();
                     }
                 });
             } else if (deleteMode === deleteModes.DELETING) {
@@ -211,36 +208,24 @@ Template.calendar.events({
                         alert('Failed to delete event')
                     } else {
                         console.log('Event deleted');
-                        refetch();
-
-                        deleteMode = deleteModes.NOT_DELETING;
-                        deleteModeDep.changed();
-                        currEvent = null;
-                        currEventDep.changed();
+                        $("#myCalendar").fullCalendar('refetchEvents');
+                        revert();                    
                     }
-                })
+                });
             }
         }
     }, 
 
-    "click #cancel, click #closebox, click #close": function(e) {
-        if (isAdmin()) {
-            deleteMode = deleteModes.NOT_DELETING;
-            deleteModeDep.changed();
-            editMode = editModes.NOT_EDITING;
-            editModeDep.changed();
-        }
-        currEvent = null;
-        currEventDep.changed();
+    "click #cancel, click #closebox, click #close, click .modal-overlay": function(e) {
+        revert();
     }
 });
 
 Template.calendar.helpers({
     is_admin: function() {
-        return Meteor.user() && (
-               Meteor.users.findOne( { _id: Meteor.userId() }).admin || 
-               Meteor.users.find( { admin: true } ).count() === 0);
+        return isAdmin();
     },
+
     add_text: function() {
         addEventModeDep.depend();
         switch (addEventMode) {
@@ -251,9 +236,9 @@ Template.calendar.helpers({
           case addEventModes.ADD_END:
             return 'Pick an end date (Click here to cancel)'
           case addEventModes.ADD_TITLE:
-            return 'Set Title'
+            return 'Add details to your event!'
           default:
-            console.err('inconsistent addEventMode state');
+            console.error('inconsistent addEventMode state');
             return 'Add Event?'
         }
     },

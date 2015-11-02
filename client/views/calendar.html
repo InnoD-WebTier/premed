@@ -14,7 +14,7 @@
     <br/>
 
     <div class="modal" data-keyboard="false" data-backdrop="static">
-      <input class="modal-open" id="eventInfo" type="checkbox" checked={{showModal}}>
+      <input class="modal-open" id="eventInfo" type="checkbox" checked={{showModal}} style="display:none;">
       <div class="modal-wrap" aria-hidden="true" role="dialog">
         <label class="modal-overlay" for="eventInfo"></label>
         {{#if currEvent}}
@@ -89,7 +89,7 @@
           <div class="modal-footer">
             {{#if is_admin}}
               {{#if deleting}}
-              <h2 id="deleteMessage">Are you sure you want to delete this event?</h2>
+              <p id="deleteMessage">Are you sure you want to delete this event?</p>
               {{/if}}
               {{#unless confirmationButtons}}
               <button id="delete" for="eventInfo">Delete</button>
