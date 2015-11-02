@@ -34,7 +34,8 @@
                     Premed prerequisite courses:
                 </p>
                 <p>
-                    <strong>Math</strong>
+                    <strong>Math</strong><br/>
+                    Choose one of the 4 tracks
                     <ul>
                         {{ #each math}}
                         <li>
@@ -69,17 +70,45 @@
                 </p>
                 <p>
                     <strong>Biology</strong>
+                    <ul>
+                        {{ #each biology }}
+                        <li>
+                            {{ class1 }} (<a href="{{ info1 }}">information</a> | <a href="{{ ratings1 }}">ratings</a>) and
+                            {{ class2 }} (<a href="{{ info2 }}">information</a> | <a href="{{ ratings2 }}">ratings</a>)
+                        </li>
+                        <li>{{ class3 }} (<a href="{{ info3 }}">information</a> | <a href="{{ ratings3 }}">ratings</a>)</li>
+                        <li>
+                            {{ class4 }} (<a href="{{ info4 }}">information</a> | <a href="{{ ratings4 }}">ratings</a>) OR
+                            {{ class5 }} (<a href="{{ info5 }}">information</a> | <a href="{{ ratings5 }}">ratings</a>)<br/>
+                            <div style="text-align:center">OR</div>
+                        </li>
+                        <li>
+                            {{ class6 }} (<a href="{{ info6 }}">information</a> | <a href="{{ ratings6 }}">ratings</a>) OR
+                            {{ class7 }} (<a href="{{ info7 }}">information</a> | <a href="{{ ratings7 }}">ratings</a>)
+                        </li>
+                        {{ /each }}
+                    </ul>
                 </p>
                 <p>
-                    Here is the breakdown for Fall 2015 Telebears Appointments:
+                    <strong>Physics</strong>
                     <ul>
-                        <li>Special Action Students: Apr 6</li>
-                        <li>Graduating Seniors (110+ units): Apr 7 - 13</li>
-                        <li>Seniors (90-109 units): Apr 14 - 16</li>
-                        <li>Juniors (60-89 units): Apr 21 - 24</li>
-                        <li>Freshmen &amp; Sophomores (0-59 units): Apr 24 - 29</li>
+                        {{ #each physics }}
+                        <li>{{ class }} (<a href="{{ info }}">information</a> | <a href="{{ ratings }}">ratings</a>)</li>
+                        {{ /each }}
                     </ul>
-                    The class schedule for Fall 2015 is now live! Check it out <a href="http://schedule.berkeley.edu/srchfall.html">here</a>.
+                </p>
+                <p>
+                    <strong>Behavioral and Social Sciences (not formally required, but highly recommended for the MCAT!)</strong>
+                    <ul>
+                        {{ #each socialscience}}
+                        <li>
+                            {{ class1 }} [for majors] (<a href="{{ info1 }}">information</a> | <a href="{{ ratings1 }}">ratings</a>) OR
+                            {{ class2 }} [for non-majors] (<a href="{{ info2 }}">information</a> | <a href="{{ ratings2 }}">ratings</a>)
+                        </li>
+                        <li>{{ class3 }} (<a href="{{ info3 }}">information</a> | <a href="{{ ratings3 }}">ratings</a>)</li>
+                        <li>{{ class4 }} (<a href="{{ info4 }}">information</a> | <a href="{{ ratings4 }}">ratings</a>)</li>
+                        {{ /each }}
+                    </ul>
                 </p>
             </div>
         </div>

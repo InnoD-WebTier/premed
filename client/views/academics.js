@@ -148,5 +148,33 @@ Template.academics.helpers({
             info7: 'https://ninjacourses.com/explore/1/course/CHEM/C130/',
             ratings7: 'https://ninjacourses.com/ratings/view/course/444/'
         }
+    ],
+    physics: [
+        {
+            class: 'Physics 8A',
+            info: 'https://ninjacourses.com/explore/1/course/PHYSICS/8A/',
+            ratings: 'https://ninjacourses.com/ratings/view/course/2436/'
+        },
+        {
+            class: 'Physics 8B',
+            info: 'https://ninjacourses.com/explore/1/course/PHYSICS/8B/',
+            ratings: 'https://ninjacourses.com/ratings/view/course/2437/'
+        }
+    ],
+    socialscience: [
+        {
+          class1: 'Psych 1',
+          info1: 'https://ninjacourses.com/explore/1/course/PSYCH/1/',
+          ratings1: 'https://ninjacourses.com/ratings/view/course/2585/',
+          class2: 'Psych 2',
+          info2: 'https://ninjacourses.com/explore/1/course/PSYCH/2/',
+          ratings2: 'https://ninjacourses.com/ratings/view/course/2586/',
+          class3: 'Soc 1',
+          info3: 'https://ninjacourses.com/explore/1/course/SOCIOL/1/',
+          ratings3: 'https://ninjacourses.com/ratings/view/course/2912/',
+          class4: 'MCB C61',
+          info4: 'https://ninjacourses.com/explore/1/course/MCELLBI/C61/',
+          ratings4: 'https://ninjacourses.com/ratings/view/course/2005/'
+        }
     ]
 });
