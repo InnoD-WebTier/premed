@@ -50,5 +50,131 @@ Template.academics.helpers({
             requirements: 'http://sph.berkeley.edu/undergraduate-major/course-requirements',
             info: 'http://sph.berkeley.edu/'
         }
+    ],
+    math: [
+        {
+            class1: 'Math 1A',
+            info1: 'https://ninjacourses.com/explore/1/course/MATH/1A/',
+            ratings1: 'https://ninjacourses.com/ratings/view/course/1839/',
+            class2: 'Math 1B',
+            info2: 'https://ninjacourses.com/explore/1/course/MATH/1B/',
+            ratings2: 'https://ninjacourses.com/ratings/view/course/1840/'
+        },
+        {
+            class1: 'Math 10A',
+            info1: 'https://ninjacourses.com/explore/1/course/MATH/10A/',
+            ratings1: 'https://ninjacourses.com/ratings/view/course/27040/',
+            class2: 'Math 10B',
+            info2: 'https://ninjacourses.com/explore/1/course/MATH/10B/',
+            ratings2: 'https://ninjacourses.com/ratings/view/course/29130/'
+        },
+        {
+            class1: 'Math 16A',
+            info1: 'https://ninjacourses.com/explore/1/course/MATH/16A/',
+            ratings1: 'https://ninjacourses.com/ratings/view/course/1841/',
+            class2: 'Math 16B',
+            info2: 'https://ninjacourses.com/explore/1/course/MATH/16B/',
+            ratings2: 'https://ninjacourses.com/ratings/view/course/1842/'
+        },
+        {
+            class1: 'Math 53',
+            info1: 'https://ninjacourses.com/explore/1/course/MATH/53/',
+            ratings1: 'https://ninjacourses.com/ratings/view/course/1847/',
+            class2: 'Math 54',
+            info2: 'https://ninjacourses.com/explore/1/course/MATH/54/',
+            ratings2: 'https://ninjacourses.com/ratings/view/course/1849/'
+        }
+    ],
+    stats: [
+        {
+            class1: 'Stats 2',
+            info1: 'https://ninjacourses.com/explore/1/course/STAT/2/',
+            ratings1: 'https://ninjacourses.com/ratings/view/course/3090/',
+            class2: 'Stats 20',
+            info2: 'https://ninjacourses.com/explore/1/course/STAT/20/',
+            ratings2: 'https://ninjacourses.com/ratings/view/course/3091/',
+            class3: 'Stats 131A',
+            info3: 'https://ninjacourses.com/explore/1/course/STAT/131A/',
+            ratings3: 'https://ninjacourses.com/ratings/view/course/3093/'
+        }
+    ],
+    chemistry: [
+        {
+            class1: 'Chem 1A',
+            info1: 'https://ninjacourses.com/explore/1/course/CHEM/1A/',
+            ratings1: 'https://ninjacourses.com/ratings/view/course/425/',
+            class2: 'Chem 1AL',
+            info2: 'https://ninjacourses.com/explore/1/course/CHEM/1AL/',
+            ratings2: 'https://ninjacourses.com/ratings/view/course/7146/'
+        },
+        {
+            class1: 'Chem 3A',
+            info1: 'https://ninjacourses.com/explore/1/course/CHEM/3A/',
+            ratings1: 'https://ninjacourses.com/ratings/view/course/427/',
+            class2: 'Chem 3AL',
+            info2: 'https://ninjacourses.com/explore/1/course/CHEM/3AL/',
+            ratings2: 'https://ninjacourses.com/ratings/view/course/428/'
+        },
+        {
+            class1: 'Chem 3B',
+            info1: 'https://ninjacourses.com/explore/1/course/CHEM/3B/',
+            ratings1: 'https://ninjacourses.com/ratings/view/course/429/',
+            class2: 'Chem 3BL',
+            info2: 'https://ninjacourses.com/explore/1/course/CHEM/3BL/',
+            ratings2: 'https://ninjacourses.com/ratings/view/course/430/'
+        }
+    ],
+    biology: [
+        {
+            class1: 'Bio 1A',
+            info1: 'https://ninjacourses.com/explore/1/course/BIOLOGY/1A/',
+            ratings1: 'https://ninjacourses.com/ratings/view/course/307/',
+            class2: 'Bio 1AL',
+            info2: 'https://ninjacourses.com/explore/1/course/BIOLOGY/1AL/',
+            ratings2: 'https://ninjacourses.com/ratings/view/course/308/',
+            class3: 'Bio 1B',
+            info3: 'https://ninjacourses.com/explore/1/course/BIOLOGY/1B/',
+            ratings3: 'https://ninjacourses.com/ratings/view/course/309/',
+            class4: 'MCB 102',
+            info4: 'https://ninjacourses.com/explore/1/course/MCELLBI/102/',
+            ratings4: 'https://ninjacourses.com/ratings/view/course/2012/',
+            class5: 'Chem 135',
+            info5: 'https://ninjacourses.com/explore/1/course/CHEM/135/',
+            ratings5: 'https://ninjacourses.com/ratings/view/course/446/',
+            class6: 'MCB 100A',
+            info6: 'https://ninjacourses.com/explore/1/course/MCELLBI/C100A/',
+            ratings6: 'https://ninjacourses.com/ratings/view/course/2010/',
+            class7: 'Chem C130',
+            info7: 'https://ninjacourses.com/explore/1/course/CHEM/C130/',
+            ratings7: 'https://ninjacourses.com/ratings/view/course/444/'
+        }
+    ],
+    physics: [
+        {
+            class: 'Physics 8A',
+            info: 'https://ninjacourses.com/explore/1/course/PHYSICS/8A/',
+            ratings: 'https://ninjacourses.com/ratings/view/course/2436/'
+        },
+        {
+            class: 'Physics 8B',
+            info: 'https://ninjacourses.com/explore/1/course/PHYSICS/8B/',
+            ratings: 'https://ninjacourses.com/ratings/view/course/2437/'
+        }
+    ],
+    socialscience: [
+        {
+          class1: 'Psych 1',
+          info1: 'https://ninjacourses.com/explore/1/course/PSYCH/1/',
+          ratings1: 'https://ninjacourses.com/ratings/view/course/2585/',
+          class2: 'Psych 2',
+          info2: 'https://ninjacourses.com/explore/1/course/PSYCH/2/',
+          ratings2: 'https://ninjacourses.com/ratings/view/course/2586/',
+          class3: 'Soc 1',
+          info3: 'https://ninjacourses.com/explore/1/course/SOCIOL/1/',
+          ratings3: 'https://ninjacourses.com/ratings/view/course/2912/',
+          class4: 'MCB C61',
+          info4: 'https://ninjacourses.com/explore/1/course/MCELLBI/C61/',
+          ratings4: 'https://ninjacourses.com/ratings/view/course/2005/'
+        }
     ]
 });
