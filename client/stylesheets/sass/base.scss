@@ -43,6 +43,11 @@ html {
     margin: 0 auto 40px;
 }
 
+.title-tagline {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
 // Page Grid Layout
 .section-container {
     @extend .row;
@@ -68,6 +73,26 @@ html {
         }
         .subheader {
             font-family: 'DINProBlack', sans-serif;
+        }
+        .section-item {
+            margin-bottom: 20px;
+            .section-item-title {
+                color: $grey;
+                cursor: pointer;
+            }
+            .section-item-body {
+                display: none;
+            }
+            .site-btn {
+                color: $gold;
+                border: 1px solid $gold;
+            }
+        }
+        .section-item.expanded {
+            .section-item-title {
+                color: $gold;
+                cursor: pointer;
+            }
         }
     }
 }
