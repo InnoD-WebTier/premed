@@ -26,6 +26,14 @@ Template.opportunities.helpers({
             website: 'lol.com'
           },
         ]
+      },
+      {
+        category: 'Clinical Resources',
+        subcategories: [
+          {
+            name: 'Cal Career Center'
+          }
+        ]
       }
     ]
   },

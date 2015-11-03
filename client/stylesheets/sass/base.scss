@@ -79,6 +79,15 @@ html {
             .section-item-title {
                 color: $grey;
                 cursor: pointer;
+                .arrow {
+                    display: inline-block;
+                    color: $gold;
+                    padding-left: 5px;
+                }
+                .rotated {
+                    transform: rotate(90deg);
+                    animation: all 0.4s linear;
+                }
             }
             .section-item-body {
                 display: none;
@@ -86,6 +95,14 @@ html {
             .site-btn {
                 color: $gold;
                 border: 1px solid $gold;
+            }
+
+            .section-sub-item {
+                .section-sub-item-title {
+                    text-transform: upper;
+                    font-family: 'DINProBlack';
+                    text-decoration: underline;
+                }
             }
         }
         .section-item.expanded {
