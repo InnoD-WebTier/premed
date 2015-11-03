@@ -13,7 +13,7 @@ html {
 }
 
 .page-container {
-    padding: 0 17%;
+    padding: 0 17% 60px 17%;
     font-family: 'DinPro', sans-serif;
     a {
         text-decoration: none;
@@ -45,6 +45,7 @@ html {
 
 // Page Grid Layout
 .section-container {
+    margin-bottom: 20px;
     @extend .row;
     .section-header {
         @extend .col;
@@ -64,6 +65,9 @@ html {
         font-family: 'DinPro', sans-serif;
         .section-list {
             list-style-type: none;
+        }
+        .subheader {
+            font-family: 'DINProBlack', sans-serif;
         }
     }
 }
@@ -120,9 +124,16 @@ html {
 }
 
 // Media Queries
+@media all and (max-width: 1044px) {
+    .content {
+        padding-top: 0;
+    }
+}
+
 @media (max-width: 920px) {
     .page-container {
-        padding: 0 10%;
+        padding-left: 10%;
+        padding-right: 10%;
     }
 }
 

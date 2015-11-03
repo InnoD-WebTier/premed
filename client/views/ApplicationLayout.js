@@ -15,8 +15,12 @@ Template.ApplicationLayout.events({
 
             if (elem && elem.offset() !== 'undefined') {
                 var elemHeight = elem.height();
+                var navHeight = 60;
+                if (document.body.clientWidth <= 1044) {
+                    navHeight = 0;
+                }
                 $('html,body').animate({
-                    scrollTop: (elem.offset().top - elemHeight - 60) + 'px'
+                    scrollTop: (elem.offset().top - elemHeight - navHeight) + 'px'
                 }, {
                     duration: 250
                 });
