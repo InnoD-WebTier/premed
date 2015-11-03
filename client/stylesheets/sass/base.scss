@@ -45,8 +45,8 @@ html {
 
 // Page Grid Layout
 .section-container {
-    margin-bottom: 20px;
     @extend .row;
+    margin-bottom: 20px;
     .section-header {
         @extend .col;
         @extend .col--1-of-4;
