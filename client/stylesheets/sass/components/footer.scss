@@ -1,0 +1,23 @@
+footer {
+    height: 100px;
+    background: $blue;
+    overflow-x: hidden;
+    text-align: center;
+    font-family: 'DinPro', sans-serif;
+    .footer-container {
+        @extend .row;
+        @include vertical-align();
+        color: $white;
+        .footer-content {
+            @extend .col;
+            @extend .col--1-of-2;
+            @extend .col--m-1-of-1;
+            letter-spacing: 0.5px;
+            font-size: 1.5rem;
+            a {
+                text-decoration: none;
+                color: white;
+            }
+        }
+    }
+}

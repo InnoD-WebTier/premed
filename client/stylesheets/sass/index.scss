@@ -15,9 +15,12 @@
 @import "client/stylesheets/sass/ApplicationLayout.scss";
 
 // Components
+@import "client/stylesheets/sass/components/footer.scss";
+@import "client/stylesheets/sass/components/navbar.scss";
 
 // Pages
-@import "client/stylesheets/sass/pages/landingpage.scss";
+@import "client/stylesheets/sass/pages/home.scss";
 @import "client/stylesheets/sass/pages/orgs.scss";
 @import "client/stylesheets/sass/pages/about.scss";
 @import "client/stylesheets/sass/pages/calendar.scss";
+@import "client/stylesheets/sass/pages/advising.scss";

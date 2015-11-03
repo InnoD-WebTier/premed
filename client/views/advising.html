@@ -9,47 +9,179 @@
                 Cal Career Center
             </div>
             <div class="section-content">
-                <p>
-                    Are you thinking about being premed? LINK HERE.
-                </p>
-                <p>
-                    Make an appointment with the advisors: LINK HERE.
-                </p>
-                <p>
+               <ul class="section-list">
+                   <li>
+                    Are you thinking about premed? Click <a href="https://career.berkeley.edu/Medical/PrepPros.stm">here</a>.
+                </li>
+                <li>
+                    <a href="https://career.berkeley.edu/Info/PreHealthAppt">Make an appointment</a> with an advisor.
+                </li>
+                <li>
+                    Read the <a href="https://career.berkeley.edu/Medical/PreMedGuide">Career Center Premed Guide</a>.
+                </li>
+                <li>
+                    Take the <a href="https://docs.google.com/a/berkeley.edu/forms/d/1uxj4eJHbILsuG3FkN-szzzq54lEj3gjIMO0COvDsj2w/viewform">pre-health student self assessment</a>.
+                </li>
+                <li>Join the <a href="http://www.linkedin.com/groups/Cal-Health-Peer-Forum-5140917?gid=5140917&amp;mostPopular=&amp;trk=tyah">Cal Health Peer Forum</a> on LinkedIn.</li>
+                <li>
                     Walk-in Advising:
                     <ul>
                         <li>Tuesdays 11am-3pm, 3060 Valley Life Sciences Building (inside IB/MCB advising offices)</li>
                         <li>Thursdays 3-4:30pm, 260 Mulford Hall (inside CNR undergraduate advising office)</li>
                     </ul>
-                </p>
-                <p>
-                    Career Center Premed Guide: lINK HERE
-                </p>
-                <p>
-                    Pre-Health Student Self Assessment:
-                </p>
-                <p>
-                    Cal Health Peer Forum on LinkedIn
-                </p>
-                <p>
                     Counselors:
                     <ul>
-                        <li>Marie Dutton:</li>
-                        <li>Caitlin Green</li>
+                        <li>
+                            <a href="https://career.berkeley.edu/marie-dutton">Marie Dutton</a>
+                        </li>
+                        <li>
+                            <a href="https://career.berkeley.edu/caitlin-green">Caitlin Green</a>
+                        </li>
                     </ul>
-                </p>
+                </li>
+               </ul>
             </div>
             <div class="section-header" id="department">
                 Department
             </div>
             <div class="section-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita aut distinctio error! Repudiandae cumque iusto est nihil, consequuntur at laudantium voluptas dignissimos blanditiis facilis ipsam, laborum quod iure, deleniti laboriosam!
+                <ul class="section-list">
+                    {{ #each dept }}
+                    <li>
+                        <div class="subheader">{{ header }}</div>
+                        <div class="links">
+                            <a href="{{ general }}">MCB general advising page</a> | <a href="{{ peer }}">Peer advising page</a>
+                        </div>
+                        <div class="info">
+                            {{ title }}
+                            <br><span class="bold">contact:</span>
+                            <a href="mailto:{{ email }}">{{ email }}</a> | {{ phone }}
+                            <br><span class="bold">location:</span>
+                            {{ location }}
+                        </div>
+                        <div class="description">
+                            {{ description }}
+                        </div>
+                    </li>
+                    {{ /each }}
+                    <li>
+                        <div class="subheader">Public Health</div>
+                        <div class="links">
+                            <a href="http://sph.berkeley.edu/undergraduate-major/advising">PH general and peer advising page</a>
+                        </div>
+                        <div class="info">
+                            <span class="bold">advisor: </span>Anatole (Tony) Soyka MA
+                            <br><span class="bold">contact: </span>
+                            <a href="mailto:sphug@berkeley.edu">sphug@berkeley.edu</a> | (510) 643-0874
+                            <br><span class="bold">location: </span>425 University Hall
+                            <br><span class="bold">time: </span>Office hours by appointment
+                        </div>
+                    </li>
+                    <li>
+                        <div class="subheader">College of Natural Resources</div>
+                        <div class="links">
+                            <a href="https://www.cnr.berkeley.edu/site/contact_advisor.php">CNR general advising page</a> | <a href="http://nature.berkeley.edu/site/pal.php">Peer advising page</a>
+                        </div>
+                        <div class="info">
+                            <div class="bold cnr-title">Major Advisors</div>
+                            <div class="advisor">
+                                <span class="bold">Undeclared</span>
+                                <br>Ginnie Sadil | <a href="mailto:gsadil@berkeley.edu">gsadil@berkeley.edu</a> | (510) 642-7895
+                                <br>Jennifer Halpert | <a href="mailto:jhalpert@berkeley.edu">jhalpert@berkeley.edu</a> | (510) 642-4249
+                            </div>
+                            {{ #each advisors }}
+                            <div class="advisor">
+                                <span class="bold">{{ department }}</span>
+                                <br>{{ advisor }} | <a href="mailto:{{ email }}">{{ email }}</a> | {{ phone }}
+                            </div>
+                            {{ /each }}
+                            <div class="description">
+                                Undergraduate Advisors have a special role on campus — they are a link between faculty and students and between students and campus. Advisors are your “tour guides” to student services and academic information in departments and across campus. Advisors have access to all the online registration and transcript information that you need. If questions or problems arise, they are trained to assist you in understanding campus policy. All issues discussed between students and Advisors are confidential. You can contact your Advisor about any questions you may have.
+                            </div>
+                            <div class="bold cnr-title">Peer Advisors</div>
+                            <span class="bold">contact: </span>
+                            <a href="mailto:pal@berkeley.edu">pal@berkeley.edu</a>
+                            <br><span class="bold">location: </span>260 Mulford Hall
+                            <div class="description">
+                                The work of peer advisors is integral to the success of their fellow CNR undergraduates. Peer advisors are trained in understanding CNR and university requirements, policies, and procedures, and they help with CNR recruitment and enrichment programs.
+                            </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
             <div class="section-header" id="peer">
                 Peer
             </div>
             <div class="section-content">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores doloribus tempora, voluptatem hic commodi blanditiis recusandae expedita nostrum, facere, pariatur odio fuga quidem error perspiciatis veritatis iusto quis illum neque?
+                <ul class="section-list">
+                    <li>
+                        <div class="subheader">UCB Premed Student Blogs</div>
+                        <ul>
+                            <li>
+                                <a href="http://billogsohard.wordpress.com/">Billog So Hard</a>
+                            </li>
+                            <li>
+                                <a href="http://berkeley-premed.blogspot.com/">Berkeley Premed Blogspot</a>
+                            </li>
+                            <li>
+                                <a href="http://calpremed.blogspot.com/">Cal Premed Blogspot</a>
+                            </li>
+                            <li>
+                                <a href="http://thispremedlife.blogspot.com/">This Premed Life</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="subheader">UCB General Advice Links</div>
+                        <ul>
+                            <li>
+                                <a href="http://admissions.berkeley.edu/premed">Admissions Office on Premed</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="subheader">UCB Premed Advising Groups</div>
+                        <ul>
+                            <li>
+                                <a href="https://bmes.berkeley.edu/resources/med-timeline/">Biomedical Engineering Society</a>
+                            </li>
+                            <li>
+                                <a href="http://premedatberkeley.wix.com/spanberkeley.com">Student Premed Advising Network (SPAN)</a>
+                            </li>
+                            <li>
+                                <a href="http://premed101.org/">Premed 101 Decal</a>
+                            </li>
+                            <li>
+                                <a href="http://www.peacetutoring.com/advising.html">PEACE Advising</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="subheader">Non-UCB-Specific Resources</div>
+                        <ul>
+                            <li>
+                                <a href="http://myhealthcareernavigator.com/page/mission">My Health Career Navigation (HCN)</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <div class="subheader">Andyl the Premed Penguin</div>
+                        <div class="blurb">
+                            "This is a personal project of mine. I'm am a Cal alum from 2007, who is now in the process of completing medical school at UCSF. Looking back I feel like I was completely lost at Cal, with really poor advising and nobody to go to. I'm hoping this group can be a collection of my thoughts and advice that I have learned the hard way to become a doctor. I hope it will be helpful to whoever is interested in medicine - too often I feel that those who make it into medicine are actually those with the greatest potential to be doctors, but those people who just had better advice, or knew how the game works. My hope is to level the playing field a bit. Also, if you message me, please friend me (acquaintance is fine) since FB seems to think the high volume of messages I send to non-friended people is spam and has blocked me. You can also friend or follow me to see what sort of health/medicine/tech stuff I read (and I read a lot). You are also welcome to invite anyone else who is a premed to this group."
+                        </div>
+                        <ul>
+                            <li>
+                                <a href="https://www.facebook.com/groups/BerkeleyPreMed/">Facebook</a>
+                            </li>
+                            <li>
+                                <a href="https://docs.google.com/document/d/17cS7d-9Pvf5zeFrZNOYamywpkp1Vq-atxMKjtGg7nPg/edit">Index of Past Posts</a>
+                            </li>
+                            <li>
+                                <a href="http://premedatcal.weebly.com/">Affiliated Site</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
