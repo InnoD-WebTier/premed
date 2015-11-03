@@ -55,7 +55,7 @@ Router.route('/contribute', function() {
 });
 
 Router.route('/opportunities', function() {
-	this.render('suggestionListView');
+	this.render('opportunities');
 }, {
 	onAfterAction: function() {
 		return setTitle('Opportunities');
