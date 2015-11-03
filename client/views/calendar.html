@@ -5,7 +5,11 @@
           <div class="calendar-buttons">
             <button id='addToggle' name='addToggle'>{{add_text}}</button>
             <br />
-            <input type='text' id='description' placeholder='Add a Description' style="display:none">
+            {{#unless editing}}
+              {{#if error}}
+              <p id='errorMessage' style="color: red">{{error}}</p>
+              {{/if}}
+            {{/unless}}
           </div>
           {{/if}}
         <div id="myCalendar"></div>
@@ -80,12 +84,15 @@
                 </select>
               {{/each}}
               </span><br/>
-              Event Description: <span id="eventDescription"><textarea id='editEventDescription' rows='4' cols='58' style='resize:vertical;' value={{currEvent.description}}></textarea></span><br/>
+              Event Description: <span id="eventDescription"><textarea id='editEventDescription' rows='4' cols='50' style='resize:vertical;' value={{currEvent.description}}></textarea></span><br/>
             </div>
             {{/unless}}
           </div>
           <div class="modal-footer">
             {{#if is_admin}}
+              {{#if error}}
+                <p id='errorMessage' style="color: red">{{error}}</p>
+              {{/if}}
               {{#if deleting}}
               <p id="deleteMessage">Are you sure you want to delete this event?</p>
               {{/if}}
