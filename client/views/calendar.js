@@ -98,15 +98,14 @@ Template.calendar.rendered = function(){
                 if(!isAdmin()) {
                   return;
                 }
-                var currentDate = new Date();
-                currentDate = currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1) + '-' + currentDate.getDate();
+                var currentDate = $.fullCalendar.moment().format('YYYY-MM-DD');
 
                 switch(addEventMode) {
                   case addEventModes.ADD_START:
-                    if (date.format() >= currentDate) {
+                    if (date.format('YYYY-MM-DD') >= currentDate) {
                         errorMessage = errorMessages.NONE;
                         errorMessageDep.changed();
-                        startDate = date.format();
+                        startDate = date;
                         addEventMode = addEventModes.ADD_END;
                         addEventModeDep.changed();
                     } else {
@@ -115,11 +114,11 @@ Template.calendar.rendered = function(){
                     }
                     break;
                   case addEventModes.ADD_END:
-                    endDate = date.format();
+                    endDate = date;
                     if (endDate >= startDate) {
                         errorMessage = errorMessages.NONE;
                         errorMessageDep.changed();
-                        currEvent = createEvent($.fullCalendar.moment(startDate), $.fullCalendar.moment(endDate));
+                        currEvent = createEvent(startDate, endDate);
                         currEventDep.changed();
                         addEventMode = addEventModes.ADD_TITLE;
                         addEventModeDep.changed();
@@ -201,7 +200,7 @@ Template.calendar.events({
                 var eventDescription = $('#editEventDescription').val();
                 start = $.fullCalendar.moment(start, "M D YYYY h m A");
                 end = $.fullCalendar.moment(end, "M D YYYY h m A");
-                if (end < start) {
+                if (end <= start) {
                     errorMessage = errorMessages.END_BEFORE_START;
                     errorMessageDep.changed();
                 } else if (title === '') {
