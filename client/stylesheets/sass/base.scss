@@ -91,6 +91,9 @@ html {
             }
             .section-item-body {
                 display: none;
+                p {
+                    margin-bottom: 2rem;
+                }
             }
             .site-btn {
                 color: $gold;
