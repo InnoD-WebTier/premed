@@ -30,5 +30,3 @@ cfs:standard-packages
 cfs:filesystem
 zimme:active-route
 fortawesome:fontawesome
-twbs:bootstrap
-peppelg:bootstrap-3-modal
