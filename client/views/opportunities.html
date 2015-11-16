@@ -6,6 +6,8 @@
         <hr class="title-underline">
         <div class="title-tagline">
             Get clinical and research experience.
+            <br>
+            <button class="new-btn">New Post</button>
         </div>
 
         {{#each opportunities}}
@@ -23,6 +25,12 @@
                     <div class="section-item-body">
                         <p>{{this.description}}</p>
                         <button>View Website</button>
+
+                        {{#if is_admin}}
+                        <button class="edit-btn" data-num="1">Edit</button>
+                        <button class="delete-btn" data-num="1">Delete</button>
+                        {{/if}}
+
                     </div>
                 </div>
             {{/each}}
@@ -30,6 +38,8 @@
         </div>
 
         {{/each}}
+
+        {{>editor}}
 
     </div>
 </template>

@@ -3,12 +3,13 @@ Meteor.subscribe("users");
 Template.admin.helpers({
   users: function() {
     return Meteor.users.find();
-  },
-  is_admin: function() {
-    return Meteor.user() && (
-           Meteor.users.findOne( { _id: Meteor.userId() }).admin || 
-           Meteor.users.find( { admin: true } ).count() === 0);
-  },
+  }
+});
+
+Template.registerHelper('is_admin', function() {
+  return Meteor.user() && (
+         Meteor.users.findOne( { _id: Meteor.userId() }).admin || 
+         Meteor.users.find( { admin: true } ).count() === 0);
 });
 
 Template.admin.events({

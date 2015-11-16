@@ -1,3 +1,21 @@
+var getOpportunities = function() {
+  var all = [
+  {
+    category: 'Current Clinical Opportunities',
+    opportunities: [
+      {
+        name: 'American Bone Health',
+        due_date: 'April 30, 2015',
+        description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa.',
+        website: 'lol.com'
+      }]
+    }
+  ];
+  return all; 
+
+};
+
+
 Template.opportunities.events({
   'click .section-item-title': function(event, template) {
     var list_item = template.$(event.target).parent();
@@ -10,23 +28,19 @@ Template.opportunities.events({
       list_item.addClass('expanded');
       desc_body.slideDown();
     }
+  },
+
+  'click .edit-btn' : function(event, template) {
+    var _id = template.$(event.target).data('num');
+    var data = getOpportunities();
+    Modal.show('editor', data[0].opportunities[_id]);
   }
+
 });
 
 Template.opportunities.helpers({
-  opportunities: function() {
-    return [
-      {
-        category: 'Current Clinical Opportunities',
-        opportunities: [
-          {
-            name: 'American Bone Health',
-            due_date: 'April 30, 2015',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa.',
-            website: 'lol.com'
-          },
-        ]
-      }
-    ]
-  },
+  opportunities: getOpportunities,
 });
+
+
+
