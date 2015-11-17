@@ -1,0 +1,18 @@
+<template name="opportunityContentPartial">
+
+  <div class="fieldName">TITLE</div>
+  <div class="titleInput">
+    <input type="text" name="title" />
+  </div>
+
+  <div class="fieldName">DUE DATE (Optional)</div>
+  <div class="input-group date dateSelector" id="oppDatePicker">
+    <input type="text" name="month" maxlength=2 placeholder="MM"/> /
+    <input type="text" name="day" maxlength=2 placeholder="DD"/> /
+    <input type="text" name="year" maxlength=2 placeholder="YY"/>
+  </div>
+
+  <div class="fieldName">DESCRIPTION</div>
+  <div id="editContent"></div>
+
+</template>

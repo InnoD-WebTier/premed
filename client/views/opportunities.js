@@ -30,10 +30,17 @@ Template.opportunities.events({
     }
   },
 
-  'click .edit-btn' : function(event, template) {
-    var _id = template.$(event.target).data('num');
-    var data = getOpportunities();
-    Modal.show('editor', data[0].opportunities[_id]);
+  'click .modal-btn' : function(event, template) {
+    var modalType = template.$(event.target).data('modal-template');
+    var category = template.$(event.target).data('category');
+    var opts = {};
+
+    if (modalType == 'opportunityModal') {
+      opts.mode = template.$(event.target).data('mode');
+      opts.category = category;
+    }
+
+    Modal.show(modalType, opts);
   }
 
 });

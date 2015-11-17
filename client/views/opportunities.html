@@ -7,8 +7,15 @@
         <div class="title-tagline">
             Get clinical and research experience.
             <br>
-            <button class="new-btn">New Post</button>
+            {{#if is_admin}}
+            <button class="modal-btn" data-modal-template="opportunityModal"
+             data-mode="new">New Post</button>
+            {{/if}}
+
         </div>
+
+        {{>opportunityModal}}
+        {{>deleteModal}}
 
         {{#each opportunities}}
 
@@ -24,11 +31,15 @@
                     </div>
                     <div class="section-item-body">
                         <p>{{this.description}}</p>
-                        <button>View Website</button>
+                        <button class='website-btn'>View Website</button>
 
                         {{#if is_admin}}
-                        <button class="edit-btn" data-num="1">Edit</button>
-                        <button class="delete-btn" data-num="1">Delete</button>
+                        <button class="modal-btn" data-modal-template="opportunityModal"
+                         data-mode="edit" data-category="{{this.category}}">Edit</button>
+                        <button class="modal-btn" data-modal-template="deleteModal"
+                         data-category="{{this.category}}">
+                          Delete
+                        </button>
                         {{/if}}
 
                     </div>
@@ -39,7 +50,6 @@
 
         {{/each}}
 
-        {{>editor}}
 
     </div>
 </template>
