@@ -13,15 +13,7 @@
 }
 
 
-#deleteModal.modal-dialog{
-  top: 20%;
-  left: 35%;
-}
-
-
 #opportunityModal.modal-dialog {
-  top: 10%;
-  left: 35%;
 
   .fa {
     color: #b7b7b7;
@@ -44,7 +36,7 @@
         font-weight: bold;
         color: #448AD4;
         font-size: 1.2em;
-        margin: 10px 0px;
+        margin: 20px 0px 15px 0px;
       }
 
       .categoryRadio {
@@ -99,11 +91,11 @@
 
       .linkFields {
         input[name='linkName'] {
-          width: 30%;
+          width: 35%;
           margin: 3px 0px;
         }
         input[name='linkURL'] {
-          width: 50%;
+          width: 60%;
           margin: 3px 0px;
         }
         .fa-times {

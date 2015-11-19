@@ -4,7 +4,7 @@
 * hi@felipefialho.com
 * http://www.felipefialho.com/
 */
-.modal .btn-close {
+.modal2 .btn-close {
   color: #aaaaaa;
   cursor: pointer;
   font-size: 30px;
@@ -13,11 +13,11 @@
   right: 10px;
   top: 0;
 }
-.modal .btn-close:hover {
+.modal2 .btn-close:hover {
   color: #919191;
 }
 
-.modal .btn-confirm {
+.modal2 .btn-confirm {
   cursor: pointer;
   font-size: 15px;
   text-decoration: none;
@@ -32,7 +32,7 @@
   display: inline-block;
 }
 
-.modal .btn-cancel {
+.modal2 .btn-cancel {
   cursor: pointer;
   font-size: 15px;
   text-decoration: none;
@@ -53,7 +53,7 @@
 }
 
 
-.modal-wrap:before {
+.modal2-wrap:before {
   content: "";
   display: none;
   background: rgba(0, 0, 0, 0.6);
@@ -64,7 +64,7 @@
   bottom: 0;
   z-index: 101;
 }
-.modal-overlay {
+.modal2-overlay {
   bottom: 0;
   display: none;
   left: 0;
@@ -73,18 +73,18 @@
   top: 0;
   z-index: 102;
 }
-.modal-open:checked ~ .modal-wrap:before,
-.modal-open:checked ~ .modal-wrap .modal-overlay {
+.modal2-open:checked ~ .modal2-wrap:before,
+.modal2-open:checked ~ .modal2-wrap .modal2-overlay {
   display: block;
 }
-.modal-open:checked ~ .modal-wrap .modal-dialog {
+.modal2-open:checked ~ .modal2-wrap .modal2-dialog {
   -webkit-transform: translate(-50%, 0);
   /*-ms-transform: translate(-50%, 0);*/
   /*-o-transform: translate(-50%, 0);*/
   /*transform: translate(-50%, 0);*/
   top: 50% - calc(603px / 2);
 }
-.modal-overlay {
+.modal2-overlay {
   bottom: 0;
   display: none;
   left: 0;
@@ -93,7 +93,7 @@
   top: 0;
   z-index: 102;
 }
-.modal-dialog {
+.modal2-dialog {
   background: #fefefe;
   border: #555555 solid 1px;
   border-radius: 5px;
@@ -113,34 +113,34 @@
   z-index: 103;
   /*overflow: auto;*/
 }
-.modal-body {
+.modal2-body {
   padding: 10px 20px 5px 20px;
 }
-.modal-body p {
+.modal2-body p {
   margin: 0;
 }
-.modal-body input {
+.modal2-body input {
   height: 29px;
   width: 100%;
 }
-.modal-header {
+.modal2-header {
   padding: 20px 20px 0px 20px;
 }
-.modal-header input  {
+.modal2-header input  {
   height: 40px;
   width: 95%;
 }
-.modal-footer {
+.modal2-footer {
   padding: 10px 20px 7px 20px;
 }
-.modal-header {
+.modal2-header {
   border-bottom: #eaeaea solid 1px;
 }
-.modal-header h2 {
+.modal2-header h2 {
   font-size: 20px;
   margin: 0;
 }
-.modal-footer {
+.modal2-footer {
   border-top: #eaeaea solid 1px;
   text-align: right;
 }

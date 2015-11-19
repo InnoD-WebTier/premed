@@ -1,6 +1,20 @@
+Meteor.subscribe("items");
+
+
+
 Template.opportunityModal.onCreated(function() {
   Session.set('modalType', 'content');
   Session.set('linkNum', 1);
+
+  // grab data from collection
+  // prefill fields
+  if (this.mode == 'edit') {
+
+    console.log('in editing mode');
+
+    console.log(Meteor.items());
+
+  }
 });
 
 Template.opportunityModal.helpers({
