@@ -33,7 +33,6 @@ cfs:tempstore@0.1.5
 cfs:upload-http@0.0.20
 cfs:worker@0.1.4
 check@1.0.6
-chuangbo:marked@0.3.5_1
 coffeescript@1.0.10
 ddp@1.2.2
 ddp-client@1.2.1
@@ -85,10 +84,8 @@ oauth@1.1.6
 oauth2@1.1.5
 observe-sequence@1.0.7
 ordered-dict@1.0.4
-peppelg:bootstrap-3-modal@1.0.3
 promise@0.5.0
 raix:eventemitter@0.1.3
-rajit:bootstrap3-datepicker@1.4.1
 random@1.0.4
 rate-limit@1.0.0
 reactive-dict@1.1.2
@@ -106,11 +103,9 @@ standard-minifiers@1.0.1
 templating@1.1.4
 templating-tools@1.0.0
 tracker@1.0.9
-twbs:bootstrap@3.3.5
 ui@1.0.8
 underscore@1.0.4
 url@1.0.5
 webapp@1.2.2
 webapp-hashing@1.0.5
-wtfzn:bootstrap-markdown@2.8.0
 zimme:active-route@2.3.2

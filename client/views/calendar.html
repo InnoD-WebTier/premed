@@ -14,14 +14,14 @@
           {{/if}}
         <div id="myCalendar"></div>
     </div>
-    <!-- Check if modal2 is still working after taking out breaks -->
-    <div class="modal2" data-keyboard="false" data-backdrop="static">
-      <input class="modal2-open" id="eventInfo" type="checkbox" checked={{showModal}} style="display:none;">
-      <div class="modal2-wrap" aria-hidden="true" role="dialog">
-        <label class="modal2-overlay" for="eventInfo"></label>
+    <!-- Check if modal is still working after taking out breaks -->
+    <div class="modal" data-keyboard="false" data-backdrop="static">
+      <input class="modal-open" id="eventInfo" type="checkbox" checked={{showModal}} style="display:none;">
+      <div class="modal-wrap" aria-hidden="true" role="dialog">
+        <label class="modal-overlay" for="eventInfo"></label>
         {{#if currEvent}}
-        <div class="modal2-dialog">
-          <div class="modal2-header">
+        <div class="modal-dialog">
+          <div class="modal-header">
             {{#if editing}}
               <h2 id="info">Title: <input type='text' id='editDesc' value={{currEvent.title}} /></h2>
             {{else}}
@@ -29,7 +29,7 @@
             {{/if}}
             <button id='closebox' class="btn-close" for="eventInfo" aria-hidden="true">×</button>
           </div>
-          <div class="modal2-body">
+          <div class="modal-body">
             {{#unless editing}}
             <div class="event-readonly">
               <div class="event-sdate">Start Date: {{currEvent.startDate}}</div>
@@ -88,7 +88,7 @@
             </div>
             {{/unless}}
           </div>
-          <div class="modal2-footer">
+          <div class="modal-footer">
             {{#if is_admin}}
               {{#if error}}
                 <p id='errorMessage' style="color: red">{{error}}</p>
