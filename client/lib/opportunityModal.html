@@ -1,0 +1,106 @@
+<template name="opportunityModal">
+<div class="modal fade">
+    <div id="opportunityModal" class="modal-dialog">
+
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4>
+          {{#if adding}}
+          Add New Opportunity
+          {{/if}}
+          {{#if editing}}
+          Edit Opportunity
+          {{/if}}
+          </h4>
+        </div>
+        
+        <div class="modal-body">
+          <form name="opportunitiesForm" method="post">
+            
+            {{#if adding}}
+            <div class="fieldName">CATEGORIES</div>
+            <div class="categoryRadio">
+
+              <input id="clinicalOpp" type="radio" name="category" 
+               value="Current Clinical Opportunities" data-type="content" checked/>
+              <label for="clinicalOpp">Current Clinical Opportunities</label>
+
+              <input id="clinicalResources" type="radio" name="category" 
+               value="Clinical Resources" data-type="link"/>
+              <label for="clinicalResources">Clinical Resources</label>
+
+              <br>
+
+              <input id="researchPos" type="radio" name="category" 
+               value="Open Research Positions" data-type="content"/>
+              <label for="researchPos">Open Research Positions</label>
+
+              <input id="researchResources" type="radio" name="category" 
+               value="Research Resources" data-type="link"/>
+              <label for="researchResources">Research Resources</label>
+            </div>
+            {{/if}}
+
+            {{#if contentType}}
+              {{>opportunityContentPartial}}
+            {{/if}}
+
+            {{#if linkType}}
+            
+            <div class="fieldName"> LINK CATEGORY </div>
+            <div class="linkCategories">
+              <select class="categorySelect">
+                <option value="Career Center">Career Center</option>
+                <option value="Internships">Internships</option>
+                <option value="In Berkeley">In Berkeley</option>
+                <option value="Summer Research">Summer Research</option>
+                <option value="General">General</option>
+              </select>
+            </div>
+
+            {{/if}}
+
+            <div class="fieldName">LINKS 
+              <i class="fa fa-question-circle" 
+                 title="Links will be added below the description"></i>
+            </div>
+            <div class="linkFields">
+              {{#each linkNum}}
+              <input type="text" class="linkTitle" name="linkTitle" placeholder="Link Title">
+              <input type="text" class="linkURL" name="linkURL" placeholder="Link URL">
+              <i class="fa fa-times"></i>
+              {{/each}}
+
+              <br>
+              <p class="addLink"><span class="addText">+Add Link</span></p>
+            </div>
+
+          </form>
+        </div>
+
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-primary" id="opportunitySubmit">
+            {{#if contentType}}
+            ADD OPPORTUNITY
+            {{/if}}
+            {{#if linkType}}
+            ADD RESOURCE(S) 
+            {{/if}}
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  
+
+
+
+
+
+</template>

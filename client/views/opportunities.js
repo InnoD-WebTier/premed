@@ -1,3 +1,6 @@
+// Subscribe to relevant Collections
+Meteor.subscribe("items");
+
 Template.opportunities.events({
   'click .section-item-title': function(event, template) {
     var list_item = template.$(event.target).parent();
@@ -13,7 +16,21 @@ Template.opportunities.events({
       exp_arrow.addClass('rotated');
       desc_body.slideDown();
     }
-  }
+  },
+
+  'click .modal-btn' : function(event, template) {
+    var modalType = template.$(event.target).data('modal-template');
+    var category = template.$(event.target).data('category');
+    var opts = {};
+
+    if (modalType == 'opportunityModal') {
+      opts.mode = template.$(event.target).data('mode');
+      opts.category = category;
+    }
+
+    Modal.show(modalType, opts);
+  },
+
 });
 
 Template.opportunities.helpers({
