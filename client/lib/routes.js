@@ -82,7 +82,6 @@ Router.route('/calendar', function() {
 	this.render('calendar');
 });
 
-
 Router.configure({
 	layoutTemplate: 'ApplicationLayout',
 	notFoundTemplate: '404'

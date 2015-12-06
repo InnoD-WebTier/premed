@@ -75,7 +75,7 @@ Meteor.methods({
 		if (Events.find({id:key})) {
 			console.log(Events.remove({_id:key}));
 		} else {
-			throw 'Invalid key';
+			throw 'Invalid key';s
 		}
 	},
 	

@@ -30,7 +30,10 @@ cfs:standard-packages
 cfs:filesystem
 zimme:active-route
 fortawesome:fontawesome
+<<<<<<< HEAD
 twbs:bootstrap
 peppelg:bootstrap-3-modal
 wtfzn:bootstrap-markdown
 chuangbo:marked
+=======
+>>>>>>> master
