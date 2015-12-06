@@ -1,6 +1,6 @@
 Template.opportunityContentPartial.onRendered(function() {
 
-  this.$('#editContent').markdown({
+  var editor = this.$('#editContent').markdown({
     'autofocus': false,
     'savable': false
   });

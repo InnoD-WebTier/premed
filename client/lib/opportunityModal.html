@@ -16,7 +16,7 @@
         </div>
         
         <div class="modal-body">
-          <form name="opportunitiesForm">
+          <form name="opportunitiesForm" method="post">
             
             {{#if adding}}
             <div class="fieldName">CATEGORIES</div>
@@ -67,8 +67,8 @@
             </div>
             <div class="linkFields">
               {{#each linkNum}}
-              <input type="text" name="linkName" placeholder="Link Title">
-              <input type="text" name="linkURL" placeholder="Link URL">
+              <input type="text" class="linkTitle" name="linkTitle" placeholder="Link Title">
+              <input type="text" class="linkURL" name="linkURL" placeholder="Link URL">
               <i class="fa fa-times"></i>
               {{/each}}
 
@@ -81,7 +81,7 @@
 
         <div class="modal-footer">
 
-          <button type="button" class="btn btn-primary" >
+          <button type="button" class="btn btn-primary" id="opportunitySubmit">
             {{#if contentType}}
             ADD OPPORTUNITY
             {{/if}}

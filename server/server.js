@@ -5,12 +5,12 @@ Events = new Mongo.Collection("events");
 //Code that runs on startup.
 Meteor.startup(function () {
 	console.log("Successful startup");
-	console.log(Clubs.find().fetch());
+	console.log(Items.find().fetch());
 	Meteor.publish("items", function() {
-		return Items.find();
+		return Items.find({});
 	});
 	Meteor.publish("clubs", function() {
-		return Clubs.find();
+		return Clubs.find({});
 	});
 	Meteor.publish("events", function() {
 		return Events.find({});
@@ -21,6 +21,56 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
+  
+  /* CRUD for Opportunities
+   * - category : string
+   * - title : string
+   * - date : datetime
+   * - desc : string
+   * - links : arrays( { title : string, url : string } ) */
+  insertOpportunity : function(category, title, date, desc, links) {
+    Items.insert({
+      'type' : 'opportunity',
+      'category' : category,
+      'title' : title,
+      'date' : date,
+      'description' : desc,
+      'links' : links
+    });
+    return true;
+  },
+  
+  getOpportunity : function(id) {
+    return Items.find({ '_id' : id }).fetch();
+  },
+
+  getAllOpportunities : function() {
+    var items = Items.find({}).fetch();
+    console.log(items);
+    return items;
+  },
+
+  updateOpportunity : function(id, category, title, date, desc, links) {
+
+    Items.update({ '_id' : id}, {
+      'type' : 'opportunity',
+      'category' : category,
+      'title' : title,
+      'date' : date,
+      'description' : description,
+      'links' : links
+    });
+
+  },
+
+  deleteOpportunity : function(id) {
+    if (Items.find({ '_id' : id })) {
+      Items.remove({ '_id' : id });
+    } else {
+      throw 'Invalid Key';
+    }
+  },
+
 	deleteEvent: function (key) {
 		if (Events.find({id:key})) {
 			console.log(Events.remove({_id:key}));

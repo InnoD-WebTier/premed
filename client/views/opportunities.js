@@ -1,3 +1,6 @@
+// Subscribe to relevant Collections
+Meteor.subscribe("items");
+
 var getOpportunities = function() {
   var all = [
   {
@@ -41,7 +44,7 @@ Template.opportunities.events({
     }
 
     Modal.show(modalType, opts);
-  }
+  },
 
 });
 
