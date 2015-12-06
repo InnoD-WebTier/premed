@@ -21,7 +21,7 @@
 // Modal Wrap
 // ----------------------
 
-.modal2-wrap {
+.modal-wrap {
 
   // This is modal bg
   &:before {
@@ -37,7 +37,7 @@
 // Modal Overlay
 // ----------------------
 
-.modal2-overlay {
+.modal-overlay {
   bottom: 0;
   display: none;
   left: 0;
@@ -50,15 +50,15 @@
 // Modal Open
 // ----------------------
 
-.modal2-open:checked ~ .modal2-wrap {
+.modal-open:checked ~ .modal-wrap {
 
   // Active animate in modal
   &:before,
-  & .modal2-overlay {
+  & .modal-overlay {
     display: block;
   }
 
-  .modal2-dialog {
+  .modal-dialog {
     .translate(-50%, 0);
     top: 20%;
   }
@@ -68,7 +68,7 @@
 // Modal Overlay
 // ----------------------
 
-.modal2-overlay {
+.modal-overlay {
   bottom: 0;
   display: none;
   left: 0;
@@ -81,7 +81,7 @@
 // Modal Dialog
 // ----------------------
 
-.modal2-dialog {
+.modal-dialog {
   background: #fefefe;
   border: @gray solid 1px;
   border-radius: 5px;
@@ -95,19 +95,19 @@
   z-index: 103;
 }
 
-.modal2-body {
+.modal-body {
   padding: @space;
   p {
     margin: 0;
   }
 }
 
-.modal2-header,
-.modal2-footer {
+.modal-header,
+.modal-footer {
   padding: @space @space;
 }
 
-.modal2-header {
+.modal-header {
   border-bottom: @gray-lighter solid 1px;
 
   h2 {
@@ -117,7 +117,7 @@
 
 }
 
-.modal2-footer {
+.modal-footer {
   border-top: @gray-lighter solid 1px;
   text-align: right;
 }
