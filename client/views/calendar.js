@@ -82,7 +82,7 @@ function refetch() {
 }
 
 function isAdmin() {
-    return Meteor.user() && Meteor.users.findOne( { _id: Meteor.userId() }).admin;
+    return Meteor.user() && Meteor.users.findOne( { _id: Meteor.userId() });
 }
 
 Template.calendar.rendered = function(){

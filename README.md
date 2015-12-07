@@ -1,3 +1,3 @@
-# Premed@Berkeley Website
+Website for Pre-med@Berkeley. Built by Innovative Design.
 
-## Innovative Design Web Tier Fall 2015
+innovativedesign.club

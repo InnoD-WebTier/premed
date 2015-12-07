@@ -15,17 +15,17 @@
 				{{this.category}}
 			</div>
 			<div class="section-content">
-		  	{{#each this.clubs}}
+		  	{{#each this.orgs}}
 				<div class="section-item">
-					<div class="section-item-title">
-		      {{this.name}}
-		      <div class="arrow">
-		      	<i class="fa fa-angle-right fa-lg"></i>
-		      </div>
+					<div class="section-item-title expand">
+		      			{{this.title}}
+				    <div class="arrow">
+				    	<i class="fa fa-angle-right fa-lg expand"></i>
+				    </div>
 					</div>
 					<div class="section-item-body">
-						<p>{{this.description}}</p>
-						<a href="{{this.website}}"><button class="site-btn">View Website</button></a>
+						<p>{{{this.description}}}</p>
+						<a href="{{this.link}}"><button class="site-btn">View Website</button></a>
 					</div>
 				</div>
 		  	{{/each}}

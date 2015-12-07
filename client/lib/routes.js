@@ -70,14 +70,6 @@ Router.route('/mcat', function() {
 	}
 });
 
-Router.route('/admin', function() {
-  this.render('admin');
-}, {
-	onAfterAction: function() {
-		return setTitle('Admin');
-	}
-});
-
 Router.route('/calendar', function() {
 	this.render('calendar');
 });

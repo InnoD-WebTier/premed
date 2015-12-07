@@ -1,5 +1,5 @@
 // Subscribe to relevant Collections
-Meteor.subscribe("items");
+Meteor.subscribe("opportunities");
 
 Template.opportunities.events({
   'click .section-item-title': function(event, template) {
@@ -35,26 +35,28 @@ Template.opportunities.events({
 
 Template.opportunities.helpers({
   opportunities: function() {
-    return [
-      {
-        category: 'Current Clinical Opportunities',
-        opportunities: [
-          {
-            name: 'American Bone Health',
-            due_date: 'April 30, 2015',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam explicabo ex doloremque, enim perferendis praesentium eos voluptates impedit suscipit quis corrupti quaerat laborum reprehenderit, rem inventore odit eum eveniet veniam quo nesciunt, ratione corporis similique ipsa.',
-            website: 'lol.com'
-          },
-        ]
-      },
-      {
-        category: 'Clinical Resources',
-        subcategories: [
-          {
-            name: 'Cal Career Center'
-          }
-        ]
+    collection = []
+    allowedValues = ["Current Clinical Opportunities", "Clinical Resources"];
+
+    for (i=0; i < allowedValues.length; i++) {
+      section = {};
+      section['opportunities'] = [];
+      section['category'] = allowedValues[i];
+      collection.push(section);
+    }
+
+    list = Opportunities.find().fetch();
+
+    for (i=0; i < list.length; i++) {
+      item = list[i];
+      categoryItem = item.category;
+      for (j=0; j < collection.length; j++) {
+        section = collection[j];
+        if (categoryItem === section.category) {
+          collection[j].opportunities.push(item);
+        }
       }
-    ]
+    }
+    return collection;
   },
 });

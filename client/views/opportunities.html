@@ -14,9 +14,6 @@
 
         </div>
 
-        {{>opportunityModal}}
-        {{>deleteModal}}
-
         {{#each opportunities}}
 
         <div class="section-container">
@@ -27,21 +24,14 @@
             {{#each this.opportunities}}
                 <div class="section-item">
                     <div class="section-item-title">
-              {{this.name}}
+                        {{this.title}}
+                        <div class="arrow">
+                            <i class="fa fa-angle-right fa-lg"></i>
+                        </div>
                     </div>
                     <div class="section-item-body">
-                        <p>{{this.description}}</p>
-                        <a href="{{this.website}}"><button class='website-btn'>View Website</button></a>
-
-                        {{#if is_admin}}
-                        <button class="modal-btn" data-modal-template="opportunityModal"
-                         data-mode="edit" data-category="{{this.category}}">Edit</button>
-                        <button class="modal-btn" data-modal-template="deleteModal"
-                         data-category="{{this.category}}">
-                          Delete
-                        </button>
-                        {{/if}}
-
+                        <p>{{{this.description}}}</p>
+                        <a href="{{this.link}}"><button class='site-btn'>View Website</button></a>
                     </div>
                 </div>
             {{/each}}
@@ -49,7 +39,6 @@
         </div>
 
         {{/each}}
-
 
     </div>
 </template>

@@ -1,3 +1,5 @@
+Meteor.subscribe("about");
+
 Template.about.helpers({
     people: [
         {
@@ -42,6 +44,11 @@ Template.about.helpers({
             photo: '/img/about/tina.png',
             position: 'Intern'
         }
-    ]
+    ],
+
+    aboutText: function() {
+        list = About.find().fetch();
+        return list[0];
+    },
 });
 
