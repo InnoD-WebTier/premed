@@ -22,7 +22,7 @@ Template.orgs.events({
 Template.orgs.helpers({
   clubs: function() {
     collection = []
-    allowedValues = ["Global Abroad Organizations", "Health Related Clubs", "Decals", "Pre-Health Fraternities & Sororities", "Non-Health-Related Clubs", "Tutoring/Teaching", "Mentoring", "Science/Society"];
+    allowedValues = ["Global Abroad Organizations", "Health Related Clubs", "Decals", "Pre-Health Fraternities & Sororities", "Non-Health-Related Clubs", "Tutoring & Teaching", "Mentoring", "Science & Society"];
 
     for (i=0; i < allowedValues.length; i++) {
       section = {};

@@ -101,7 +101,7 @@ Organizations.attachSchema(new SimpleSchema ({
 	category: {
 		type: String,
 		label: "Org Type",
-		allowedValues: ["Global Abroad Organizations", "Health Related Clubs", "Decals", "Pre-Health Fraternities & Sororities", "Non-Health-Related Clubs", "Tutoring/Teaching", "Mentoring", "Science/Society"]
+		allowedValues: ["Global Abroad Organizations", "Health Related Clubs", "Decals", "Pre-Health Fraternities & Sororities", "Non-Health-Related Clubs", "Tutoring & Teaching", "Mentoring", "Science & Society"]
 	},
 	link: {
 		type: String,
