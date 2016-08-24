@@ -1,6 +1,8 @@
 Events = new Mongo.Collection("events");
 
-//Code that runs on startup.
+// Code that runs on startup.
+// In our case, find all the different collections and make the data
+// avaliable to the client.
 Meteor.startup(function () {
 	console.log("Successful startup");
 	Meteor.publish("events", function() {
@@ -21,7 +23,7 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
-  	getEvents: function () {
+	getEvents: function () {
 		var eventList = Events.find({}).fetch();
 		return eventList;
 	},
