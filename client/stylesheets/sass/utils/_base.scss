@@ -26,7 +26,7 @@ html {
 }
 
 .title {
-    @extend .row;
+    @extend .row !optional;
     font-family: 'DINProBold';
     color: $light-blue;
     font-size: 4rem;
@@ -50,12 +50,12 @@ html {
 
 // Page Grid Layout
 .section-container {
-    @extend .row;
+    @extend .row !optional;
     margin-bottom: 20px;
     .section-header {
-        @extend .col;
-        @extend .col--1-of-4;
-        @extend .col--m-1-of-1;
+        @extend .grid__col;
+        @extend .grid__col--1-of-4;
+        @extend .grid__col--m-1-of-2;
         text-align: right;
         font-family: 'DINProMedium', sans-serif;
         color: $light-blue;
@@ -63,9 +63,9 @@ html {
         line-height: 2.5rem;
     }
     .section-content {
-        @extend .col;
-        @extend .col--3-of-4;
-        @extend .col--m-1-of-1;
+        @extend .grid__col;
+        @extend .grid__col--3-of-4;
+        @extend .grid__col--m-1-of-2;
         text-align: left;
         font-family: 'DinPro', sans-serif;
         .section-list {
